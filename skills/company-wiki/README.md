@@ -1,37 +1,43 @@
 # company-wiki / 企业文库
 
-`company-wiki` is a portable Agent Skill for building a small, curated knowledge schema over an
-organization's existing documents, repositories, and systems. It helps an agent resolve company
-terminology, choose authoritative evidence, navigate relationships, investigate recurring question
-types, and answer with explicit uncertainty. The original sources remain the system of record.
+`company-wiki` is a portable Agent Skill for building a curated, document-native company wiki over a
+cloud-drive collection. Ordinary documents are nodes. Native hyperlinks, bookmarks, and heading links
+are edges. The agent reads the graph progressively—from a small home/map to guides, focused detail, and
+original evidence—then answers with citations and explicit uncertainty.
+
+The drive is the durable home of the wiki. This package does not impose folders, YAML records, a graph
+database, an index, embeddings, source copies, or a connector. A flat document collection is valid.
 
 ## Package layout
 
-- `SKILL.md` — short routing and safety instructions loaded first.
-- `references/` — progressive workflow and format instructions.
-- `../../examples/` — an illustrative schema for learning the file format (kept outside the installed skill).
+- `SKILL.md` — concise routing, graph model, loading order, safety, and answer contract.
+- `references/init.md` — initialize a home/map and the first reading paths.
+- `references/query.md` — traverse the graph and investigate questions.
+- `references/maintain.md` — propose, apply, and validate document/link changes.
+- `references/document-format.md` — node, edge, disclosure, question-guide, and validation guidance.
+- `../../examples/` — a flat illustrative graph, not organization content.
 
-On initialization, the agent creates `<skill-dir>/schema/` and `<skill-dir>/competency-questions.md`.
-The
-schema contains the organization's identity, domains, concepts, vocabulary, relationships, sources,
-authority rules, definitions, and problem patterns. The catalog contains the questions that define
-what the schema must help answer.
+The installed skill contains no organization wiki. Init creates ordinary wiki documents in the user's
+chosen writable cloud-drive collection: normally one home/map, a few guides, and only the focused detail
+nodes needed by real questions. It links to original source documents instead of copying them. If the
+host cannot create documents or preserve native link targets, the agent reports that limitation and does
+not claim the wiki was saved.
 
-`schema/` and `competency-questions.md` are organization data. Keep them when updating or replacing
-the skill; do not treat them as disposable package files. The root example is format guidance only and
-must never be copied as organizational content.
+Wiki documents are organization data. Keep them in the drive and preserve them when updating or replacing
+this skill. Do not move them into the installed package or treat package updates as a migration of the
+organization's knowledge.
 
 ## Use it
 
-1. Install or copy the complete skill into a writable skill directory.
-2. Ask the agent to set up company-wiki, naming the sources and schema language. It will ask for
-   whichever of those two answers is missing, inspect reachable sources, and create a minimal schema.
-3. Ask company questions normally. The agent loads the schema progressively, queries original
-   sources through tools already available on the host, and cites the evidence it actually read.
-4. Ask it to suggest or apply a schema change, or to check the schema for problems. Changes require
-   approval; validation is read-only by default.
+1. Install the skill where the host can load it.
+2. Ask the agent to set up `company-wiki`, naming the source collections and wiki language. It asks only
+   for whichever required answer is missing, checks drive capabilities, and creates a minimal linked graph.
+3. Ask company questions normally. The agent starts at the home/map, follows labeled links, reads only
+   relevant evidence, and cites the documents it actually opened.
+4. Ask it to suggest or apply a wiki change, or to validate links and coverage. User corrections approve
+   that specific change; other edits require approval. Validation is read-only by default.
 
-The skill does not include connectors, databases, embeddings, indexes, caches, source copies,
-per-document sidecars, workflow automation, or executable code. It reuses the host's access
-capabilities and reports when a source or capability is unavailable. Derived retrieval infrastructure
-is considered only after a demonstrated retrieval failure.
+The skill reuses only cloud-drive/document skills, MCP tools, agent plugins, CLIs, APIs, or repository tools
+the host app already provides. It never invents a connector, calls an undocumented provider API, or assumes
+a new integration. It reports unreachable sources, missing link metadata, and permission limits instead of
+inventing facts or building retrieval infrastructure.

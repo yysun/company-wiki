@@ -5,236 +5,168 @@
 - [Schema Specification v0.1](../../../../../docs/company-wiki_schema_v0.1.md)
 - [Competency Questions v0.1](../../../../../docs/company-wiki_competency-questions_v0.1.md)
 
-Section references below are prefixed "PRD §", "Spec §", and "CQ §".
-
-**Supersedes:** this story's first v0.3 baseline, which is no longer shipped. On 2026-09-10 the user chose to rebaseline on v0.4, which drops v0.3's wiki-page model: INDEX and topic pages in the document system, and the Build, Browse, Refresh, and Audit workflows.
+**Rebaseline:** On 2026-09-10 the user corrected the architecture. The product is a document-native
+wiki over a cloud-drive document collection. The earlier schema-heavy, YAML-oriented design and its
+assumption that folders are available are superseded by this requirement.
 **Date:** 2026-09-10
-**Deliverable:** the `company-wiki` agent skill package. It is Markdown only, with no executable code.
-**Chinese name:** 企业文库 (user decision, 2026-09-10)
+**Deliverable:** the `company-wiki` agent skill package, examples, and behavioral test specification.
+The skill itself is Markdown only; it contains no executable code.
+**Chinese name:** 企业文库
 
 ## Problem
 
-Agents answering company questions often miss knowledge, for four reasons:
-- The user's words differ from the documents' words.
-- A convenient or outdated source wins over the authoritative one.
-- The knowledge is spread across several repositories.
-- The agent retrieves documents instead of working through the problem.
+Company knowledge already lives in cloud-drive documents and source systems. A cloud drive may have no
+usable folders, weak metadata, and poor YAML support. A central machine schema would add a second
+knowledge system that is hard to keep current and is not how people read the source material.
 
-Traditional RAG starts from the documents (chunk, embed, retrieve). That adds infrastructure but still
-gives the agent no understanding of how the company's knowledge is organized (PRD §1–§3).
+The real missing layer is a navigable reading path: a small entry document, question- or domain-oriented
+guides, focused detail documents, and links to authoritative source documents. The agent must be able to
+follow that path with the host's ordinary document search, open, and link-following tools.
 
 ## Outcome
 
-A portable agent skill with two jobs.
+Deliver a portable skill that builds and uses a curated company wiki whose nodes are ordinary cloud-drive
+documents and whose edges are ordinary native hyperlinks, bookmarks, or heading links.
 
-**1. Build and maintain a schema.** It helps an organization create and maintain a small curated
-knowledge schema that an AI can read. The schema holds:
-- domains
-- concepts and vocabulary
-- relationships
-- a source map
-- authority rules
-- business definitions
-- problem patterns
+The wiki is a navigation and evidence layer, not a graph database, ingestion pipeline, or replacement for
+source systems. Original sources remain authoritative and are never copied or modified. The wiki is
+progressively disclosed:
 
-The skill also keeps a catalog of competency questions: the questions the organization expects the AI
-to answer.
+- **Level 0 — home/map:** what the wiki covers, how to start, and links to major guides.
+- **Level 1 — guides:** a domain or competency-question reading path with a short summary and selected
+  links.
+- **Level 2 — detail:** a focused policy, concept, decision, definition, metric, dependency, or risk.
+- **Level 3 — evidence:** the original source document or repository view.
 
-**2. Use the schema to answer.** It teaches any capable agent to use the schema to plan an
-investigation, query the original sources through tools the host already has, and answer with
-evidence and stated uncertainty.
-
-The original sources remain authoritative, and nothing is ingested (PRD §1, §2, §24).
-
-## Graph-shaped navigation
-
-The schema is a logical document graph, not a graph database. Schema documents or focused sections
-are nodes; labeled Markdown links and typed relationship entries are edges. An agent traverses that
-graph with ordinary document-reading tools, preserving each link's visible label and actual target
-before following it. The graph remains a curated navigation and evidence layer over original sources;
-it does not reintroduce the dropped v0.3 document-page model.
+The format is ordinary document prose, headings, lists, tables, and labeled links. YAML is not required
+for organization documents. Folders are not required for discovery or navigation; titles, summaries,
+headings, link labels, and native document identifiers are the durable handles.
 
 ## Acceptance Criteria
 
-### Package
+### Package and portability
 
-- [ ] `skills/company-wiki/` ships `SKILL.md`, `README.md`, and `references/*.md`; the repository root `examples/` ships the illustrative schema. The
-      `examples/` folder holds a worked example schema and competency-question catalog. The package
-      contains no scripts, executable code, databases, indexes, embeddings, caches, or services (PRD
-      §4, §13, §17, §19).
-- [ ] The repository ships no organization-specific schema. Init creates the organization's
-      `schema/` and `competency-questions.md` inside the skill directory, using the layout in PRD §17.
-- [ ] `SKILL.md` follows the Agent Skills format:
-      - frontmatter `name: company-wiki`
-      - a `description` under 1024 characters that says what the skill does and when to use it
-      - hosts can match the skill on "company wiki" and "企业文库"
-- [ ] `SKILL.md` states each of the ten behaviors in PRD §18 and contains no detailed procedures. It
-      is 150 lines or fewer and routes each workflow to its reference file. Every reference is linked
-      from `SKILL.md`, and every link resolves.
-- [ ] A workflow needs only `SKILL.md`, its own reference file, and the files that reference names.
-      References build on `SKILL.md` without restating its rules beyond brief pointers.
-- [ ] `README.md` explains to human readers:
-      - the skill's purpose, including the name 企业文库
-      - the package layout, including what init creates
-      - how to run init, ask questions, and maintain the schema
-      - that `schema/` and `competency-questions.md` are organization data and must be kept across
-        skill updates
+- [ ] `skills/company-wiki/` ships `SKILL.md`, `README.md`, and linked `references/*.md`; root
+      `examples/` ships a worked document graph. Root `tests/` ships the E2E specification and fixtures.
+- [ ] The package contains no executable code, database, graph index, embedding, cache, connector, or
+      organization-specific content. The organization wiki is created in the chosen cloud-drive
+      collection and survives skill updates independently.
+- [ ] `SKILL.md` follows Agent Skills format: `name: company-wiki`, a single useful description under
+      1024 characters containing `company wiki` and `企业文库`, ten concise behaviors, progressive
+      loading, safety rules, and routing to every reference file. It is at most 150 lines and contains
+      no detailed workflow procedure.
+- [ ] Each workflow can load `SKILL.md`, its own reference, and only the documents that reference names.
+      All package links resolve. The shipped instructions contain no PRD/spec section-number dependency.
+- [ ] `README.md` explains the cloud-drive model, the package layout, how to initialize/query/maintain,
+      and that wiki documents—not a local schema directory—are organization data to preserve.
 
-      It doesn't duplicate the agent instructions.
-- [ ] No instruction contradicts PRD v0.4, Schema Spec v0.1, or CQ v0.1, except where a user decision
-      recorded here overrides them. The shipped skill text makes sense without those documents, so it
-      contains no "§" references.
+### Document-native graph and progressive disclosure
 
-### Schema model
+- [ ] The format defines a wiki document as a human-readable node with a title, a short summary, useful
+      headings, and labeled links. Suggested labels such as `governed by`, `defined by`, `depends on`,
+      `evidence`, and `see also` are a small vocabulary, not a machine schema.
+- [ ] Native link targets are preserved exactly when read or written. A visible label without a usable
+      target is reported as a broken edge; a target without a meaningful label is reported as weak
+      navigation. Heading anchors/bookmarks are supported when the host exposes them.
+- [ ] The home/map document links to guides; guides link to focused detail and evidence documents; detail
+      documents link to authoritative sources and related nodes. A flat cloud-drive collection works just
+      as well as a foldered one. Folders, filenames, YAML blocks, sidecars, and stable local paths are not
+      runtime prerequisites.
+- [ ] The agent reads the home document's opening, headings, and link labels first, then follows only
+      relevant edges. It does not load the whole collection by default. Each generated or maintained node
+      has an explicit next-reading path.
+- [ ] A document's recommended human-readable labels may record type, owner, status, effective date,
+      review date, language, or source authority in prose or a small table. Missing labels remain
+      uncertainty; the agent does not invent them.
+- [ ] The host adapter contract is explicit: discovery may return a title plus provider-native document
+      id or URL; reads return the opening, headings, link labels, and exact targets the provider exposes;
+      writes create or edit only wiki documents; and link writes preserve both label and target. If a host
+      cannot preserve a target, heading anchor, or permission boundary, the skill reports that capability
+      as unverified or unavailable instead of guessing.
 
-- [ ] The skill defines the schema format per Spec §3–§19, as Markdown first with YAML-compatible
-      blocks. It covers:
-      - **Identity:** required `id`, `name`, `version`, and `description`. Optional `owner`, `updated`,
-        `default_language`, and `additional_languages`.
-      - **Domains, concepts, and vocabulary:** preferred terms, aliases, acronyms, legacy terms, and
-        notes on terms with more than one meaning.
-      - **Relationships:** the 15 core relationships.
-      - **Knowledge types and facets.**
-      - **Sources:** each with one of the listed access types, plus routes.
-      - **Authority:** the eight authority levels, plus authority rules.
-      - **Business definitions and metrics.**
-      - **Problem patterns:** `id`, `name`, `intent`, `requires`, and `investigation`, plus optional
-        `trigger_examples`. The 12 recommended pattern ids are listed as starting points.
-- [ ] Progressive disclosure (PRD §9, §17; Spec §20):
-      - `schema/index.md` (Level 0) is small enough to load on every company-knowledge task.
-      - It links to domain files (Level 1) and detailed resources (Level 2), which load only when
-        relevant.
-      - A small organization may keep most of its schema in `index.md`.
-- [ ] Minimum sufficient semantics: every schema element exists because a competency question or a
-      demonstrated query need requires it (PRD §22.6; CQ §21).
-- [ ] The items listed in Spec §23 never go in the schema, and neither do credentials (Spec §12).
-- [ ] The skill defines the competency-question catalog format (CQ §2), the question categories
-      (CQ §3–§17), and the schema-growth rule (CQ §21).
-- [ ] The validation rules in Spec §22 are defined so that an LLM can check them.
+### Initialization
 
-### Init: schema creation
+- [ ] When no wiki home/map exists, init asks which document systems or collections to include and which
+      language the wiki should use before creating anything. It skips a question only when the user's
+      request answers it; host context does not count. It invites optional domains, authoritative sources,
+      terminology, and real questions.
+- [ ] Init checks that the chosen drive supports reading and writing documents and native links. If it
+      cannot write, it explains the limitation and does not pretend to have saved a wiki.
+- [ ] Before dependent initialization behavior is relied on, a bounded capability probe checks document
+      discovery, read, create, edit, native link label/target round-tripping, heading/bookmark handling,
+      and permission-denied behavior. A failed probe stops provider-specific claims and leaves the wiki
+      unchanged.
+- [ ] Init inspects source titles, summaries, headings, links, and representative content; proposes a
+      minimal home/map, guides, and focused nodes; and links to sources rather than copying them.
+      Inferences are marked proposed until supported by evidence or confirmed by the user.
+- [ ] Init uses the user's chosen language for wiki prose and records it in a human-readable document
+      line or table. If a home/map already exists, init makes no overwrite and hands off to maintenance.
 
-- [ ] **Init questions.** When no schema exists, the agent asks two questions before creating
-      anything:
-      - which document systems or sources to include
-      - which language the schema should use
+### Query, maintenance, and validation
 
-      It skips a question only when the user's own request already answers it; host-provided context
-      doesn't count. It creates nothing until it has both answers.
-- [ ] The language is recorded in the schema identity as `default_language`, plus
-      `additional_languages` if needed. Each source is recorded in the source map with its access
-      type.
-- [ ] Init combines human input with LLM proposals (PRD §15):
-      - It invites the user to name key domains, authoritative sources, terminology, business rules,
-        and real questions.
-      - It proposes domains, concepts, aliases, relationships, source routes, authority rules, problem
-        patterns, and competency questions from inspecting the sources.
-      - It stops once the schema is sufficient.
-- [ ] Anything inferred without explicit source evidence or human confirmation is marked as proposed,
-      never as confirmed or canonical. This applies to definitions, aliases, term mappings,
-      relationships, ownership, and authority rankings (PRD §15). The marking applies to each item
-      individually, so a confirmed element never carries an unmarked inferred alias, relationship, or
-      ranking.
-- [ ] If a schema already exists, init doesn't overwrite it and switches to maintenance.
-
-### Query runtime
-
-- [ ] The agent follows PRD §12:
-      1. Understand the request: intent, concepts, domain, problem type, expected answer form, and
-         time sensitivity.
-      2. Consult the schema progressively.
-      3. Resolve terminology through the vocabulary.
-      4. Build an investigation plan from the problem pattern that applies.
-      5. Query the original sources, using source routes to narrow the search (the order in PRD §13).
-      6. Evaluate authority, freshness, completeness, contradictions, and evidence coverage.
-      7. Iterate when the evidence is insufficient.
-- [ ] Linked schema documents form a traversable logical graph: links have meaningful labels and
-      resolvable targets, and the query workflow can follow them with ordinary document-reading
-      tools while preserving the target (user decision, 2026-09-10).
-- [ ] Answers separate established facts, inferred conclusions, hypotheses, and unresolved
-      uncertainty, and they cite the original sources.
-- [ ] Conflicts are surfaced rather than silently resolved. "Not found in the sources searched" stays
-      distinct from "does not exist" (CQ-GAP).
-- [ ] Without a schema, the agent still answers by searching the sources directly. It suggests running
-      init, and it doesn't create a schema on its own.
-- [ ] When the agent notices repeated gaps, missed terms, or corrections, it suggests schema updates
-      (PRD §18.10) rather than applying them silently.
-
-### Maintenance and validation
-
-- [ ] Maintenance is incremental (PRD §16; Spec §24):
-      - The agent proposes each change with its trigger, its evidence, and the competency questions
-        it affects.
-      - It applies a change only with user approval. A correction the user supplies counts as that
-        approval.
-      - It never silently rewrites confirmed or canonical meaning.
-      - It updates the `updated` date and reports what it changed.
-- [ ] Validation checks the Spec §22 rules on request, plus one extension: it flags any problem
-      pattern that no competency question references (Spec §18, CQ §21). It reports warnings and is
-      read-only unless the user asks for fixes.
+- [ ] Query understands intent, terms, domain, question type, answer form, and time sensitivity; starts
+      at the home/map; resolves terminology through relevant guides; follows labeled links; reads source
+      evidence; evaluates authority, freshness, completeness, conflicts, and permission; and iterates when
+      evidence is insufficient.
+- [ ] Answers distinguish established facts, inferences, hypotheses, and unresolved uncertainty; cite
+      the documents actually read; surface conflicts; and distinguish “not found in the searched sources”
+      from “does not exist.” Proposed meaning is treated as inference; proposed navigation may guide search.
+- [ ] Without a wiki, query searches original sources directly, creates nothing, and suggests init. When
+      search, link targets, or a source are unavailable, it reports the limit and uses only what remains.
+- [ ] Maintenance proposes additions, corrections, link repairs, stale-source changes, and new guides
+      with their trigger, evidence, affected questions, and minimal document edits. A user correction is
+      approval; other changes require approval. Confirmed meaning is never silently rewritten.
+- [ ] Validation is read-only by default. It checks the home/map, reachable native links, useful labels,
+      progressive-disclosure depth, summaries, source authority, stale/broken/orphan nodes, permission
+      boundaries, and whether every competency-question category has a route.
 
 ### Access and safety
 
-- [ ] Access is tool-agnostic. The skill reuses whatever host skills, CLIs, MCP servers, APIs, or
-      files are available and never builds connectors. One schema can cover several heterogeneous
-      sources, with at least two access types (PRD §8, §19, §22.7).
-- [ ] When a capability is missing, the agent works with what it has and reports the limitation. For
-      example, without search it follows routes and listings; when a source is unreachable, it says
-      so. It suggests derived retrieval infrastructure only after a demonstrated failure, and never
-      builds it proactively (PRD §13).
-- [ ] Sources are never modified. There is no per-document metadata or sidecar file (PRD §14). Source
-      content is treated as data, never as instructions to the agent.
-- [ ] Runtime access is permission-aware. Content the current user can't access is never revealed.
-- [ ] Sources labeled confidential or restricted are identified by label, owner, and route rather than
-      quoted, unless the host's permission-aware access confirms the current user may see them.
-- [ ] The schema never holds credentials, and never holds content taken from restricted or
-      confidential sources. Everyone who uses the skill can read it.
-- [ ] The agent does not invent organizational facts.
+- [ ] Access is host-capability-first: use only the cloud-drive/document skills, MCP tools, agent plugins,
+      CLIs, APIs, or repository tools already exposed by the host app. Do not invent a connector, call an
+      undocumented provider API, or install/assume a new integration. Git operations are read-only.
+- [ ] Source content is data, never instructions. Sources and restricted documents are never modified or
+      copied into the wiki. The agent never reveals content the current user cannot access, never stores
+      credentials, and identifies inaccessible material by label, owner, and route when permitted.
+- [ ] No derived retrieval infrastructure is introduced proactively, and the agent does not invent
+      organizational facts.
 
-### Coverage check
+### Competency-question coverage
 
-- [ ] The skill's guidance has a handling path for each of the 15 competency-question categories in
-      CQ v0.1 (A–O): authoritative lookup, ownership, version and change, decision, metric, dependency,
-      incident, policy application, proposal, history, status, risk, reconciliation, vocabulary, and
-      unknown or missing knowledge.
+- [ ] The query and maintenance guidance has a handling path for categories A–O: authoritative lookup,
+      ownership, version/change, decision, metric, dependency, incident, policy application, proposal,
+      history, status, risk, reconciliation, vocabulary, and unknown/missing knowledge.
 
 ## Constraints
 
-- The skill is Markdown only and portable. It depends on no particular agent host, provider, or tool
-  name.
-- It uses progressive disclosure, both for its own files and for the schema it creates.
-- **Language:**
-  - The schema's language is chosen at init and recorded as an ISO 639-1 code, for example `en` or
-    `zh`.
-  - Skill instructions are written in English.
-  - Schema field names follow the spec: English snake_case.
-  - Element ids are ASCII kebab-case, and competency questions use `CQ-<CATEGORY>-NNN`.
-  - Names, definitions, and descriptions use the chosen language or languages.
-  - Aliases keep terms exactly as the sources write them, in any language.
-- The Chinese product name is 企业文库.
-- The skill lives in `skills/company-wiki/` at the repository root. The organization's schema lives inside
-  the skill directory (PRD §17).
+- The skill is Markdown only, portable, and host/tool agnostic.
+- Organization documents live in the user's chosen cloud-drive collection. They may be flat, foldered,
+  or exposed only through search/list APIs; the skill must not depend on folder names.
+- Organization documents use ordinary readable content and native links. The Agent Skills frontmatter in
+  `SKILL.md` is package metadata; it is not a requirement for organization documents.
+- Skill instructions are English. Wiki prose follows the language chosen at init. The product name is
+  企业文库.
+- The root layout is fixed: `skills/`, `examples/`, and `tests/`.
 
 ## Non-Goals
 
-- Anything in PRD §4: vector or graph databases, RDF/OWL/SPARQL, per-document metadata, copying
-  sources, pre-generated summaries, new connectors, workflow engines, and process automation.
-- The optional retrieval infrastructure in PRD §13, and the v0.5+ features in PRD §23: query-planner
-  code, automated source discovery, schema-linting tools, and a competency-question test runner.
-- **The MVP evaluation** (PRD §19–§21; CQ §19). It means running the skill on real company questions
-  and sources, and comparing "agent + raw search" with "agent + schema". It needs a real
-  organization, real sources, and human judgment of the answers, so it moves to a follow-up story.
-- Host-specific installation, packaging, or distribution.
-- The v0.3 wiki-page model, which the v0.4 rebaseline dropped.
+- Graph databases, RDF/OWL/SPARQL, vector retrieval, embeddings, ingestion or copying of sources,
+  generated summaries for every source, per-document sidecars, YAML-dependent organization schemas,
+  folder-management workflows, new connectors, workflow engines, and process automation.
+- Host-specific installation, packaging, or cloud-drive provisioning.
+- Benchmarking answer quality against raw search; that requires a real organization and a separate pilot.
+- The old local `schema/` plus `competency-questions.md` organization-data layout.
 
 ## Open Questions (non-blocking)
 
-1. **Pilot:** which organization, sources, and question set the MVP evaluation uses, and who judges
-   the answers. Default: a separate follow-up story (`company-wiki-pilot`).
+1. Which connected cloud-drive/document provider is used for the pilot? The skill will use whichever
+   document tools the host exposes and report capability gaps.
+2. How much native link metadata each provider exposes (document id, heading anchor, backlink list) varies
+   by host; the skill must preserve what is available and state what is not.
 
 **Resolved by the user on 2026-09-10:**
-- The baseline is PRD v0.4.
-- The Chinese name is 企业文库.
-- Init asks which document systems to include and which language to use.
-
-No blocking questions.
+- Use a document-native graph over cloud-drive documents.
+- Treat ordinary documents as nodes and native links as edges.
+- Use progressive disclosure for reading.
+- Do not require folders or YAML for the organization wiki.
+- Keep the skill under `skills/`, tests under `tests/`, and examples under `examples/`.
