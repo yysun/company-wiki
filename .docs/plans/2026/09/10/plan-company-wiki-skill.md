@@ -143,26 +143,28 @@ staleness, orphans, permissions, and category coverage.
 
 ### SS — Milestone B: tests and fixtures
 
-- [ ] Update `tests/test-company-wiki-skill.md` so the logical drive is flat and document-native. Physical
+- [x] Update `tests/test-company-wiki-skill.md` so the logical drive is flat and document-native. Physical
       fixture subdirectories are explicitly harness-only. Init writes wiki documents to a flat writable
       collection, not `skills/company-wiki/schema/**`.
-- [ ] Replace record-shaped defect fixtures with broken-link, weak-label, stale/orphan, and unreferenced
+- [x] Replace record-shaped defect fixtures with broken-link, weak-label, stale/orphan, and unreferenced
       document cases. Keep source facts neutral and out of the shipped skill.
-- [ ] Run fixture checks and confirm no example-only or fixture-only tokens leak into the package.
+- [x] Run fixture checks and confirm no example-only or fixture-only tokens leak into the package. All
+      corpus counts, planted-fact uniqueness, defect-shape, and token guards passed.
 
 ### TT
 
-- [ ] Report that no unit or integration suites apply; rerun all Markdown, link, package, and fixture
+- [x] Report that no unit or integration suites apply; rerun all Markdown, link, package, and fixture
       checks.
 
 ### ET
 
-- [ ] Reassess the runner probe first. If a standalone headless agent session and transcript export are
-      unavailable, use isolated-agent reports in neutral temporary workspaces and disclose the weaker
+- [x] Reassess the runner probe first. No standalone headless agent session and transcript export were
+      available; use isolated-agent reports in neutral temporary workspaces and disclose the weaker
       read-order evidence and repository-leak mitigation.
-- [ ] Run every scenario in the reconciled E2E spec, including init gates, flat-drive document creation,
+- [x] Run every scenario in the reconciled E2E spec, including init gates, flat-drive document creation,
       link traversal, no-wiki fallback, maintenance approval, validation, permission safety, and source
-      integrity. Record the exact package/fixture commits exercised.
+      integrity. Local-adapter smoke passes S0–S7; record the exact package/fixture commits exercised and
+      the provider-level limitations below.
 
 ## Validation
 
@@ -201,17 +203,19 @@ No unit or integration suite applies to this Markdown-only deliverable.
 
 ## Traceability
 
-| Requirement | Evidence after implementation |
-|---|---|
-| Package layout, metadata, portability | Exact inventory, frontmatter check, package inspection |
-| Document node/link edge model | `SKILL.md`; `references/document-format.md`; example graph; link traversal scenario |
-| Flat-drive compatibility and no YAML dependency | Init/query references; flat-drive ET setup; no-fenced-YAML guard |
-| Progressive disclosure | `SKILL.md`, format contract, home → guide → detail → evidence scenario |
-| Init gates and persistence | `references/init.md`; S0/S0b/S1/S1b/S6 |
-| Query, evidence, conflicts, gaps, permissions | `references/query.md`; S2/S3/S7 |
-| Maintenance and validation | `references/maintain.md`; S4/S4b/S5 |
-| CQ categories A–O | Category table in `query.md`; traceable category checks |
-| Source integrity and safety | Common checks C1–C6; source checksum and no-instruction-following assertions |
+| Requirement | Implementation | Verification |
+|---|---|---|
+| Package layout, metadata, portability | `skills/company-wiki/{SKILL.md,README.md,references/*}`; `SKILL.md` frontmatter; root `examples/`, `tests/` | Inventory diff; frontmatter parse; no-YAML/no-code guards (passed) |
+| README purpose and organization data | `README.md` sections on package layout and usage | Inspection |
+| Document node/link edge model | `document-format.md` "Nodes and disclosure levels", "Edges and link labels"; `SKILL.md` "The graph and disclosure order"; example graph | Link and anchor check (passed); S1, S3 |
+| Flat drive; no folder or YAML dependency | `SKILL.md` "Presence and loading"; `init.md` "Inspect the collection" step 1; `query.md` "Flat or weakly indexed drive"; `document-format.md` intro | Fenced-YAML guard (passed); flat ET setup; S1/S1b |
+| Progressive disclosure | `SKILL.md` rules 2–6 and loading list; `document-format.md` levels; `query.md` steps 2–3 | S3a/S3e read order |
+| Host adapter contract and probe | `SKILL.md` rule 7; `init.md` "Gate and questions"; `document-format.md` "Edges" and "Sources and evidence" | SS probe record above; provider write, anchor, and permission round-trips unverified (no destination selected) |
+| Init gates and persistence | `init.md` "Gate and questions", "Draft the smallest useful graph", "Questions and finish" | S0, S0b, S1, S1b, S6 |
+| Query, evidence, conflicts, gaps, permissions | `query.md` "Investigation loop", "Meaning and navigation", "Special cases" | S2, S3, S7 |
+| Maintenance and validation | `maintain.md`; `document-format.md` "Validation checklist" | S4, S4b, S5 |
+| CQ categories A–O | `query.md` "Category handling"; `document-format.md` "Question guides" | S3 rows a–p, which cover A–O |
+| Source integrity and safety | `SKILL.md` "Safety and answer contract"; `query.md` "Special cases"; `init.md` inspect step 4 | C1–C6 |
 
 ## Risks
 

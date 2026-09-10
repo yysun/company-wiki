@@ -137,4 +137,3 @@ On validation, scan every wiki document the host can enumerate, not only documen
 
 Validation is read-only unless the user explicitly asks for fixes. Use [maintenance](maintain.md) for
 proposals and approved edits.
-

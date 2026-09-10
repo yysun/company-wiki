@@ -1,11 +1,8 @@
 # Forecast parts demand
 
-```yaml
-id: forecast-parts-demand
-name: Forecast parts demand
-intent: Estimate future demand from available operational evidence.
-requires: [historical demand, seasonality]
-investigation: [find historical evidence, compare periods, state uncertainty]
-review_status: proposed
-evidence: source-id#section
-```
+**Summary:** How to estimate next quarter's spare-parts demand for depot stock planning.
+
+## Investigation path
+
+Compare parts usage across recent quarters, check open service tickets for pending replacements, and
+state the uncertainty in the estimate.
