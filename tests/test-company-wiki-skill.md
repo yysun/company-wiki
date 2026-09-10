@@ -86,11 +86,13 @@ telemetry batch interval. The agent may use only read-only git commands.
 
 ### Wiki defects for S5
 
-The two files under `defects/` are ordinary Markdown documents, not schema records:
+The files under `defects/` are ordinary Markdown documents, not schema records:
 
 - `concepts/battery-recycling.md` links to an undefined concept and an undefined source route.
+- Its source edge has an intentionally weak visible label.
 - `problem-patterns/forecast-parts-demand.md` is a focused guide with no inbound link and no question
   guide pointing to it.
+- `stale/outdated-service-note.md` is explicitly stale and has no current evidence or next-reading path.
 
 The validation run must report those broken or missing edges and leave the documents unchanged.
 
@@ -141,9 +143,9 @@ schema directory during this swap.
 
 ## Adapter contract and feasibility probe
 
-Before running S0–S7, inspect the host app's already-exposed cloud-drive/document skills, MCP tools, agent
-plugins, CLIs, APIs, and repository tools. Do not install or invent a connector. Record whether the host
-can:
+Before running S0–S7, inspect the host app's already-exposed cloud-drive/document skills, MCP tools, or
+agent plugins. For the git source, use only other repository, CLI, or API tools the host exposes. Do not
+install or invent a connector. Record whether the host can:
 
 1. discover a document by title and provider-native id or URL;
 2. read its opening, headings, visible link labels, and exact targets;
@@ -287,10 +289,11 @@ Each row writes nothing and passes C1–C6.
 
 ### S5 — Validation (post-init)
 
-- **Before baseline:** copy both `defects/` Markdown files into the flat `wiki-documents/` collection.
+- **Before baseline:** copy all three `defects/` Markdown files into the flat `wiki-documents/` collection.
 - **Action:** `Check our company wiki for problems.`
-- **Expected:** reports the undefined linked concept, undefined source route, and unlinked/uncovered guide;
-  may report other concrete link or summary defects; changes no file.
+- **Expected:** reports the undefined linked concept, undefined source route, weak link label,
+  unlinked/uncovered guide, and stale document with missing evidence/next-reading path; may report other
+  concrete defects; changes no file.
 
 ### S6 — Init on an existing wiki (post-init)
 

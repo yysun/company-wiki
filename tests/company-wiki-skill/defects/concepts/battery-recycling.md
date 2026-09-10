@@ -4,7 +4,7 @@
 
 ## Related reading
 
-- [Hazardous waste handling](hazardous-waste-handling.md) — see also
+- [Open](hazardous-waste-handling.md) — see also; the label is intentionally too vague for a useful edge.
 
 ## Evidence
 

@@ -37,7 +37,8 @@ organization's knowledge.
 4. Ask it to suggest or apply a wiki change, or to validate links and coverage. User corrections approve
    that specific change; other edits require approval. Validation is read-only by default.
 
-The skill reuses only cloud-drive/document skills, MCP tools, agent plugins, CLIs, APIs, or repository tools
-the host app already provides. It never invents a connector, calls an undocumented provider API, or assumes
-a new integration. It reports unreachable sources, missing link metadata, and permission limits instead of
-inventing facts or building retrieval infrastructure.
+For cloud-drive work, the skill reuses only cloud-drive/document skills, MCP tools, or agent plugins the host
+app already provides. For non-drive sources it uses only the host's corresponding exposed repository, CLI,
+or API tools. It never invents a connector, calls an undocumented provider API, or assumes a new integration.
+It reports unreachable sources, missing link metadata, and permission limits instead of inventing facts or
+building retrieval infrastructure.

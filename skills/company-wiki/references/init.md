@@ -6,12 +6,21 @@ format](document-format.md) for the node, link, and disclosure contract.
 
 ## Gate and questions
 
-Before creating any document, inspect only the cloud-drive/document skills, MCP tools, agent plugins, CLIs,
-APIs, and repository tools already exposed by the host app. Check that those capabilities can search or
-list documents, open them, and create or edit a document with native links. Do not invent a connector, call
-an undocumented provider API, install an integration, or create a probe file. If the drive is read-only or
-its link targets cannot be preserved, explain the limitation and offer a draft in the response without
-claiming that it was saved.
+Before creating any document, inspect only the cloud-drive/document skills, MCP tools, or agent plugins
+already exposed by the host app. For non-drive sources, use only the host's corresponding exposed tools.
+Run this bounded capability check before relying on provider behavior:
+
+1. Discovery returns a title and, when available, a provider-native document id or URL.
+2. A read returns the opening, headings, visible link labels, and exact targets the provider exposes.
+3. A write can create and edit only in the explicitly selected wiki collection.
+4. A link round-trip preserves the visible label and exact target.
+5. Heading anchors or bookmarks are either preserved or explicitly reported unsupported.
+6. A denied read/write returns a permission failure without exposing content.
+
+Do not invent a connector, call an undocumented provider API, install an integration, or create a probe
+file. If no destination is authorized for a write/round-trip check, mark those capabilities unverified and
+do not claim them as proven. If the drive is read-only or its link targets cannot be preserved, explain the
+limitation and offer a draft in the response without claiming that it was saved.
 
 Ask these questions when the user's request has not already answered them:
 
