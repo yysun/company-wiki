@@ -177,13 +177,25 @@ staleness, orphans, permissions, and category coverage.
   attempted. The skill makes those provider capabilities explicit but unverified.
 - Isolated local-adapter smoke evidence exercised package commit `eb30a72` and fixture/test commit
   `46b1c9a`. Init/query coverage passed S0, S0b, S1, S1b, S2, and S3 A/N, B, C, D, E, F, G, H, I, J,
-  K, L, M, O, plus permissions. Maintenance/validation coverage passed S4, S4b, S5, S6, and S7.
+  K, L, M, O, plus permissions. Maintenance/validation coverage passed S4, S4b, S6, and S7.
+  After the final integration-boundary fixes in `6ee5437`, a focused S5 run passed the broken-target,
+  weak-label, stale-node, orphan, and missing-next-reading checks with no edits.
 - The smoke runs used flat copies of all 13 drive documents, a temporary read-only git repository, and
   temporary wiki documents only. Checks passed for source checksums, clean git state, no source copies,
   no restricted values, ignored embedded instructions, no sidecars or state files, and no `TODO.md`.
 - No standalone headless runner or transcript exporter was available. Read-order evidence is therefore
   weaker than a full transcript proof, and provider-level permission-denied, heading/bookmark, and native
   link round-trip behavior remain unverified. Reports were checked for repository-path leaks.
+
+## Final gate record
+
+- **CR:** `CR passed: no major findings` after the second review round. The final review covered
+  `98f7ffe..HEAD`, confirmed that baseline `docs/**` is outside scope, and accepted the explicit
+  provider-capability limits.
+- **VR:** `VR passed: all acceptance criteria complete`. Every REQ checkbox is checked. Structural,
+  fixture, focused S5, and isolated S0–S7 smoke evidence support the claims; provider-level behavior is
+  reported as unverified rather than overstated.
+- **DD/GC:** pending final done record and delivery inspection.
 
 ## Validation
 
