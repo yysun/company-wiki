@@ -17,6 +17,25 @@ database, an index, embeddings, source copies, or a connector. A flat document c
 - `references/document-format.md` — node, edge, disclosure, question-guide, and validation guidance.
 - `../../examples/` — a flat illustrative graph, not organization content.
 
+## Try the example
+
+The entry document is [`company-wiki-home.md`](../../examples/sample-company/company-wiki-home.md).
+Open it first, then follow the shortest relevant path:
+
+`home/map → guide → focused detail → linked source`
+
+For example, a workplace-policy question goes from the home to `people-guide.md`, then to
+`vacation-policy-detail.md`; a customer-metric question goes through `customer-guide.md` to
+`churn-rate-detail.md`. `authoritative-lookup-guide.md` explains which source wins when documents
+disagree, and `question-guide.md` collects recurring question paths.
+
+The Markdown files under `examples/sample-company/` are a local, flat-drive adapter for testing the
+reading order and link graph. They are not a required filesystem layout and are not uploaded or copied
+into a real wiki. In production, put equivalent ordinary documents in the chosen cloud drive and let
+the host's existing cloud-drive/document skill, MCP tool, or agent plugin open them. For a local smoke
+test, give the agent the whole example directory, tell it to start at `company-wiki-home.md`, and ask it
+to answer using only documents reached from that entry point.
+
 The installed skill contains no organization wiki. Init creates ordinary wiki documents in the user's
 chosen writable cloud-drive collection: normally one home/map, a few guides, and only the focused detail
 nodes needed by real questions. It links to original source documents instead of copying them. If the

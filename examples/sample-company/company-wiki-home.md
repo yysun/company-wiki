@@ -5,6 +5,17 @@
 This home document is the Level 0 entry point for a small, flat cloud-drive collection. Start here, then
 follow only the guide that matches the question.
 
+## How to use this example
+
+Treat the Markdown files in this directory as one flat document collection. The intended reading path is:
+
+`this home → one guide → one focused detail document → the linked source`
+
+For a local test, open this file first and ask the agent to answer from documents reachable from it. Do not
+start with a detail document: the point of the example is to exercise progressive disclosure and ordinary
+document links. In a real deployment, the equivalent documents live in the chosen cloud drive and are
+opened through the host's existing cloud-drive/document skill, MCP tool, or agent plugin.
+
 ## Start here
 
 - [People guide](people-guide.md) — workplace rules and the `vacation-policy` reading path.
