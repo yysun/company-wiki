@@ -195,7 +195,9 @@ staleness, orphans, permissions, and category coverage.
 - **VR:** `VR passed: all acceptance criteria complete`. Every REQ checkbox is checked. Structural,
   fixture, focused S5, and isolated S0–S7 smoke evidence support the claims; provider-level behavior is
   reported as unverified rather than overstated.
-- **DD/GC:** pending final done record and delivery inspection.
+- **DD:** complete in [done record](../../../../done/2026/09/10/company-wiki-skill.md), including the
+  complete final VR result verbatim.
+- **GC:** ready after final delivery inspection; no automatic push.
 
 ## Validation
 
