@@ -310,7 +310,8 @@ If a schema already exists, init changes nothing and hands over to maintenance.
 #### ET evidence record
 
 The fallback isolated-agent reports ran in neutral temporary workspaces and were checked for source
-integrity and repository-path leaks. Passed reports cover S0, S1, S1b, S3a, S4, S5, S6, and S7. S5
+integrity and repository-path leaks. The package they exercised is committed as `1bc8e05`; the
+fixtures are committed as `c2aeb82`. Passed reports cover S0, S1, S1b, S3a, S4, S5, S6, and S7. S5
 reported the planted undefined relationship, missing source route, and unreferenced pattern without
 editing. S4 recorded a user-confirmed term and updated the schema date. S7 reported schema guidance as
 unverified when the repository was absent. Full headless tool transcripts were unavailable, and S0b,
