@@ -230,6 +230,26 @@ The system does not need to materialize every policy document into a graph.
 
 Instead, the LLM reads the concept definition and source route, then queries the original source.
 
+### 7.1 Operational Lifecycle
+
+The document-native implementation uses five distinct operations:
+
+```text
+Init → Ingest → Query → Maintain → Validate
+```
+
+- **Init** creates a minimal map from bounded discovery and representative sampling; it is not a full import.
+- **Ingest** reconciles explicitly selected new evidence into the existing wiki through a reviewed and
+  approved change plan. One source is the default; batches are finite and user-selected.
+- **Query** answers through the wiki and original evidence without writing.
+- **Maintain** corrects or restructures wiki knowledge under explicit change control.
+- **Validate** detects link failures, source drift, gaps, contradictions, and graph defects without writing.
+
+Ingest is an editorial operation, not centralized ingestion infrastructure. It creates no source mirror,
+embedding index, processing ledger, mandatory log, watcher, or background synchronization. Approved writes
+are revalidated before application; stale plans require fresh approval, and partial provider failure is
+reported without destructive rollback.
+
 ---
 
 ## 8. Source Adapter Model
