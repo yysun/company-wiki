@@ -17,15 +17,16 @@ unknown.
 
 ## Lifecycle Data Boundaries
 
-These boundaries apply to `Init → Ingest → Query → Maintain → Validate`:
+These boundaries apply to `Init → Bootstrap → Explore ↔ Query → Curate → Add Source → Maintain → Validate`:
 
 - Every workflow reads the registry entry first and uses only one selected, contained profile. A direct route
   supplied by the user is allowed only where the skill's missing-registry contract explicitly permits it.
 - Source discovery and reads stay inside the profile's registered original-material locations and scopes.
-  Ingest additionally requires the user to select exact source documents or an explicitly bounded batch; a
+  Add Source (with Ingest as a compatibility alias) additionally requires the user to select exact source documents or an explicitly bounded batch; a
   topic, folder, or collection never silently expands into an all-source operation.
-- Wiki writes stay inside the profile's verified destination. Ingest writes require approval of its concrete
-  change plan; Maintain follows its own correction and approval rules. Query and Validate are read-only.
+- Wiki writes stay inside the profile's verified destination and require provider-authenticated identity,
+  exact-scope capability/governance, audience containment, a concrete approved plan, and apply-time rereads.
+  Query, Explore, and Validate are read-only. Bootstrap never infers a source boundary from index content.
 - Original sources remain unchanged in every workflow. Access to a source grants neither wiki-write authority
   nor permission to weaken provider, confidentiality, or repository boundaries.
 

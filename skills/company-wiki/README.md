@@ -1,9 +1,8 @@
 # company-wiki / 企业文库
 
-`company-wiki` is a portable Agent Skill for building a curated, document-native company wiki over a
-cloud-drive collection. Ordinary documents are nodes. Native hyperlinks, bookmarks, and heading links
-are edges. The agent reads the graph progressively—from a small home/map to guides, focused detail, and
-original evidence—then answers with citations and explicit uncertainty.
+`company-wiki` is a portable Agent Skill for an admin-governed Company Library Index and a user-controlled
+Personal Wiki. Ordinary documents are nodes and native links are edges. The tree is navigation, the graph is
+discovery, and a single routing decision selects original evidence before the agent answers with citations.
 
 The drive is the durable home of the wiki. This package does not impose folders, YAML records, a graph
 database, a provider-side search/evidence index, embeddings, source copies, or a connector. The small local
@@ -13,7 +12,10 @@ Markdown registry is configuration only. A flat document collection is valid.
 
 - `SKILL.md` — concise routing, graph model, loading order, safety, and answer contract.
 - `references/init.md` — initialize a home/map and the first reading paths.
-- `references/ingest.md` — reconcile explicitly selected new sources through an approved change plan.
+- `references/bootstrap.md` — create a minimal Personal Wiki by reference.
+- `references/curate.md` — make durable navigation knowledge or promote it by scope.
+- `references/add-source.md` — reconcile explicitly selected sources (`Ingest` compatibility alias).
+- `references/change-protocol.md` — shared authority, approval, and failure contract for writes.
 - `references/registry.md` — select and safely persist user-level wiki configuration.
 - `references/query.md` — traverse the graph and investigate questions.
 - `references/maintain.md` — propose and apply corrections, repairs, and restructuring.
@@ -26,12 +28,11 @@ Markdown registry is configuration only. A flat document collection is valid.
 The entry document is [`company-wiki-home.md`](../../examples/sample-company/company-wiki-home.md).
 Open it first, then follow the shortest relevant path:
 
-`home/map → guide → focused detail → linked source`
+`routing context → one route decision → original evidence`
 
-For example, a workplace-policy question goes from the home to `people-guide.md`, then to
-`vacation-policy-detail.md`; a customer-metric question goes through `customer-guide.md` to
-`churn-rate-detail.md`. `authoritative-lookup-guide.md` explains which source wins when documents
-disagree, and `question-guide.md` collects recurring question paths.
+For example, a workplace-policy question chooses the people route and source evidence together; a customer
+metric question chooses the customer route and source evidence together. The outline ranks likely routes but
+never blocks direct source search within the registered scope.
 
 The Markdown files under `examples/sample-company/` are a local, flat-drive adapter for testing the
 reading order and link graph. They are not a required filesystem layout and are not uploaded or copied
@@ -40,24 +41,23 @@ the host's existing cloud-drive/document skill, MCP tool, or agent plugin open t
 test, give the agent the whole example directory, tell it to start at `company-wiki-home.md`, and ask it
 to answer using only documents reached from that entry point.
 
-The installed skill contains no organization wiki. Init creates ordinary wiki documents in the user's
-chosen writable cloud-drive collection: normally one home/map, a few guides, and only the focused detail
-nodes needed by real questions. It links to original source documents instead of copying them. If the
-host cannot create documents or preserve native link targets, the agent reports that limitation and does
-not claim the wiki was saved. Init samples representative sources; it does not ingest every document or
-create processed-source state.
+The installed skill contains no organization wiki. Init creates a small Company Library Index from bounded
+representative sampling. Bootstrap creates a minimal Personal Wiki by reference without sampling or copying the
+company corpus. Both link to original source documents instead of copying them and propose exact pages before
+any durable write.
 
 ## Lifecycle
 
-`Init → Ingest → Query → Maintain → Validate`
+`Init → Bootstrap → Explore ↔ Query → Curate → Add Source → Maintain → Validate`
 
-Ingest is the explicit bridge between initialization and everyday use. The user selects one new source by
+Add Source is the explicit bridge between discovery and durable knowledge. The user selects one new source by
 default, or supplies a finite batch. The agent reads it, compares it with relevant wiki nodes and evidence,
 and presents the exact proposed edits. Source selection permits reading but not those edits; the agent writes
 only after approval and revalidation. An unchanged source produces no edit or receipt. Validate is separately
 read-only, while fixes route to Maintain.
 
-This source-to-wiki reconciliation does not introduce centralized ingestion. There is no source copy,
+This source-to-wiki reconciliation does not introduce centralized ingestion. `Ingest` remains a compatibility
+alias. There is no source copy,
 embedding pipeline, provider-side index, processing ledger, mandatory log, watcher, or background sync.
 
 Wiki documents are organization data. Keep them in the drive and preserve them when updating or replacing
@@ -89,12 +89,12 @@ registry and must report that limitation.
    example, “创建一个财务文库” already supplies the name, finance scope, and Chinese language; the agent can
    ask only for the unknown original-material location and writable destination. A subject never authorizes
    a whole-drive search: source discovery stays inside locations the user explicitly specifies.
-3. Ingest a new or changed source by selecting its exact native target. Review the proposed wiki changes,
+3. Add a new or changed source by selecting its exact native target. Review the proposed wiki changes,
    then approve them if they correctly preserve authority, conflicts, and evidence links.
-4. Ask company questions normally. The agent starts at the home/map, follows labeled links, reads only
-   relevant evidence, and cites the documents it actually opened.
-5. Ask it to maintain corrections or structure, or to validate links and coverage. User corrections approve
-   that specific change; other maintenance edits require approval. Validation is always read-only.
+4. Ask company questions normally. The Personal Wiki ranks routes, but never limits source search; the agent
+   makes one routing decision, reads relevant original evidence, and cites documents it actually opened.
+5. Ask it to Curate or Maintain structure, or Validate links and coverage. Every durable change has its own
+   concrete proposal and approval; corrections are not approval. Validation is always read-only.
 
 For cloud-drive work, the skill reuses only cloud-drive/document skills, MCP tools, or agent plugins the host
 app already provides. For non-drive sources it uses only the host's corresponding exposed repository, CLI,

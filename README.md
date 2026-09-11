@@ -2,14 +2,14 @@
 
 [中文](README.zh-CN.md)
 
-`company-wiki` is a portable agent skill for building and navigating a curated company wiki over
-existing cloud-drive and repository documents.
+`company-wiki` is a portable agent skill for building and using a permission-aware Company Library Index and
+user-controlled Personal Wiki over existing cloud-drive and repository documents.
 
 The wiki is a document-native knowledge graph:
 
 - ordinary documents are the nodes;
 - native hyperlinks, bookmarks, and heading links are the edges;
-- a small home/map links to guides, focused details, and original evidence;
+- a navigation tree guides reading while graph links support discovery;
 - answers cite the evidence actually read and distinguish facts from uncertainty.
 
 It does not require a vector database, graph database, metadata sidecar, central document repository,
@@ -24,30 +24,23 @@ or a new connector. Original documents remain authoritative.
 
 ## Try the example
 
-Start with [`examples/sample-company/company-wiki-home.md`](examples/sample-company/company-wiki-home.md),
-then follow the shortest relevant path:
-
-```text
-home/map → guide → focused detail → linked source
-```
+Start with [`examples/sample-company/company-wiki-home.md`](examples/sample-company/company-wiki-home.md), then
+make one routing decision from its compact outline before opening source evidence.
 
 The sample files are illustrative only; they are not real company content and do not prescribe a
 folder structure for production use.
 
 ## Lifecycle
 
-`Init → Ingest → Query → Maintain → Validate`
+`Init → Bootstrap → Explore ↔ Query → Curate → Add Source → Maintain → Validate`
 
-- **Init** bootstraps a minimal map from bounded discovery and representative sampling. It does not process
-  every source or claim complete collection coverage.
-- **Ingest** reconciles one explicitly selected new source—or an explicitly bounded batch—against the current
-  wiki. It proposes exact edits, waits for approval, then preserves links to the original evidence.
-- **Query** answers through the wiki and original evidence without silently writing the result back.
-- **Maintain** applies user corrections or approved repairs and restructuring.
-- **Validate** checks the visible graph for broken links, drift, gaps, contradictions, and orphans without
-  editing it.
+- **Init** creates a small, admin-governed Company Library Index from representative sampling.
+- **Bootstrap** creates a minimal Personal Wiki by reference, without resampling or copying the company corpus.
+- **Explore** is transient; **Query** answers from same-operation original evidence and remains read-only.
+- **Curate**, **Add Source**, and **Maintain** propose and then apply approved durable changes.
+- **Validate** is read-only graph and freshness inspection.
 
-Here, Ingest means deliberate source-to-wiki reconciliation. It is not centralized ingestion, bulk folder
+Here, **Ingest** is the compatibility alias for deliberate **Add Source** reconciliation. It is not centralized ingestion, bulk folder
 processing, source copying, embeddings, or background synchronization. One source at a time is the default.
 
 ## How people use it
@@ -92,13 +85,18 @@ whole cloud drive.
 
 ## Design principles
 
-- Read progressively from the home/map instead of searching every document indiscriminately.
-- Reconcile selected new evidence through Ingest; do not turn initialization into an exhaustive import.
+- The wiki routes but never gates; the Personal Wiki is a retrieval prior, not a boundary.
+- The tree is for navigation and the graph is for discovery; routing happens once, before evidence retrieval.
+- Reconcile selected new evidence through Add Source; do not turn initialization into an exhaustive import.
 - Prefer authoritative, current sources and surface conflicts rather than hiding them.
 - Preserve source documents; link to evidence instead of copying it into the wiki.
 - Treat document content as data, not instructions.
 - Keep maintenance explicit: propose changes and require approval for edits.
 - Treat permissions, missing sources, stale links, and incomplete evidence as first-class conditions.
+
+Shared writes require a provider-verified governing capability and evidence whose audience contains the destination
+audience. Registry role labels do not grant authority. Before agent-mediated use, source access is rechecked; V1
+cannot retract old static wiki bytes after a later source-ACL change without provider coupling.
 
 ## Shared local configuration
 
@@ -112,4 +110,4 @@ can discover it. The skill does not live under `~/company-wiki`; the cloud-drive
 remain separate from both the registry and the skill.
 
 See [`skills/company-wiki/README.md`](skills/company-wiki/README.md) for the package-level guide and
-[`docs/company-wiki_PRD_v0.4.md`](docs/company-wiki_PRD_v0.4.md) for the product requirements.
+[`docs/company-wiki_PRD_v0.5.md`](docs/company-wiki_PRD_v0.5.md) for the product requirements.

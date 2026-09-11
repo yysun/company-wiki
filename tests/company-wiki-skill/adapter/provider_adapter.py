@@ -24,10 +24,12 @@ class AdapterError(Exception):
 def load_config(path: Path) -> dict[str, Any]:
     with path.open(encoding="utf-8") as handle:
         config = json.load(handle)
-    required = {"source_roots", "wiki_root", "event_log"}
+    required = {"source_roots", "wiki_root", "registry_root", "event_log"}
     missing = sorted(required - config.keys())
     if missing:
         raise AdapterError(f"configuration missing: {', '.join(missing)}")
+    config["_config_path"] = str(path.resolve(strict=True))
+    validate_harness_paths(config)
     return config
 
 
@@ -37,6 +39,20 @@ def is_contained(path: Path, root: Path) -> bool:
         return True
     except ValueError:
         return False
+
+
+def protected_roots(config: dict[str, Any]) -> list[Path]:
+    roots = [Path(config["wiki_root"]).resolve(strict=True), Path(config["registry_root"]).resolve(strict=True)]
+    roots.extend(Path(value).resolve(strict=True) for value in config["source_roots"].values())
+    return roots
+
+
+def validate_harness_paths(config: dict[str, Any]) -> None:
+    protected = protected_roots(config)
+    for label, value in (("configuration", config["_config_path"]), ("event log", config["event_log"])):
+        resolved = Path(value).resolve(strict=False)
+        if any(is_contained(resolved, root) for root in protected):
+            raise AdapterError(f"{label} must be outside source, wiki, and registry roots")
 
 
 def resolve_relative(root: Path, relative: str) -> Path:
@@ -84,11 +100,6 @@ def read_events(path: Path) -> list[dict[str, Any]]:
 
 def append_event(config: dict[str, Any], operation: str, target: str, result: str) -> None:
     event_path = Path(config["event_log"])
-    protected_roots = [Path(config["wiki_root"]).resolve(strict=True)]
-    protected_roots.extend(Path(value).resolve(strict=True) for value in config["source_roots"].values())
-    resolved_event_parent = event_path.parent.resolve(strict=True)
-    if any(is_contained(resolved_event_parent, root) for root in protected_roots):
-        raise AdapterError("event log must be outside source and wiki roots")
     events = read_events(event_path)
     event = {"seq": len(events) + 1, "operation": operation, "target": target, "result": result}
     with event_path.open("a", encoding="utf-8") as handle:
@@ -174,6 +185,11 @@ def write_document(config: dict[str, Any], target: str) -> int:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", required=True, type=Path)
+    parser.add_argument(
+        "--soft-errors",
+        action="store_true",
+        help="return content-free adapter failures as JSON with process status 0 for CLI trace capture",
+    )
     parser.add_argument("operation", choices=("list", "read", "preflight", "write"))
     parser.add_argument("target")
     return parser.parse_args()
@@ -191,6 +207,9 @@ def main() -> int:
             return preflight_write(config, args.target)
         return write_document(config, args.target)
     except (AdapterError, json.JSONDecodeError, OSError) as error:
+        if args.soft_errors:
+            print(json.dumps({"ok": False, "error": str(error)}, sort_keys=True))
+            return 0
         print(f"adapter error: {error}", file=sys.stderr)
         return 13
 

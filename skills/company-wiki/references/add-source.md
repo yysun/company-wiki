@@ -1,7 +1,7 @@
-# Ingest selected sources into the document wiki
+# Add selected sources to the document wiki
 
 Use this workflow when the user identifies new or changed original evidence and wants it reconciled into an
-existing wiki. Ingest is source-centered: it reads selected evidence, compares it with the current graph, and
+existing wiki. **Ingest** is a compatibility alias. Add Source is source-centered: it reads selected evidence, compares it with the current graph, and
 proposes the smallest coherent wiki update. It is not bulk ETL, indexing, source copying, or initialization.
 
 Select one profile through [Registry](registry.md), follow its exact home/map target, and load
@@ -14,9 +14,10 @@ The user must explicitly identify one source document or a finite batch through 
 document ids, or repository locators. Default to one source at a time. A batch is allowed only when the user
 supplies or explicitly selects its bounded members.
 
-A topic, filename guess, “latest documents,” folder, collection, repository, or current UI context is not a
-bounded selection. Ask for exact sources and stop before source discovery when selection is missing or
-ambiguous. Never enumerate a location to manufacture a batch. Reject a selected source outside the profile's
+A topic, filename guess, “latest documents,” collection, repository, or current UI context is not a bounded
+selection. A user-selected folder is allowed only as one finite batch: enumerate it first, report members and its
+bound, then read only that selection. Ask for exact sources and stop before source discovery when selection is
+missing or ambiguous. Never enumerate a location to manufacture a batch. Reject a selected source outside the profile's
 registered original-material locations or scope. Report permission denial without exposing content.
 
 ## Read and reconcile
@@ -57,8 +58,9 @@ approval of the proposal. “Ingest this source” is not approval of edits that
 
 Immediately before applying an approved plan:
 
-1. Reopen every selected source and planned wiki target. Recheck material content, status, dates, exact links,
-   permissions, destination containment, and write capability.
+1. Reopen every selected source and planned wiki target. Recheck authenticated identity, governing authority,
+   source/destination audience, material content, status, dates, exact links, permissions, destination
+   containment, and write capability.
 2. If a source, target, relationship, permission, or required change materially differs from the approved
    proposal, invalidate the plan and its approval. Make no write; present a revised plan for fresh approval.
 3. If preflight fails for any planned target, make no write and report the exact failure.
