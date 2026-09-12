@@ -47,6 +47,10 @@ These are linked navigation and reasoning overlays, not duplicate repositories. 
 
 The LLM uses this schema to plan retrieval and investigation, then accesses original documents through existing tools such as local files, synced folders, CLI tools, MCP servers, document skills, search APIs, or cloud-drive connectors.
 
+An explicitly declared local folder is a first-class storage option for both original-material retrieval and
+Markdown wiki storage. The source folder and writable wiki folder remain separate declared locations: local-folder
+compatibility never authorizes a wider filesystem search or a write to the source collection.
+
 > The company provides the map. The documents provide the evidence. The user's questions grow the wiki.
 
 ---
@@ -358,6 +362,20 @@ profile until the replacement succeeds.
 ## 8. Source Adapter Model
 
 The schema is independent of access mechanism.
+
+### 8.1 Local-folder compatibility
+
+An explicitly registered local filesystem folder may be a source location or a writable wiki destination. This
+supports local smoke tests, private Personal Wikis, and local-first deployments without uploading documents to a
+cloud drive. A cloud-synced folder can use the same local adapter, but is not thereby a verified cloud-provider
+integration.
+
+The agent must receive the exact source folder and exact writable wiki folder separately, and search or write only
+within the applicable declared boundary. Effective local write access permits a local write only; it does not prove
+a shared audience, authenticated provider identity, or governance authority. A local adapter alone is therefore
+sufficient for private/personal use and tests, but Team or Company durable writes require an integration that can
+verify identity, governing capability, and audience containment. If those checks are unavailable, the system
+returns a proposal rather than writing shared knowledge.
 
 A source may be accessed through:
 

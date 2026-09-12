@@ -16,6 +16,15 @@ The Company Library Index is a document-native taxonomy and source map:
 It does not require a vector database, graph database, metadata sidecar, central document repository,
 or a new connector. Original documents remain authoritative.
 
+The Personal Wiki accumulates durable user judgment and routing context—not a private document cache. It retains
+reused concepts and source routes, project and decision context, annotations, hypotheses, priorities, and reusable
+investigation patterns, so later questions start with better judgment. Company facts still require current original
+evidence when they are used.
+
+An explicitly declared local folder works for both source retrieval and Markdown wiki storage. The source folder
+and writable wiki folder must still be separate; local-folder support never permits a wider filesystem search or a
+write back to the source collection.
+
 ## Repository layout
 
 - [`skills/company-wiki/`](skills/company-wiki/) — installable skill package and workflow references.
@@ -30,6 +39,49 @@ make one routing decision from its compact outline before opening source evidenc
 
 The sample files are illustrative only; they are not real company content and do not prescribe a
 folder structure for production use.
+
+### Local-folder demo
+
+No upload is required for a local or private demonstration. Declare separate folders for the bounded source corpus
+and writable wiki:
+
+```text
+Company Wiki Demo/
+├── Test Sources/   # fixture documents; bounded read/search scope
+└── Test Wiki/      # separate writable Markdown wiki destination
+```
+
+For example, ask:
+
+> Create a demo wiki named Company Wiki Demo. Original material: the local `Test Sources` folder only. Wiki
+> destination: the separate writable local `Test Wiki` folder. Use English. Do not search outside `Test Sources`.
+
+This supports smoke tests and private Personal Wikis. A cloud-synced folder can use the same local adapter, but
+local availability does not prove cloud-provider identity, ACLs, or governance. Use a provider integration for
+Team or Company writes that require those checks.
+
+### Cloud-drive demo
+
+Do not upload the repository examples verbatim as a real wiki. To test a supported provider, deploy a small,
+controlled fixture corpus to one provider-specific test collection, keeping the test source and writable wiki
+destination separate:
+
+```text
+Company Wiki Demo — Google Drive
+├── Test Sources/   # fixture documents; bounded read/search scope
+└── Test Wiki/      # separate writable wiki destination
+```
+
+For example, ask:
+
+> Create a demo wiki named Company Wiki Demo. Original material: the Google Drive `Test Sources` collection only.
+> Wiki destination: the separate writable Google Drive `Test Wiki` collection. Use English. Do not search outside
+> `Test Sources`.
+
+The fixture corpus should include an alias, a current authoritative document, an obsolete conflicting document, a
+multi-document question, and a decoy. Test a restricted document too when the provider can represent its ACLs.
+Repeat this setup only for providers the product supports; each provider needs its own acceptance test because
+search, links, and permissions differ.
 
 ## Lifecycle
 
@@ -48,6 +100,9 @@ processing, source copying, embeddings, or background synchronization. One sourc
 
 Once the assistant can access the company's documents, people can ask everyday questions in plain
 language. For example:
+
+> For a Google Drive demo, create a wiki from `Company Wiki Demo/Test Sources` only and write it to the separate
+> `Company Wiki Demo/Test Wiki` collection. Do not search the rest of the drive.
 
 > Create a wiki named Company Handbook. Original material: the current People, Operations, and Customer
 > collections. Wiki destination: the writable Company Knowledge collection. Use English, with People,
@@ -89,6 +144,8 @@ whole cloud drive.
 - The taxonomy is the governed backbone; typed links are the small useful graph on top; source search retrieves
   evidence.
 - The wiki routes but never gates; the Personal Wiki is a retrieval prior, not a boundary.
+- Personal growth retains durable judgment and routing context; it does not default to per-document summaries or
+  metadata abstractions.
 - The tree is for navigation and typed links are for discovery; routing happens once, before evidence retrieval.
 - Reconcile selected new evidence through Add Source; do not turn initialization into an exhaustive import.
 - Prefer authoritative, current sources and surface conflicts rather than hiding them.
@@ -100,6 +157,10 @@ whole cloud drive.
 Shared writes require a provider-verified governing capability and evidence whose audience contains the destination
 audience. Registry role labels do not grant authority. Before agent-mediated use, source access is rechecked; V1
 cannot retract old static wiki bytes after a later source-ACL change without provider coupling.
+
+A local adapter may verify effective local write access, but this is enough only for private/personal use and test
+fixtures. It does not establish shared audience containment or Company/Team governance; if those checks are not
+available, the assistant must return a proposal rather than write shared knowledge.
 
 ## Shared local configuration
 
