@@ -42,20 +42,23 @@ folder structure for production use.
 
 ### Local-folder demo
 
-No upload is required for a local or private demonstration. Declare separate folders for the bounded source corpus
-and writable wiki:
+No upload is required for a private local demonstration. Prepare a synthetic index fixture, then explicitly select
+it for Personal Bootstrap. Keep the bounded source corpus and writable wiki separate:
 
 ```text
 Company Wiki Demo/
+├── Test Index/index.md  # user-prepared synthetic index; read-only Bootstrap reference
 ├── Test Sources/   # fixture documents; bounded read/search scope
 └── Test Wiki/      # separate writable Markdown wiki destination
 ```
 
 For example, ask:
 
-> Create a demo wiki named Company Wiki Demo. Original material: the local `Test Sources` folder only. Wiki
-> destination: the separate writable local `Test Wiki` folder. Use English. Do not search outside `Test Sources`.
+> Bootstrap a private Personal Wiki named Company Wiki Demo. Selected Company Library Index: the local synthetic
+> `Test Index/index.md` fixture. Original material: the local `Test Sources` folder only. Wiki destination: the
+> separate writable local `Test Wiki` folder. Use English. Do not search outside `Test Sources`.
 
+Bootstrap references that exact index without creating a local Company Index or inferring source scope from it.
 This supports smoke tests and private Personal Wikis. A cloud-synced folder can use the same local adapter, but
 local availability does not prove cloud-provider identity, ACLs, or governance. Use a provider integration for
 Team or Company writes that require those checks.

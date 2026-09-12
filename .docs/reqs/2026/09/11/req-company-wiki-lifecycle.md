@@ -178,9 +178,10 @@ must explain reconciliation and must not imply copying, chunking, embedding, or 
 - [ ] Selecting a source authorizes reading, not durable edits. Immediately before an approved apply, the agent
       reopens selected sources and targets, rechecks material content, links, permissions, ownership, governing
       authority, and destination boundaries, and invalidates stale approval when the plan would materially change.
-- [ ] An apply-time preflight failure writes nothing. After a partial provider write, Add Source stops, verifies
-      current state, does not automatically roll back or continue, and reports successful, failed, and unattempted
-      changes with a recovery proposal. A retry reconciles current state and proposes only remaining work.
+- [ ] A preflight failure before apply writes nothing. A failed/unknown outcome during apply stops later writes.
+      Add Source reconciles current state without automatic rollback and reports confirmed successful, confirmed
+      failed, unknown, and unattempted changes with a recovery proposal. A retry proposes only remaining work and
+      follows the shared contract for revised versus unchanged already-authorized actions.
 - [ ] Re-adding unchanged evidence to a current wiki is a reported no-op and creates no duplicate pages, links,
       records, receipts, or mandatory logs. Add Source reports selected, changed, unchanged, skipped, unsupported,
       conflicting, and inaccessible material.
@@ -201,6 +202,9 @@ must explain reconciliation and must not imply copying, chunking, embedding, or 
       replacement preserves unrelated entries. A failure may leave an unlinked completed profile, preserves successful
       pages and pre-existing registry bytes, reports exact recovery work, and never deletes/recreates successful pages
       automatically. Recovery uses exact targets only and creates no registry ledger or sidecar.
+      Existing profiles are reusable only on exact match; changed registrations create a fresh profile and switch
+      the index link last. Approval binds the selected entry delta; unrelated index changes may be preserved via a
+      fresh guarded merge, but selected-registration changes require revised approval.
 - [ ] Approval is bound to the authenticated principal, destination scope, exact targets, evidence versions,
       audience/continuing-protection result, target versions, operation parameters, and proposal. A principal,
       capability, target, source, audience, or material-content change invalidates approval before any further write.

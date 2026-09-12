@@ -1130,6 +1130,10 @@ Atomic, conflict-protected index replacement preserves unrelated entries. Regist
 resources: failures may leave successful pages or an unlinked completed profile. Preserve pre-existing registry bytes,
 do not recreate successful pages, and keep recovery records out of the locator-only registry. Unresolvable outcomes
 remain unknown; V1 promises no automatic crash recovery without native lookup/session state.
+Reuse an existing profile only if it already exactly matches; changed registrations create a fresh contained profile
+and switch the index link last, leaving the old profile intact. Approval binds the exact selected entry delta;
+unrelated index entries may be merged after revalidation with a refreshed version guard. Changes to the selected
+registration or authority invalidate approval; this exception never permits rebasing source/page edits.
 
 ---
 

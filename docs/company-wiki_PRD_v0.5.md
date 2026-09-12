@@ -324,7 +324,12 @@ Init and Bootstrap also register their completed provider documents. Provider cr
 are non-atomic. Preflight registry feasibility before page creation; then create/verify provider pages, write the
 completed profile, and publish its index link last. Per-file atomic replacement plus a conditional/exclusive update
 protects cooperating registry writers from lost updates; atomic rename alone is insufficient. Preserve unrelated
-entries and reject same-registration conflicts. An index failure may leave an unlinked completed profile; preserve
+entries and reject same-registration conflicts. Reuse an existing profile only if it already exactly matches the
+approved registration; never rewrite a linked profile before index commit. Changed registrations create a fresh
+contained profile without overwriting existing files, then switch the selected index link last. Registration
+approval covers that exact entry delta: unrelated-entry-only changes may be merged with a refreshed index version
+guard after revalidation, without redundant approval. Changes to the selected registration, identity, or protection
+require revised approval; source/page version drift remains invalidating. An index failure may leave an unlinked completed profile; preserve
 pre-existing registry bytes and successful pages and report exact recovery work. Retry reconciles exact targets
 without scanning the registry or recreating successful pages. Operation state is not registry configuration: V1
 adds no ledger/sidecar and promises no automatic crash recovery when session/native lookup cannot resolve outcomes.

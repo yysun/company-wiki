@@ -36,19 +36,22 @@
 
 ### 本地文件夹演示
 
-本地或私有演示不需要上传文件。分别指定受限来源资料和可写 Wiki 的文件夹：
+私有本地演示不需要上传文件。先准备一份合成索引测试文件，并明确选中它来引导个人 Wiki；来源资料与可写 Wiki 仍须分开：
 
 ```text
 Company Wiki Demo/
+├── Test Index/index.md  # 用户准备的合成索引；Bootstrap 的只读引用
 ├── Test Sources/   # 测试文档；受限的读取/搜索范围
 └── Test Wiki/      # 独立、可写的 Markdown Wiki 目标
 ```
 
 例如，可以这样提问：
 
-> 创建一个名为“Company Wiki Demo”的演示 Wiki。原始资料仅限本地 `Test Sources` 文件夹。Wiki 存放位置：
-> 独立且可写的本地 `Test Wiki` 文件夹。使用中文。不要搜索 `Test Sources` 之外的内容。
+> 引导（Bootstrap）一个名为“Company Wiki Demo”的私有个人 Wiki。选中的公司索引是本地合成测试文件
+> `Test Index/index.md`。原始资料仅限本地 `Test Sources` 文件夹。Wiki 存放位置：独立且可写的本地 `Test Wiki`
+> 文件夹。使用中文。不要搜索 `Test Sources` 之外的内容。
 
+Bootstrap 只引用这个明确选中的索引，不创建本地公司索引，也不从索引推断资料范围。
 这种方式适合快速测试和私人的个人 Wiki。云端同步文件夹也可使用同一本地适配器，但本地可访问并不能证明云端提供方身份、ACL 或治理权限。
 需要这些验证的团队或公司级写入，应使用提供方集成。
 

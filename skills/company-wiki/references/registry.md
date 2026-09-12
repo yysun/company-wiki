@@ -23,12 +23,20 @@ profiles read-only.
 
 Before provider creation, preflight exact profile/index containment, write feasibility, and support for atomic,
 conflict-protected registration; a successful probe does not guarantee later success. Init and Bootstrap may create
-a minimal registry only after approved provider pages succeed. Reuse the exact approved profile target or choose
-a new contained target in the proposal; never overwrite an unrelated registration. Verify a completed profile
-before publishing its index link. Use per-file atomic replacement plus a host-supported conditional/exclusive
+a minimal registry only after approved provider pages succeed. Reuse an existing profile only when its bytes
+already exactly match the approved completed registration; do not rewrite it. For a new or changed registration,
+propose a fresh contained profile target and create it without replacing an existing file. Never edit an already
+linked profile as the first half of registration. Verify the completed profile before adding/switching its index
+link; leave the previous profile intact. Use per-file atomic creation/replacement plus a host-supported conditional/exclusive
 update covering reread through replacement for cooperating registry writers. Atomic rename alone does not prevent
 lost updates. Preserve unrelated entries from a fresh reread; reject conflicting edits to the same registration.
 If these operations are unavailable, do not begin setup and leave a proposal instead.
+
+Registration approval covers the exact selected entry delta and completed profile, not replacement of the whole
+index. An unrelated-entry-only index change may be merged under that existing approval after rechecking containment,
+identity/capability, and unchanged selected registration/protection. Refresh the index version condition from the
+new reread and preserve every unrelated entry. A changed selected entry, profile, destination, or authority needs
+a revised approved proposal. This narrow merge exception does not permit rebasing source/page edits onto new versions.
 
 Registration is non-atomic across provider pages, profile, and index. An index failure may leave a newly completed
 unlinked profile; report its exact path without scanning for it. Preserve pre-existing registry bytes and successful

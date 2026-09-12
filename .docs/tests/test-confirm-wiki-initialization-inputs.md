@@ -143,6 +143,8 @@ a folder hierarchy unless it says otherwise.
   Repeat with a newly completed profile followed by an index conflict: the new unlinked profile may remain, all
   pre-existing registry bytes and unrelated concurrent entries survive, and retry reconciles exact targets before
   registering them. No duplicate page/link, directory scan, blind timeout retry, or registry recovery ledger is allowed.
+  If an existing linked profile needs new content, create a fresh profile target and fail the index switch: the old
+  profile and selected index entry remain intact. Reusing an existing profile is allowed only on exact byte match.
 
 Positive provider-creation cases also require the current [publication and recovery contract](test-wiki-publication-recovery.md).
 The local fixture adapter's filesystem permissions do not establish enterprise publication capabilities.

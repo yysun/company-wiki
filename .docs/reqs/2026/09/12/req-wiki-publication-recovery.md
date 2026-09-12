@@ -6,23 +6,25 @@ The package must make supported publication guarantees explicit and guide safe, 
 
 ## Acceptance criteria
 
-- [ ] Governed source-derived durable content, including Personal copies and metadata, requires current audience
+- [x] Governed source-derived durable content, including Personal copies and metadata, requires current audience
       containment and provider-enforced continuing containment on every native exposure surface. Unavailable proof
       blocks publication; private local originals/test fixtures remain supported without enterprise guarantees.
-- [ ] Identity, exact-scope write/govern capability, audience, and continuing protection are separate checks with
+- [x] Identity, exact-scope write/govern capability, audience, and continuing protection are separate checks with
       verified, denied, or unavailable outcomes. Synced files and registry roles cannot authorize shared writes.
-- [ ] All contributing evidence is authorized before shared generation. Restricted prior context cannot be
+- [x] All contributing evidence is authorized before shared generation. Restricted prior context cannot be
       sanitized by deleting tokens or citations. Query/Explore refuse unsafe legacy routing bytes before model
       ingestion and retain bounded direct-source fallback. Diagnostics and retirement stubs obey the same boundary.
-- [ ] Setup preflights registration, uses supported idempotent/conditional creates, verifies dependencies before
+- [x] Setup preflights registration, uses supported idempotent/conditional creates, verifies dependencies before
       links, and registers completed pages with the profile before an atomic, concurrency-protected index update.
       Failures preserve pre-existing registry bytes and successful pages; retry reconciles exact approved targets.
-- [ ] Writes use provider-enforced version conditions or an equivalent exclusive-write mechanism. Unknown outcomes
+      Changed registrations use a fresh profile; exact existing profiles are reused without rewrite. Approval binds
+      the selected entry delta, allowing guarded merges of unrelated entries while rejecting selected-entry drift.
+- [x] Writes use provider-enforced version conditions or an equivalent exclusive-write mechanism. Unknown outcomes
       are reconciled before retry. Partial failure stops later writes without automatic rollback; changed bindings
       invalidate approval, and recovery proposes only remaining work without overwriting concurrent edits.
-- [ ] The PRD, personal requirements, skill workflows, public guides, and affected behavioral specifications agree
+- [x] Repository AGENTS boundaries, the PRD, personal requirements, skill workflows, public guides, and affected behavioral specifications agree
       on these contracts, including unsupported-provider behavior and the limits of static exports and local tests.
-- [ ] Existing package/adapter unit tests and skill validation pass. Independent scenario-based evaluation covers
+- [x] Existing package/adapter unit tests and skill validation pass. Independent scenario-based evaluation covers
       authorization, metadata, revocation, setup failure, unknown outcomes, concurrency, and local compatibility.
       Provider acceptance scenarios are specified separately and never reported as production runtime proof.
 

@@ -24,9 +24,16 @@ These boundaries apply to `Init → Bootstrap → Explore ↔ Query → Curate �
 - Source discovery and reads stay inside the profile's registered original-material locations and scopes.
   Add Source (with Ingest as a compatibility alias) additionally requires the user to select exact source documents or an explicitly bounded batch; a
   topic, folder, or collection never silently expands into an all-source operation.
-- Wiki writes stay inside the profile's verified destination and require provider-authenticated identity,
-  exact-scope capability/governance, audience containment, a concrete approved plan, and apply-time rereads.
-  Query, Explore, and Validate are read-only. Bootstrap never infers a source boundary from index content.
+- Wiki writes stay inside the profile's verified destination and require a concrete approved plan, apply-time
+  rereads, and conditional/exclusive write protection. Provider-governed content additionally requires authenticated
+  provider identity, exact-scope capability/governance, current audience containment, and provider-enforced continuing
+  protection across native exposure surfaces. Unavailable proof blocks publication. Only user-owned local originals
+  and synthetic fixtures in a verified private destination may use effective local identity/access; synced/exported
+  governed evidence and Team/Company writes never qualify for that exception.
+- Gate unsafe derived metadata/content before model ingestion, and generate shared artifacts only from evidence
+  authorized for the destination. Query, Explore, and Validate are read-only. Bootstrap never infers a source boundary
+  from index content. Recovery reconciles exact targets and unknown outcomes, preserves concurrent work, and performs
+  no automatic rollback; changed registrations use a fresh profile and publish the index link last.
 - Original sources remain unchanged in every workflow. Access to a source grants neither wiki-write authority
   nor permission to weaken provider, confidentiality, or repository boundaries.
 

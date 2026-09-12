@@ -12,7 +12,8 @@ and registration; original sources are never written. Apply the [publication bou
 2. Bind approval to the authenticated principal, scope, destination, targets, proposal, evidence versions, and
    audience/protection result, target versions, and operation parameters. Reuse an operation key only for the same
    approved intent; changed content is a new operation. Approval in the current session need not be requested again
-   when it already covers the concrete unchanged action.
+   when it already covers the concrete unchanged action. Registry index registration binds the exact selected-entry
+   delta under the narrow unrelated-entry merge rule in [Registry](registry.md); source/page version drift is not exempt.
 3. Immediately before apply, recheck identity; exact write/govern capability; source/destination audiences;
    continuing protection; source and target versions/content/links; and target preflight. Any material change,
    unavailable result, or failed preflight invalidates approval and writes nothing before apply. If discovered
@@ -36,7 +37,7 @@ retry a create, delete a possible result, or invent an idempotency key. A suppor
 after its semantics and unchanged authorization/intent are verified; it must not duplicate the resource.
 
 On recovery, reread current source/target state, preserve successful and concurrent edits, and identify only work
-still needed. Drift invalidates old approval; obtain approval for the revised concrete proposal. An unchanged
+still needed. Material drift invalidates old approval; obtain approval for the revised concrete proposal. An unchanged
 remaining action already concretely authorized in the session needs no redundant approval. Native idempotency does
 not waive authorization checks, and a completed operation must not overwrite a later edit when replayed. Cleanup
 is an explicit version-protected Maintain change, never an automatic destructive rollback.
