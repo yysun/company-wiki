@@ -17,6 +17,7 @@ Markdown registry is configuration only. A flat document collection is valid.
 - `references/curate.md` — make durable navigation knowledge or promote it by scope.
 - `references/add-source.md` — reconcile explicitly selected sources (`Ingest` compatibility alias).
 - `references/change-protocol.md` — shared authority, approval, and failure contract for writes.
+- `references/publication.md` — current/continuing protection, safe generation, pre-read gates, and legacy cleanup.
 - `references/registry.md` — select and safely persist user-level wiki configuration.
 - `references/query.md` — traverse the graph and investigate questions.
 - `references/maintain.md` — propose and apply corrections, repairs, and restructuring.
@@ -64,6 +65,21 @@ embedding pipeline, provider-side index, processing ledger, mandatory log, watch
 Wiki documents are organization data. Keep them in the drive and preserve them when updating or replacing
 this skill. Do not move them into the installed package or treat package updates as a migration of the
 organization's knowledge.
+
+Publication requires verified identity, exact-scope authority, current audience containment, and provider-enforced
+continuing protection for all contributing evidence and native exposure surfaces, including history and previews.
+Personal copies and index links are included. Snapshot-only ACL integrations cannot publish governed material;
+use authorized transient drafts or direct-source answers. Shared generation excludes restricted context before
+synthesis; unsafe legacy wiki reads are gated before content enters the model. V1 supplies no sync or recall service.
+
+Private user-owned local originals/tests remain supported with verified local identity/access and private scope;
+synced/exported evidence does not inherit that exception. Writes require conditional/exclusive updates and
+idempotent/conditional creates. Unknown outcomes are reconciled through exact targets/native operation keys before
+retry; partial work is preserved without automatic rollback. Registration publishes the verified profile link last
+with atomic conflict protection, but remains non-atomic across resources. No recovery ledger belongs in the registry.
+
+The included adapter is a local fixture tool, not an enterprise connector. Package validation and isolated decision
+tests do not establish native ACL enforcement or crash-safe transactions; deployments need provider acceptance.
 
 ## Shared local registry
 

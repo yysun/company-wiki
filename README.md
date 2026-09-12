@@ -154,13 +154,26 @@ whole cloud drive.
 - Keep maintenance explicit: propose changes and require approval for edits.
 - Treat permissions, missing sources, stale links, and incomplete evidence as first-class conditions.
 
-Shared writes require a provider-verified governing capability and evidence whose audience contains the destination
-audience. Registry role labels do not grant authority. Before agent-mediated use, source access is rechecked; V1
-cannot retract old static wiki bytes after a later source-ACL change without provider coupling.
+Durable provider-derived content requires verified identity, exact-destination authority, current audience
+containment, and provider-enforced continuing protection. That protection must cover native pages, titles/search
+previews, history, and exports after source or destination permissions change. It applies to Personal copies,
+index references, and all contributing metadata as well as shared summaries. An ACL snapshot alone is insufficient;
+unsupported publication returns an authorized transient draft or direct-source answer. The skill does not add ACL
+sync and cannot recall downloaded copies. Unsafe legacy pages must be gated before their bytes enter the model.
 
-A local adapter may verify effective local write access, but this is enough only for private/personal use and test
-fixtures. It does not establish shared audience containment or Company/Team governance; if those checks are not
-available, the assistant must return a proposal rather than write shared knowledge.
+Shared generation uses only destination-authorized evidence; excluded prior context requires clean regeneration
+or refusal. Removing a citation does not make a restricted derivation safe. Registry roles grant no authority.
+Local identity/access supports only verified private work on user-owned local originals or synthetic fixtures;
+synced/exported governed evidence and Team/Company writes require provider proof.
+
+Writes use native version protection and idempotent/conditional creates. Setup verifies pages before registering
+the profile and atomically updating the index with conflict protection. Partial failures stop later writes; timeouts
+remain unknown until exact-target/operation reconciliation. Recovery preserves successful and concurrent work,
+proposes only remaining changes, and never automatically rolls back. Registry/provider operations remain non-atomic.
+
+See the [publication boundary](skills/company-wiki/references/publication.md) and
+[change protocol](skills/company-wiki/references/change-protocol.md). These are deployment capability requirements;
+the local fixture adapter and its passing tests do not establish production ACL or transaction guarantees.
 
 ## Shared local configuration
 

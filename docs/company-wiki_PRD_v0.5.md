@@ -232,10 +232,11 @@ access, or prove an answer. Provider-authenticated, scoped search finds the orig
        Scoped native source search → Original evidence and answers
 ```
 
-All layers use the current provider-authenticated identity. A shared Markdown node may contain derived knowledge
-only when its destination audience is provably no broader than the audiences of all underlying sources. If that
-cannot be established, the product must keep the knowledge in a narrower scope, sanitize it from independently
-public evidence, or refuse the shared write.
+Provider-backed layers use the current provider-authenticated identity. A derived Markdown node may contain
+governed source knowledge only when current audience containment and provider-enforced continuing protection
+are verified under §7.3. A narrower Personal copy is subject to the same rule. If proof is unavailable, refuse
+durable publication and retain only an authorized transient draft or direct-source answer. Private local originals
+and synthetic fixtures follow the bounded local contract in §8.1.
 
 ---
 
@@ -304,14 +305,29 @@ reconciliation behavior; documents do not need to be copied, chunked, embedded, 
 
 Every durable change uses the same change contract: identify ownership scope, exact targets, evidence, conflicts,
 and preserved content; verify the authenticated principal's governing capability; present a concrete proposal;
-bind approval to the principal, scope, targets, evidence versions, audience result, and proposal; then reread and
-preflight immediately before ordered writes. Any changed binding invalidates approval. A preflight failure writes
-nothing. A provider failure stops later writes and produces verified successful, failed, and unattempted state plus
-a remaining-work-only recovery proposal—never destructive automatic rollback.
+bind approval to the principal, scope, targets, evidence/target versions, audience/protection results, operation
+parameters, and proposal; then reread and preflight immediately before ordered writes. Changed bindings invalidate
+approval. A preflight failure before apply writes nothing; drift between writes stops further writes. Each update
+requires a native version condition or verified equivalent exclusive-write mechanism. Reread-then-write alone
+cannot prevent concurrent overwrites, and a content version does not prove unchanged permissions. Creates require
+native idempotency or conditional create-if-absent at an exact, reconcilable target. Unsupported operations yield
+a proposal. Verify dependencies before linking to them; every intermediate page must already be disclosure-safe.
+
+A failed or unknown provider outcome stops later writes and produces confirmed successful, confirmed failed,
+unknown, and unattempted state plus a remaining-work-only recovery proposal. A timeout can follow a successful
+commit: reconcile exact approved targets and original native operation keys before retrying. If identity/outcome
+cannot be established, stop rather than creating a duplicate. Preserve successful work and concurrent edits; never
+perform destructive automatic rollback. Recovery rechecks authorization and current state. Revised work requires
+approval; unchanged concrete remaining actions already authorized in the session need no redundant approval.
 
 Init and Bootstrap also register their completed provider documents. Provider creation and registry registration
-are non-atomic: provider pages are created first, then the completed profile and registry link. Registration failure
-preserves successful provider pages and prior registry bytes and reports exact recovery work.
+are non-atomic. Preflight registry feasibility before page creation; then create/verify provider pages, write the
+completed profile, and publish its index link last. Per-file atomic replacement plus a conditional/exclusive update
+protects cooperating registry writers from lost updates; atomic rename alone is insufficient. Preserve unrelated
+entries and reject same-registration conflicts. An index failure may leave an unlinked completed profile; preserve
+pre-existing registry bytes and successful pages and report exact recovery work. Retry reconciles exact targets
+without scanning the registry or recreating successful pages. Operation state is not registry configuration: V1
+adds no ledger/sidecar and promises no automatic crash recovery when session/native lookup cannot resolve outcomes.
 
 ### 7.2 Roles and knowledge ownership
 
@@ -333,16 +349,45 @@ normally reference shared nodes downward.
 
 ### 7.3 Access and disclosure boundary
 
-Source-system ACLs remain authoritative. Registry or wiki prose may describe an owner but cannot grant write or
-governance capability. Derived pages, titles, links, aliases, backlinks, summaries, inferred relationships, search
-results, and exposed activity must not reveal source information unavailable to the viewer. Native ACLs should be
-used where practical; V1 does not introduce a parallel permission database.
+Source-system ACLs remain authoritative. Registry/wiki role text and local availability grant no provider authority.
+Derived pages, titles, links, aliases, backlinks, summaries, inferred relationships, search results, provenance,
+proposals, and exposed activity obey the same boundary:
 
-For a shared write, source readability is not enough. The provider must verify both the authenticated writer's
-governance capability on the exact destination and that the destination audience is a subset of every underlying
-evidence audience. If either result is unavailable, the product returns a draft or proposal and refuses the write.
-Sanitization is valid only when the remaining material is independently non-sensitive and supported by evidence
-visible to the entire destination audience.
+`destination audience ⊆ intersection of all contributing evidence audiences`
+
+Contributing evidence includes every input that influenced the output, including transitive wiki inputs; a citation
+list is not a complete lineage proof. Unknown lineage or audience blocks the affected material. Identity, exact-scope
+write/governance, current audiences, and continuing protection are separate provider checks, each with verified,
+denied, or unavailable results. Neither denied nor unavailable authorizes a write. V1 has no parallel ACL database.
+
+**Continuing protection.** Durable material derived from provider-governed evidence, including Personal copies and
+Bootstrap's index reference, requires provider enforcement that keeps containment true after source ACL changes,
+destination widening, group changes, and inheritance overrides. The guarantee must hold from creation and cover all
+exposed native surfaces: page bytes, title/search previews, history, and export endpoints. Current ACL snapshots,
+same-folder placement, content version tokens, and periodic validation are insufficient. If protection is unknown
+or unsupported, do not persist the material, including a local/private export. Use currently authorized source
+queries or a transient draft contained to the authorized requester. This intentionally limits writable deployments
+to providers that can prove the contract; connector availability alone does not imply publication support.
+
+V1 has no ACL synchronization service and cannot recall already disclosed/downloaded bytes. Existing uncoupled pages
+are legacy exposure, not grandfathered safe publications. Validate reports the limit; approved Maintain can reduce
+current exposure without claiming it erased history or copies. A future asynchronous sync service would require an
+explicit maximum revocation delay and outage policy, and would not establish immediate enforcement.
+
+**Generation and reads.** Enforce requester access before content/metadata enters the model. Generate shared
+artifacts only from evidence authorized for the destination. When prior context includes excluded evidence, use
+a clean host-supported context containing only independently authorized inputs; otherwise refuse shared generation.
+Deleting a codename or citation from a contaminated draft is not sanitization. For derived wiki reads, establish
+safety through protected provider metadata or an enforced read boundary before exposing legacy bytes. If impossible,
+bypass that page for separately registered bounded source search; do not load unsafe routes and rely on prompting
+to suppress them. This gate does not add a routing phase or authorize broader discovery.
+
+Split mixed-audience pages where useful; a broader page cannot reveal narrower pages through links, names, counts,
+or inferred relationships. Apply the rule to error/recovery reports and retirement stubs as well. An approved
+disclosure-reducing cleanup requires exact-scope authority and version protection but does not republish the old
+evidence. Use only destination-safe replacement text and report remaining native history/search exposure requiring
+provider-admin repair. Do not change source ACLs or automatically delete pages. Provider/tool boundaries enforce
+these guarantees; skill text, human assurances, and local test results cannot supply enforcement.
 
 ### 7.4 Registry and scope selection
 
@@ -373,9 +418,13 @@ integration.
 The agent must receive the exact source folder and exact writable wiki folder separately, and search or write only
 within the applicable declared boundary. Effective local write access permits a local write only; it does not prove
 a shared audience, authenticated provider identity, or governance authority. A local adapter alone is therefore
-sufficient for private/personal use and tests, but Team or Company durable writes require an integration that can
-verify identity, governing capability, and audience containment. If those checks are unavailable, the system
-returns a proposal rather than writing shared knowledge.
+sufficient for private user-owned local originals and synthetic tests when effective local identity/access and
+private destination scope are established. It does not authorize exporting governed evidence or Team/Company writes.
+Provider-backed publication requires identity, governing capability, current audience containment, and continuing
+protection under §7.3. Synced files must resolve to exact native resources for these checks; a local path cannot
+substitute. Unknown privacy is treated as shared scope. Unsupported checks yield only an appropriately contained
+proposal. Local workflows retain normal registry selection, Bootstrap prerequisites, approval, and conditional or
+exclusive file-update protection; local compatibility is not a new lifecycle route.
 
 A source may be accessed through:
 
@@ -401,13 +450,19 @@ permissions(uri)
 audience(uri)
 versions(uri)
 capabilities(destination)
+protection(destination, contributing_evidence, exposure_surfaces)
 preflight_write(destination, target)
-write(destination, target)
+write(destination, target, version_condition_or_create_condition, operation_key)
+lookup_operation(operation_key_or_exact_target)
 ```
 
-The exact interface is provider-specific, but V1 must fail closed when identity, governance, write permission, or
-evidence/destination audience containment cannot be verified. Profile text is never a substitute for these
-provider responses.
+These are conceptual capabilities, not callable APIs the skill may invent. Use only the host's documented exposed
+tools. A deployment must report supported semantics and unavailable checks explicitly. V1 fails closed when identity,
+governance, write permission, audience containment, continuing protection, or required concurrency/retry protection
+cannot be verified. Protected pre-read checks must not themselves disclose hidden titles or relationships. Operation
+keys identify an unchanged approved request; reuse with different parameters is rejected, and replay must not undo
+subsequent edits. Exact lookup and all evidence resolution remain inside selected boundaries. Profile text is never
+a substitute for provider responses. The shipped local fixture adapter does not implement these enterprise guarantees.
 
 Local sync is a first-class adapter option, but local availability is never an authorization bypass.
 

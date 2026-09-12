@@ -14,5 +14,6 @@ checked date, relationship, verification/freshness state, and origin (`source te
 and an explicit unresolved state. Mark inference as `Proposed:`.
 
 Personal homes include readable sections for pinned, temporary, personally canonical, and do-not-curate topics.
-Use `Retired` and `Merged into` stubs rather than deleting nodes. Validate checks primary routes, outline/tree
+Use `Retired` and `Merged into` stubs rather than deleting nodes only when their metadata remains audience-safe;
+apply [Publication](publication.md) for legacy disclosure cleanup. Validate checks primary routes, outline/tree
 consistency, provenance, links, aliases, freshness, conflicts, and audience-safe disclosure.

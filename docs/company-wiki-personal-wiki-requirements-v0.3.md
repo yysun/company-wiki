@@ -1093,19 +1093,43 @@ Access remains source-constrained
 
 ### 10.2 Shared wiki content
 
-Before a generated or personal wiki page is shared with another user, the system SHOULD verify that the recipient is permitted to access the underlying evidence required to reconstruct the exposed claims.
+Before durable publication, the system MUST verify authenticated exact-destination authority and that the
+destination audience is contained by every contributing evidence audience. Contributions include titles, aliases,
+links, relationships, provenance, and transitive inputs, not merely final citations. Unknown proof MUST block the
+affected publication. Personal copies of provider-governed evidence are subject to the same rule.
 
-If this cannot be established, the system SHOULD:
-
-- omit restricted claims;
-- provide a sanitized page;
-- or prevent sharing.
+Shared generation MUST use only destination-authorized evidence. If earlier context contains excluded evidence,
+regenerate from independently authorized inputs in a clean supported context; otherwise refuse shared generation.
+Removing a citation or codename is not proof of sanitization. Proposals and diagnostics must also remain audience-safe.
 
 ### 10.3 Native ACL preference
 
-Where feasible, personal and shared wiki files SHOULD use the cloud drive's native access control.
+Provider-derived personal and shared wiki files MUST have provider-enforced continuing audience containment from
+creation, including after source ACL, group, inheritance, or destination-audience changes. Verify native content,
+title/search previews, history, and export coverage. Current ACL snapshots and folder placement alone are insufficient.
+If the host cannot prove protection, retain only an authorized transient draft or direct-source answer; a private
+local export is not a substitute. V1 adds no parallel ACL database or synchronization service and cannot recall
+already disclosed/downloaded copies.
 
-The product SHOULD avoid introducing a parallel ACL database in V1.
+Before reading derived wiki bytes, establish current evidence safety through protected provider metadata or an
+enforced read boundary. Unsafe legacy routes must be bypassed before model ingestion, using separately registered
+bounded source search. Validate is read-only; approved disclosure cleanup may remove unsafe current fields without
+preserving restricted stubs, but MUST report unresolved native history/search exposure.
+
+### 10.4 Durable changes and recovery
+
+Use the [shared change protocol](../skills/company-wiki/references/change-protocol.md). Bind concrete approval to
+identity, evidence/target versions, audiences/protection, scope, and operation parameters. Use native conditional or
+exclusive updates and idempotent/conditional creates; reread-then-write alone does not protect concurrent edits.
+Verify dependencies before exposing links. Failed or unknown outcomes stop later writes; a timeout may follow a
+committed write. Reconcile exact targets/original operation keys before retry, preserve concurrent edits, and propose
+only remaining work. Changed bindings need revised approval; no automatic destructive rollback is allowed.
+
+Setup preflights registration and creates verified provider pages before the completed profile and index link.
+Atomic, conflict-protected index replacement preserves unrelated entries. Registration remains non-atomic across
+resources: failures may leave successful pages or an unlinked completed profile. Preserve pre-existing registry bytes,
+do not recreate successful pages, and keep recovery records out of the locator-only registry. Unresolvable outcomes
+remain unknown; V1 promises no automatic crash recovery without native lookup/session state.
 
 ---
 
@@ -1226,7 +1250,10 @@ Local operation MAY improve:
 - low-latency file access;
 - offline experimentation.
 
-However, local indexing MUST NOT be treated as an authorization bypass.
+However, local indexing MUST NOT be treated as an authorization bypass. Only private user-owned local originals
+and synthetic fixtures may rely on effective local identity/access and verified private destination scope. Synced
+or exported provider-governed evidence still requires provider proof under §10; role labels and filesystem write
+access cannot authorize Team/Company publication. See the [publication contract](../skills/company-wiki/references/publication.md).
 
 ---
 

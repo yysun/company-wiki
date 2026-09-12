@@ -8,4 +8,7 @@ Maintain—reconciles new selected evidence.
 Every correction is proposed before it is applied. State scope, affected pages, evidence, conflicts, exact edits,
 and preserved organization, then use the [durable change protocol](change-protocol.md). A removal unlinks the node
 and rewrites it as a `Retired` stub; a merge preserves a `Merged into` stub. Do not delete provider pages.
+For disclosure cleanup, the [publication boundary](publication.md) overrides ordinary stub preservation: no restricted
+title, backlink, alias, or relationship may remain in a broader page. Propose exact destination-safe replacements,
+use version protection, and report unresolved native history/search exposure. Do not claim old copies were erased.
 Freshness is `current`, `potentially stale`, `superseded`, or `needs review`; changing it needs evidence and approval.

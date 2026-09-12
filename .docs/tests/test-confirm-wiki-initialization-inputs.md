@@ -140,3 +140,9 @@ a folder hierarchy unless it says otherwise.
 - **Expected:** reports partial completion, the native home/map link, and the exact registry step that failed;
   preserves the prior index/profile bytes; does not claim registration succeeded; and does not delete the
   provider documents automatically.
+  Repeat with a newly completed profile followed by an index conflict: the new unlinked profile may remain, all
+  pre-existing registry bytes and unrelated concurrent entries survive, and retry reconciles exact targets before
+  registering them. No duplicate page/link, directory scan, blind timeout retry, or registry recovery ledger is allowed.
+
+Positive provider-creation cases also require the current [publication and recovery contract](test-wiki-publication-recovery.md).
+The local fixture adapter's filesystem permissions do not establish enterprise publication capabilities.

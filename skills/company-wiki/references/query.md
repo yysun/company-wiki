@@ -1,6 +1,9 @@
 # Explore and Query
 
-Both routes are read-only. Select one profile through [Registry](registry.md), then make one routing decision from
+Both routes are read-only. Select one profile through [Registry](registry.md), then apply the pre-read gate in
+[Publication](publication.md) before loading any wiki title, route, or content. If a legacy page's evidence safety
+cannot be established without exposing its bytes, skip it and use the separately registered source-search scope.
+Do not load a stale restricted alias and rely on a prompt to suppress it. Make one routing decision from
 its compact context: Personal home as prior, named Company Index taxonomy home as router, and at most three declared
 routing pages per scope. Resolve canonical concepts and aliases, choose the few relevant typed links, likely source
 areas, and direct native searches together before evidence retrieval. Taxonomy and typed-link matches guide query
@@ -24,3 +27,4 @@ available reads cannot establish a complete answer.
 original evidence, cites every factual claim from evidence read in the same operation, labels interpretation and
 conflicts, and writes nothing. A wiki statement without same-operation evidence is unverified navigation, not fact.
 Recheck current source access/audience before exposing a derived route; fail closed on unavailable access.
+Source search metadata, unavailable-route diagnostics, and response links obey the same disclosure boundary.

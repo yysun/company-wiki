@@ -59,19 +59,21 @@ approval of the proposal. “Ingest this source” is not approval of edits that
 Immediately before applying an approved plan:
 
 1. Reopen every selected source and planned wiki target. Recheck authenticated identity, governing authority,
-   source/destination audience, material content, status, dates, exact links, permissions, destination
+   source/destination audience, continuing protection, material content, status, dates, exact links, permissions, destination
    containment, and write capability.
 2. If a source, target, relationship, permission, or required change materially differs from the approved
    proposal, invalidate the plan and its approval. Make no write; present a revised plan for fresh approval.
 3. If preflight fails for any planned target, make no write and report the exact failure.
-4. Apply planned changes in the stated order. After each write, reopen the target and verify its content and
-   links before continuing.
+4. Apply planned changes through the [durable change protocol](change-protocol.md): native conditional/idempotent
+   operations, dependencies before links, and verified results. Unsupported version protection cannot be replaced
+   by an unguarded reread/write. After each write, verify the exact target, version, content, links, and protection.
 
-Provider writes are not assumed atomic. If a write fails after an earlier write succeeded, stop immediately.
-Do not continue, delete successful work, or attempt automatic rollback: a rollback could overwrite concurrent
-provider edits. Verify current state and report successful, failed, and unattempted changes, the resulting
-graph inconsistency, and a recovery proposal. On retry, reconcile current sources and wiki state and propose
-only the remaining work for fresh approval.
+Provider writes are not assumed atomic. If a write fails or has an unknown outcome, stop immediately. A timeout
+may follow a committed write. Do not continue, blindly retry, delete successful work, or attempt automatic rollback:
+a rollback could overwrite concurrent provider edits. Reconcile exact targets/native operation keys and report
+confirmed successful, confirmed failed, unknown, and unattempted changes, graph inconsistency, and a recovery
+proposal. Preserve concurrent edits; changed evidence, authorization, or targets require a revised approved plan.
+Follow the shared protocol for unchanged already-authorized remaining work and unresolved outcomes.
 
 ## Content and reporting contract
 

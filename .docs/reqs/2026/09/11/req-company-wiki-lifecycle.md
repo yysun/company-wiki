@@ -62,20 +62,22 @@ must explain reconciliation and must not imply copying, chunking, embedding, or 
       titles, links, summaries, backlinks, aliases, inferred relationships, search results, and activity do not
       reveal knowledge outside the current user's source access. Derived knowledge is written only when its
       destination audience is no broader than its evidence audiences.
-- [ ] V1 does not promise instantaneous revocation propagation to a static wiki file after a source ACL later
-      narrows: without provider ACL coupling or background synchronization, direct native access remains governed
-      by the wiki destination's ACL. Before using or exposing a derived claim, the agent rechecks current source
-      access and audience, fails closed on an unavailable result, marks drift for Validate/Maintain, and never
-      presents the stale derived claim as evidence.
+- [ ] New durable provider-derived content requires provider-enforced continuing audience containment across
+      native content, metadata/previews, history, and export surfaces, including Personal copies and index references.
+      ACL snapshots alone block publication. Unsafe legacy wiki bytes are gated before model ingestion; bounded
+      separately registered source search remains available. V1 supplies no sync service and cannot recall disclosed
+      copies; Validate/Maintain report and explicitly repair legacy exposure without claiming history erasure.
 - [ ] V1 writes source-derived knowledge to a shared destination only when the provider can verify both the
       authenticated writer's governance capability and that the destination audience is a subset of every
-      underlying source audience. If either fact is unavailable, the agent refuses the shared write. Sanitization
-      may remove restricted claims, titles, links, aliases, and relationships only when the remaining material is
-      independently non-sensitive and supported by evidence visible to the whole destination audience.
+      contributing source audience, including transitive inputs. If authority, current containment, or continuing
+      protection is unavailable, refuse publication. Generate only from destination-authorized evidence; excluded
+      prior context requires clean-context regeneration or refusal. Removing tokens or citations is not sanitization.
 - [ ] Registry text may name an expected owner or role but never grants authority. Personal, Team, and Company
       writes require provider-authenticated identity plus verified write/governance capability on that exact
       destination; unavailable or unverifiable identity, capability, or audience results yield a draft/proposal
-      only and no durable write.
+      only and no durable write. Private user-owned local originals and synthetic fixtures may use effective local
+      identity/access and verified private destination scope; this exception never authorizes export of governed
+      evidence or Team/Company writes. Check outcomes distinguish verified, denied, and unavailable.
 
 ### Company Library Index initialization
 
@@ -190,14 +192,19 @@ must explain reconciliation and must not imply copying, chunking, embedding, or 
 - [ ] Company-index Init, Personal Bootstrap, Curate, Add Source, Maintain, and promotion all invoke one shared
       durable-change contract. It requires a concrete scope/target/evidence plan, authenticated governing
       authority, explicit approval, immediate source-and-target reread, link/ACL/audience/destination preflight,
-      stale-plan invalidation, ordered writes, stop on first failure, current-state verification, and a
-      remaining-work-only recovery proposal.
+      stale-plan invalidation, native conditional/exclusive updates, idempotent/conditional creates, dependencies
+      before links, stop on first failed/unknown outcome, current-state verification, and a remaining-work-only
+      recovery proposal. Timeouts do not prove failure; reconcile exact approved targets/original operation keys
+      before retry. Preserve concurrent edits; unsupported protection yields no write. Unknown outcomes stay unknown.
 - [ ] Setup treats provider documents and registry registration as non-atomic. Provider pages are created before
-      the completed profile and index link; a profile/index failure preserves successful provider pages and prior
-      registry bytes, reports partial completion and exact recovery work, and never deletes provider pages.
+      the completed profile and index link, after registry feasibility preflight. Atomic conflict-protected index
+      replacement preserves unrelated entries. A failure may leave an unlinked completed profile, preserves successful
+      pages and pre-existing registry bytes, reports exact recovery work, and never deletes/recreates successful pages
+      automatically. Recovery uses exact targets only and creates no registry ledger or sidecar.
 - [ ] Approval is bound to the authenticated principal, destination scope, exact targets, evidence versions,
-      audience result, and proposal. A principal, capability, target, source, audience, or material-content change
-      invalidates approval before any further write.
+      audience/continuing-protection result, target versions, operation parameters, and proposal. A principal,
+      capability, target, source, audience, or material-content change invalidates approval before any further write.
+      An unchanged concrete remaining action already authorized in the session does not require redundant approval.
 
 ### Maintain and Validate
 

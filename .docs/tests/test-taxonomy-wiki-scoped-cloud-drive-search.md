@@ -75,3 +75,7 @@ principal. The shared taxonomy audience is broader than that restricted document
 **Expected outcome:** The restricted alias, relationship, document title, source route, and content are
 not exposed. The agent uses only the principal's provider-visible taxonomy and search results, and reports
 unavailability without leaking restricted metadata.
+Protected pre-read checks must establish derived-content safety before wiki titles/routes enter the model. If an
+uncoupled legacy taxonomy cannot pass that check, the agent bypasses it for separately registered source search.
+Removing restricted tokens after loading them does not pass. New governed taxonomy publication also requires the
+[continuing-protection and recovery acceptance](test-wiki-publication-recovery.md) contract.

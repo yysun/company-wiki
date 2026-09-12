@@ -21,9 +21,24 @@ profiles read-only.
 
 ## Registration and fallbacks
 
-Init and Bootstrap may create a minimal registry only after approved provider pages succeed. Write the completed
-profile before its index link; a failure preserves old registry bytes and successful pages, reports recovery, and
-never deletes pages automatically. Init requires exact user-supplied source and index destination; Bootstrap
+Before provider creation, preflight exact profile/index containment, write feasibility, and support for atomic,
+conflict-protected registration; a successful probe does not guarantee later success. Init and Bootstrap may create
+a minimal registry only after approved provider pages succeed. Reuse the exact approved profile target or choose
+a new contained target in the proposal; never overwrite an unrelated registration. Verify a completed profile
+before publishing its index link. Use per-file atomic replacement plus a host-supported conditional/exclusive
+update covering reread through replacement for cooperating registry writers. Atomic rename alone does not prevent
+lost updates. Preserve unrelated entries from a fresh reread; reject conflicting edits to the same registration.
+If these operations are unavailable, do not begin setup and leave a proposal instead.
+
+Registration is non-atomic across provider pages, profile, and index. An index failure may leave a newly completed
+unlinked profile; report its exact path without scanning for it. Preserve pre-existing registry bytes and successful
+pages; never restore an old index over concurrent entries or delete pages automatically. Retry inspects only the
+exact approved pages/profile/index, verifies their current state and protection, and proposes the remaining
+registration. Do not recreate successful pages or duplicate links. If the session loses an exact provider target,
+use only supported native operation lookup; unresolved identity remains unknown. Recovery details/operation keys
+belong in the authorized session or native provider metadata, never a registry ledger, cache, or sidecar.
+
+Init requires exact user-supplied source and index destination; Bootstrap
 requires an exact selected index and personal destination. Query/Explore without a profile can use only an exact
 user-supplied accessible source locator. Never infer a profile or boundary for Curate, Add Source, Maintain, or
 Validate. Registry names or expected owner roles never grant capability.
