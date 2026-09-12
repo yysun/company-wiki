@@ -11,10 +11,11 @@ Treat the Markdown files in this directory as one flat document collection. The 
 
 `this routing context → one route decision → linked source`
 
-For a local test, open this file first and ask the agent to answer from documents reachable from it. Do not
-start with a detail document: the point of the example is to exercise progressive disclosure and ordinary
-document links. In a real deployment, the equivalent documents live in the chosen cloud drive and are
-opened through the host's existing cloud-drive/document skill, MCP tool, or agent plugin.
+For a local test, open this file first and ask the agent to answer from documents reachable from it.
+The synthetic originals are in the separate `../sample-company-sources/` collection. Read original
+evidence before stating a company fact. These example files and sources are read-only during a query.
+In a real deployment, the equivalent documents live in the chosen provider and are opened through the
+host's existing document/search tools.
 
 ## Start here
 
@@ -25,13 +26,18 @@ opened through the host's existing cloud-drive/document skill, MCP tool, or agen
 
 ## Source boundaries
 
-- **HR collection (`hr-wecom`):** open through the host app's already-available WeCom document skill,
-  MCP tool, or agent plugin. It is the source for workplace policy and people definitions.
-- **Product collection (`product-drive`):** open through the host app's already-available Google Drive
-  document skill, MCP tool, or agent plugin. It is the source for customer and product definitions.
+- **HR collection (`hr-wecom`):** [approved annual leave policy](../sample-company-sources/hr-policy-current.md),
+  [previous policy](../sample-company-sources/hr-policy-previous.md), and
+  [unapproved proposal](../sample-company-sources/hr-policy-draft.md).
+- **Product collection (`product-drive`):** [customer definitions](../sample-company-sources/customer-definitions.md),
+  [metric rules](../sample-company-sources/product-metric.md),
+  [retention review](../sample-company-sources/customer-quarterly-review.md), and
+  [outreach discussion](../sample-company-sources/customer-outreach-notes.md).
 
-These are illustrative provider capabilities. A real wiki records only what the host exposes and preserves
-the native document targets it returns. The wiki links to sources; it does not copy them.
+The collection labels illustrate provider routes; this local demo needs no provider connection.
+The exact local source boundary is `examples/sample-company-sources/` only. A real wiki records only
+what the host exposes and preserves the native document targets it returns. The wiki links to sources;
+it does not copy them.
 
 ## Reading rules
 

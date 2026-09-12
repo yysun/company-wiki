@@ -11,7 +11,9 @@ the period, population, exclusions, and reporting owner in the source before com
 
 ## Evidence and next reading
 
-- [Product metric evidence](https://drive.google.com/document/d/example-product-metric) — source of truth
+- [Product metric evidence](../sample-company-sources/product-metric.md) — synthetic original source of truth
   for the formula and reporting rules.
+- [Retention review](../sample-company-sources/customer-quarterly-review.md) — measured monthly counts.
+- [Outreach discussion](../sample-company-sources/customer-outreach-notes.md) — unconfirmed hypotheses.
 - [Customer guide](customer-guide.md) — see also the surrounding lifecycle definitions.
 - [Authoritative lookup guide](authoritative-lookup-guide.md) — how to verify an official definition.

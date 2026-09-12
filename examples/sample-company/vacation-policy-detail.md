@@ -12,7 +12,9 @@ approval path, and owner before stating the rule.
 
 ## Evidence and next reading
 
-- [HR policy evidence](https://drive.google.com/document/d/example-hr-vacation-policy) — source of truth
+- [HR policy evidence](../sample-company-sources/hr-policy-current.md) — synthetic original source of truth
   for the current rule.
+- [Previous policy](../sample-company-sources/hr-policy-previous.md) — historical comparison.
+- [Expansion proposal](../sample-company-sources/hr-policy-draft.md) — unapproved draft.
 - [People guide](people-guide.md) — see also the wider people reading path.
 - [Authoritative lookup guide](authoritative-lookup-guide.md) — how to handle conflicting versions.

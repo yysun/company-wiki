@@ -11,6 +11,8 @@ metric to definitions and evidence.
 - [Question guide](question-guide.md#customer-questions) — choose a lookup or metric path.
 - [Churn-rate detail](churn-rate-detail.md) — the focused metric node.
 - [Product source collection](company-wiki-home.md#source-boundaries) — open the original definitions.
+- [Customer lifecycle definitions](../sample-company-sources/customer-definitions.md) — `defined by`
+  the synthetic canonical source.
 
 ## Concepts
 

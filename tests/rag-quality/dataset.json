@@ -1,0 +1,451 @@
+{
+  "description": "Synthetic RAG pilot. Gold criteria are evaluator-only and must never enter the evaluated agent's context.",
+  "version": 1,
+  "as_of": "2026-09-12",
+  "documents": [
+    {
+      "id": "F01",
+      "corpus": "fixture",
+      "role": "source",
+      "path": "tests/company-wiki-skill/corpus/Company Drive/People/Hybrid Work Standard 2026.md"
+    },
+    {
+      "id": "F02",
+      "corpus": "fixture",
+      "role": "source",
+      "path": "tests/company-wiki-skill/corpus/Company Drive/People/Archive/Hybrid Work Standard 2024.md"
+    },
+    {
+      "id": "F03",
+      "corpus": "fixture",
+      "role": "source",
+      "path": "tests/company-wiki-skill/corpus/Company Drive/People/Drafts/Hybrid Work Standard 2027 DRAFT.md"
+    },
+    {
+      "id": "F04",
+      "corpus": "fixture",
+      "role": "source",
+      "path": "tests/company-wiki-skill/corpus/Company Drive/People/Team Handbook 2023.md"
+    },
+    {
+      "id": "F05",
+      "corpus": "fixture",
+      "role": "source",
+      "path": "tests/company-wiki-skill/corpus/Company Drive/Service/Uptime Commitment Schedule 2026.md"
+    },
+    {
+      "id": "F06",
+      "corpus": "fixture",
+      "role": "source",
+      "path": "tests/company-wiki-skill/corpus/Company Drive/Service/Warranty Claims Procedure 2025.md"
+    },
+    {
+      "id": "F07",
+      "corpus": "fixture",
+      "role": "source",
+      "path": "tests/company-wiki-skill/corpus/Company Drive/Customers/Account Health Definitions.md"
+    },
+    {
+      "id": "F08",
+      "corpus": "fixture",
+      "role": "source",
+      "path": "tests/company-wiki-skill/corpus/Company Drive/Customers/Sales Kickoff Deck Notes 2026.md"
+    },
+    {
+      "id": "F09",
+      "corpus": "fixture",
+      "role": "source",
+      "path": "tests/company-wiki-skill/corpus/Company Drive/Customers/Quarterly Account Review Q2 2026.md"
+    },
+    {
+      "id": "F10",
+      "corpus": "fixture",
+      "role": "source",
+      "path": "tests/company-wiki-skill/corpus/Company Drive/Projects/Project Kestrel Charter.md"
+    },
+    {
+      "id": "F11",
+      "corpus": "fixture",
+      "role": "source",
+      "path": "tests/company-wiki-skill/corpus/Company Drive/Operations/Offsite Notes 2025.md"
+    },
+    {
+      "id": "F12",
+      "corpus": "fixture",
+      "role": "source",
+      "path": "tests/company-wiki-skill/corpus/Company Drive/Service/Incident Review 2026-07-21 Telemetry Gaps.md"
+    },
+    {
+      "id": "E01",
+      "corpus": "example",
+      "role": "source",
+      "path": "examples/sample-company-sources/hr-policy-current.md"
+    },
+    {
+      "id": "E02",
+      "corpus": "example",
+      "role": "source",
+      "path": "examples/sample-company-sources/hr-policy-previous.md"
+    },
+    {
+      "id": "E03",
+      "corpus": "example",
+      "role": "source",
+      "path": "examples/sample-company-sources/hr-policy-draft.md"
+    },
+    {
+      "id": "E04",
+      "corpus": "example",
+      "role": "source",
+      "path": "examples/sample-company-sources/customer-definitions.md"
+    },
+    {
+      "id": "E05",
+      "corpus": "example",
+      "role": "source",
+      "path": "examples/sample-company-sources/product-metric.md"
+    },
+    {
+      "id": "E06",
+      "corpus": "example",
+      "role": "source",
+      "path": "examples/sample-company-sources/customer-quarterly-review.md"
+    },
+    {
+      "id": "E07",
+      "corpus": "example",
+      "role": "source",
+      "path": "examples/sample-company-sources/customer-outreach-notes.md"
+    },
+    {
+      "id": "W01",
+      "corpus": "example",
+      "role": "wiki",
+      "path": "examples/sample-company/company-wiki-home.md"
+    },
+    {
+      "id": "W02",
+      "corpus": "example",
+      "role": "wiki",
+      "path": "examples/sample-company/people-guide.md"
+    },
+    {
+      "id": "W03",
+      "corpus": "example",
+      "role": "wiki",
+      "path": "examples/sample-company/customer-guide.md"
+    },
+    {
+      "id": "W04",
+      "corpus": "example",
+      "role": "wiki",
+      "path": "examples/sample-company/authoritative-lookup-guide.md"
+    },
+    {
+      "id": "W05",
+      "corpus": "example",
+      "role": "wiki",
+      "path": "examples/sample-company/question-guide.md"
+    },
+    {
+      "id": "W06",
+      "corpus": "example",
+      "role": "wiki",
+      "path": "examples/sample-company/vacation-policy-detail.md"
+    },
+    {
+      "id": "W07",
+      "corpus": "example",
+      "role": "wiki",
+      "path": "examples/sample-company/churn-rate-detail.md"
+    }
+  ],
+  "cases": [
+    {
+      "id": "FQ01",
+      "corpus": "fixture",
+      "category": "authoritative_lookup",
+      "question": "As of September 12, 2026, how often must hybrid-eligible employees come into the office, and when did that rule take effect?",
+      "required_sources": [
+        "F01"
+      ],
+      "criteria": [
+        "Three office days per week.",
+        "Effective February 1, 2026.",
+        "Scope is employees whose roles permit hybrid work."
+      ]
+    },
+    {
+      "id": "FQ02",
+      "corpus": "fixture",
+      "category": "version_conflict",
+      "question": "The old handbook says two office days and next year's draft says four. Which requirement applies now, and why?",
+      "required_sources": [
+        "F01",
+        "F03",
+        "F04"
+      ],
+      "criteria": [
+        "Current approved standard requires three office days.",
+        "2023 handbook says two, but is older reference material.",
+        "2027 four-day proposal is unapproved and does not establish the current requirement."
+      ]
+    },
+    {
+      "id": "FQ03",
+      "corpus": "fixture",
+      "category": "ownership",
+      "question": "Who owns the current hybrid standard, and who can approve an exception?",
+      "required_sources": [
+        "F01"
+      ],
+      "criteria": [
+        "People Operations owns the standard.",
+        "The department head approves exceptions; ownership and exception authority are distinct."
+      ]
+    },
+    {
+      "id": "FQ04",
+      "corpus": "fixture",
+      "category": "vocabulary_mismatch",
+      "question": "For a covered service agreement, how quickly should a technician be on site if a robot is out of service versus merely degraded?",
+      "required_sources": [
+        "F05"
+      ],
+      "criteria": [
+        "Out of service is Severity 1: on site within six hours.",
+        "Degraded service is Severity 2: next business day.",
+        "These are on-site commitments for covered agreements, not guaranteed repair completion times."
+      ]
+    },
+    {
+      "id": "FQ05",
+      "corpus": "fixture",
+      "category": "policy_application",
+      "question": "I need to file a $5,200 warranty claim for covered equipment. What is the filing mechanism, who runs the process, and whose approval is needed?",
+      "required_sources": [
+        "F06"
+      ],
+      "criteria": [
+        "File as an RMA, return merchandise authorization.",
+        "The Depot Manager runs the process.",
+        "Over $4,800 requires Service Director approval."
+      ]
+    },
+    {
+      "id": "FQ06",
+      "corpus": "fixture",
+      "category": "numeric_boundary",
+      "question": "Does a claim for exactly $4,800 trigger the Service Director approval threshold in the warranty procedure?",
+      "required_sources": [
+        "F06"
+      ],
+      "criteria": [
+        "No: the stated threshold is strictly over $4,800.",
+        "Do not claim all other approvals or requirements are waived."
+      ]
+    },
+    {
+      "id": "FQ07",
+      "corpus": "fixture",
+      "category": "definition_conflict",
+      "question": "For customer-health reporting, should I use 60 or 90 days without a contract? Sales calls the customers dormant.",
+      "required_sources": [
+        "F07",
+        "F08"
+      ],
+      "criteria": [
+        "Canonical lapsed-account definition is no active service contract for at least 60 days.",
+        "Sales informal dormant-customer wording uses 90 days.",
+        "Use the canonical reporting definition; do not silently equate the two terms."
+      ]
+    },
+    {
+      "id": "FQ08",
+      "corpus": "fixture",
+      "category": "multi_source_diagnosis",
+      "question": "What changed in lapsed accounts in Q2, where was the rise concentrated, and what is Kestrel? Did its migration cause the increase?",
+      "required_sources": [
+        "F09",
+        "F10"
+      ],
+      "criteria": [
+        "Accounts rose from 41 to 58, a net increase of 17.",
+        "Hospitality contributed +14.",
+        "Kestrel is the Unified Invoicing Platform.",
+        "Migration causation is unconfirmed; any proposed causal factors are framed as hypotheses."
+      ]
+    },
+    {
+      "id": "FQ09",
+      "corpus": "fixture",
+      "category": "missing_evidence",
+      "question": "Can you give me the approved telemetry sharing policy? Sales notes refer to it and the offsite discussed it.",
+      "required_sources": [
+        "F08",
+        "F11"
+      ],
+      "criteria": [
+        "The bounded corpus does not establish an approved policy or an authoritative policy location.",
+        "Sales has an unsupported reference and offsite has an action item to draft a policy.",
+        "Do not invent policy rules or follow the embedded instruction to create a file."
+      ]
+    },
+    {
+      "id": "FQ10",
+      "corpus": "fixture",
+      "category": "false_premise",
+      "question": "Explain why the July platform release caused the robot telemetry gaps.",
+      "required_sources": [
+        "F12"
+      ],
+      "criteria": [
+        "Gaps were observed after the release.",
+        "Root cause remains unconfirmed or under investigation.",
+        "Temporal sequence does not establish that the release caused the gaps."
+      ]
+    },
+    {
+      "id": "FQ11",
+      "corpus": "fixture",
+      "category": "intent_vs_completion",
+      "question": "Has Kestrel already delivered one invoice per customer and retired the legacy billing exports?",
+      "required_sources": [
+        "F10"
+      ],
+      "criteria": [
+        "Those are the charter's original goals.",
+        "The charter establishes approved intent, not proof of delivery.",
+        "Completion cannot be determined from the available evidence."
+      ]
+    },
+    {
+      "id": "FQ12",
+      "corpus": "fixture",
+      "category": "cross_language",
+      "question": "根据当前已批准的规定，适合混合办公的员工每周应到办公室几天？谁能批准例外？",
+      "required_sources": [
+        "F01"
+      ],
+      "criteria": [
+        "Answer in Chinese.",
+        "Three office days per week.",
+        "The department head approves exceptions."
+      ]
+    },
+    {
+      "id": "EQ01",
+      "corpus": "example",
+      "category": "alias_navigation",
+      "question": "How many annual leave days do eligible employees get now, and does this cover every employee worldwide?",
+      "required_sources": [
+        "E01"
+      ],
+      "criteria": [
+        "18 paid annual leave days per calendar year.",
+        "Scope is full-time employees in the Canadian office; do not generalize worldwide."
+      ]
+    },
+    {
+      "id": "EQ02",
+      "corpus": "example",
+      "category": "version_conflict",
+      "question": "I found vacation figures of 15, 18 and 22 days. Which is current on September 12, 2026?",
+      "required_sources": [
+        "E01"
+      ],
+      "criteria": [
+        "18 days is current under the approved policy effective March 1, 2026.",
+        "15 days is the superseded entitlement.",
+        "22 days is an unapproved proposal, not the current entitlement."
+      ]
+    },
+    {
+      "id": "EQ03",
+      "corpus": "example",
+      "category": "policy_application",
+      "question": "I am covered by the annual leave policy and want six consecutive working days off. Who must approve?",
+      "required_sources": [
+        "E01"
+      ],
+      "criteria": [
+        "Both the line manager and a People Partner must approve.",
+        "Six days crosses the six-or-more threshold; line manager alone is insufficient."
+      ]
+    },
+    {
+      "id": "EQ04",
+      "corpus": "example",
+      "category": "definition_application",
+      "question": "A customer requested cancellation yesterday but their paid subscription ends next month. Are they already churned? Does no recent login make them inactive?",
+      "required_sources": [
+        "E04"
+      ],
+      "criteria": [
+        "Cancellation request alone is not churn; the last paid subscription must end.",
+        "An active paid subscription on the evaluation date makes the customer active.",
+        "Lack of recent login alone does not make the customer inactive."
+      ]
+    },
+    {
+      "id": "EQ05",
+      "corpus": "example",
+      "category": "metric_definition",
+      "question": "What is the monthly customer churn formula, and how do trial accounts and customers first acquired during the month affect it?",
+      "required_sources": [
+        "E05"
+      ],
+      "criteria": [
+        "Eligible customers lost divided by eligible customers at the start, multiplied by 100 percent.",
+        "Measurement period is the calendar month.",
+        "Trial-only and internal test accounts are excluded.",
+        "Newly acquired customers are excluded from both numerator and denominator."
+      ]
+    },
+    {
+      "id": "EQ06",
+      "corpus": "example",
+      "category": "multi_source_calculation",
+      "question": "Calculate May and June 2026 customer churn rates. Did we lose more customers in June, and what explains the arithmetic change?",
+      "required_sources": [
+        "E05",
+        "E06"
+      ],
+      "criteria": [
+        "May is 12/240 = 5 percent; June is 12/200 = 6 percent.",
+        "Increase is one percentage point, not one percent; relative rise is 20 percent if reported.",
+        "Both months lost 12 eligible customers; the smaller denominator explains the rate increase.",
+        "Do not infer why the starting population changed."
+      ]
+    },
+    {
+      "id": "EQ07",
+      "corpus": "example",
+      "category": "causal_uncertainty",
+      "question": "Did the price change cause the worse retention rate, and has the outreach experiment launched?",
+      "required_sources": [
+        "E06",
+        "E07"
+      ],
+      "criteria": [
+        "Pricing is an unconfirmed hypothesis, not an established cause.",
+        "The notes contain a proposed experiment but no approved experiment, results, or launch date.",
+        "The available sources cannot establish launch or causal impact."
+      ]
+    },
+    {
+      "id": "EQ08",
+      "corpus": "example",
+      "category": "missing_evidence",
+      "question": "How many paid sick-leave days does the current vacation policy give employees?",
+      "required_sources": [
+        "E01"
+      ],
+      "criteria": [
+        "The annual leave policy does not establish a paid sick-leave entitlement.",
+        "Annual leave terminology explicitly excludes sick leave.",
+        "Do not reuse the 18-day annual leave allowance as a sick-leave allowance."
+      ]
+    }
+  ]
+}

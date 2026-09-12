@@ -40,6 +40,16 @@ make one routing decision from its compact outline before opening source evidenc
 The sample files are illustrative only; they are not real company content and do not prescribe a
 folder structure for production use.
 
+The sample wiki now links to seven readable synthetic originals in
+[`examples/sample-company-sources/`](examples/sample-company-sources/), including policy versions,
+customer definitions, metric rules, and a retention report. The source collection remains separate
+from the wiki documents.
+
+For recorded retrieval and answer tests, see the
+[`20-question RAG quality benchmark`](tests/rag-quality/README.md). It combines the existing synthetic
+test corpus with the example wiki and records evidence retrieval, citations, rubric judgments,
+navigation, timing, and token usage. It is a component pilot, not provider or lifecycle acceptance.
+
 ### Local-folder demo
 
 No upload is required for a private local demonstration. Prepare a synthetic index fixture, then explicitly select
@@ -85,6 +95,33 @@ The fixture corpus should include an alias, a current authoritative document, an
 multi-document question, and a decoy. Test a restricted document too when the provider can represent its ACLs.
 Repeat this setup only for providers the product supports; each provider needs its own acceptance test because
 search, links, and permissions differ.
+
+## RAG quality evaluation
+
+The [20-question benchmark](tests/rag-quality/README.md) covers 12 questions over the existing synthetic
+test corpus and 8 questions using the example wiki and its separate original sources. It tests source
+authority, conflicting versions, policy boundaries, multi-document reasoning, missing evidence, and
+English/Chinese queries. Browse the [questions and answer key](tests/rag-quality/questions.md).
+
+The [September 12, 2026 pilot](tests/rag-quality/pilot-2026-09-12.md) used `gpt-6-astra` with high reasoning:
+
+| Measurement | Result |
+|---|---:|
+| Answers passing every rubric item and grounding review | 20/20 |
+| Answer rubric items, agent-reviewed | 59/59 |
+| Required original documents retrieved | 100% |
+| Citation integrity checks | 90/90 |
+| Example navigation checks | 8/8 |
+| Mean source documents opened / elapsed time | 2.7 / 29.0 seconds |
+
+Citation integrity checks exact quotes and observed source reads; semantic support is reviewed separately.
+The same agent authored the cases and reviewed the answers. This single run on short synthetic documents
+does not establish production accuracy or the incremental benefit of wiki routing. Provider permissions
+and full lifecycle acceptance remain separate tests. The runner also has 7 scoring tests alongside the
+23 existing adapter/contract tests; all 30 passed.
+
+Raw runs stay local under the Git-ignored `tests/rag-quality/results/` directory. The tracked pilot summary
+preserves the measurements and their limits; the benchmark guide explains how to rerun and score new cases.
 
 ## Lifecycle
 

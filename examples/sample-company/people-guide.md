@@ -11,6 +11,8 @@ the reader to scan the whole drive.
 - [Question guide](question-guide.md#people-questions) — start with recurring people questions.
 - [Vacation policy detail](vacation-policy-detail.md) — the focused reading node.
 - [HR source collection](company-wiki-home.md#source-boundaries) — open the original policy documents.
+- [Annual leave policy](../sample-company-sources/hr-policy-current.md) — `source of truth`
+  in the separate synthetic original-material collection.
 
 ## Vacation policy
 
