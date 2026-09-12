@@ -5,7 +5,12 @@ Personal Wiki. The Index taxonomy is the governed backbone: it records canonical
 authority guidance. A small set of typed native links forms the useful discovery graph on top, while native source
 search retrieves original evidence before the agent answers with citations.
 
-The drive is the durable home of the wiki. This package does not impose folders, YAML records, a graph
+The cloud drive is the primary durable home of the wiki. Create ordinary native documents and links through the
+host's existing document tools; users need neither Markdown files nor a Git repository or a separate wiki server.
+GitHub distributes the skill, and Git commit history does not drive wiki maintenance. Explicitly selected local
+folders support Markdown wiki storage, and repositories may be registered as original-material sources.
+
+This package does not impose folders, YAML records, a graph
 database, a provider-side derived search/evidence index, embeddings, source copies, or a connector. The small local
 Markdown registry is configuration only. A flat document collection is valid.
 

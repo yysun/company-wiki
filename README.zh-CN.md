@@ -2,7 +2,19 @@
 
 [English](README.md)
 
-`company-wiki` 是一个便携的智能助手技能，用来在现有企业文档之上建立和使用权限感知的公司索引与个人 Wiki。
+`company-wiki` 是一个便携的智能助手技能，用来在企业现有云盘中建立和使用权限感知的公司索引与个人 Wiki。
+原始资料保留在原处；索引和 Wiki 使用普通的云盘原生文档及链接，存放在单独指定的可写位置。
+
+智能助手通过宿主已有的文档工具浏览 Wiki、搜索指定资料，并依据原始证据回答问题。
+使用它不需要 Git、Markdown 文件或单独部署的 Wiki 应用。
+
+| 层面 | 存放位置 |
+|---|---|
+| 企业原始知识 | 现有云端文档；明确指定的仓库或本地文件夹也可以作为来源 |
+| 公司索引与个人 Wiki | 所选云盘中的原生文档；也支持明确选择的本地 Markdown 存储 |
+| 技能包、示例与本地配置 | 本仓库及用户本地注册表中的 Markdown；它们与企业知识分开存放 |
+
+GitHub 用来分发技能。Wiki 维护不由 Git 提交驱动，也不要求用户将资料搬进 Git 仓库或采用固定的 `.md` 文件结构。
 
 公司索引是以文档为基础的分类体系与来源地图：
 
@@ -27,36 +39,7 @@
 - [`docs/`](docs/) — 产品需求、知识结构和能力说明。
 - [`tests/`](tests/) — 端到端规范、测试资料和验证场景。
 
-## 试用示例
-
-先打开 [`examples/sample-company/company-wiki-home.md`](examples/sample-company/company-wiki-home.md)，
-再从紧凑导航概要做一次路由决策，然后读取原始证据。
-
-这些示例文件仅用于演示，不包含真实企业内容，也不要求生产环境采用同样的文件夹结构。
-
-示例 Wiki 已链接到 [`examples/sample-company-sources/`](examples/sample-company-sources/) 中的七份可读取合成原始文档，
-涵盖政策版本、客户定义、指标口径和留存报告。原始资料集合与 Wiki 文档保持分离。
-
-### 本地文件夹演示
-
-私有本地演示不需要上传文件。先准备一份合成索引测试文件，并明确选中它来引导个人 Wiki；来源资料与可写 Wiki 仍须分开：
-
-```text
-Company Wiki Demo/
-├── Test Index/index.md  # 用户准备的合成索引；Bootstrap 的只读引用
-├── Test Sources/   # 测试文档；受限的读取/搜索范围
-└── Test Wiki/      # 独立、可写的 Markdown Wiki 目标
-```
-
-例如，可以这样提问：
-
-> 引导（Bootstrap）一个名为“Company Wiki Demo”的私有个人 Wiki。选中的公司索引是本地合成测试文件
-> `Test Index/index.md`。原始资料仅限本地 `Test Sources` 文件夹。Wiki 存放位置：独立且可写的本地 `Test Wiki`
-> 文件夹。使用中文。不要搜索 `Test Sources` 之外的内容。
-
-Bootstrap 只引用这个明确选中的索引，不创建本地公司索引，也不从索引推断资料范围。
-这种方式适合快速测试和私人的个人 Wiki。云端同步文件夹也可使用同一本地适配器，但本地可访问并不能证明云端提供方身份、ACL 或治理权限。
-需要这些验证的团队或公司级写入，应使用提供方集成。
+## 试用
 
 ### 云端文档演示
 
@@ -76,6 +59,35 @@ Company Wiki Demo — Google Drive
 
 测试资料应包含别名、当前权威文档、过时且相互冲突的文档、需要多份文档才能回答的问题，以及干扰文档。如果提供方可以表达 ACL，
 还应包含一份受限文档。只为产品已支持的提供方重复此设置；不同提供方的搜索、链接和权限行为不同，必须各自验收。
+
+### 可选的本地 Markdown 演示
+
+先打开 [`examples/sample-company/company-wiki-home.md`](examples/sample-company/company-wiki-home.md)，
+再从紧凑导航概要做一次路由决策，然后读取原始证据。
+
+这些示例文件仅用于演示，不包含真实企业内容，也不要求生产环境采用同样的文件夹结构。
+
+示例 Wiki 已链接到 [`examples/sample-company-sources/`](examples/sample-company-sources/) 中的七份可读取合成原始文档，
+涵盖政策版本、客户定义、指标口径和留存报告。原始资料集合与 Wiki 文档保持分离。
+
+私有本地演示不需要上传文件。先准备一份合成索引测试文件，并明确选中它来引导个人 Wiki；来源资料与可写 Wiki 仍须分开：
+
+```text
+Company Wiki Demo/
+├── Test Index/index.md  # 用户准备的合成索引；Bootstrap 的只读引用
+├── Test Sources/   # 测试文档；受限的读取/搜索范围
+└── Test Wiki/      # 独立、可写的 Markdown Wiki 目标
+```
+
+例如，可以这样提问：
+
+> 引导（Bootstrap）一个名为“Company Wiki Demo”的私有个人 Wiki。选中的公司索引是本地合成测试文件
+> `Test Index/index.md`。原始资料仅限本地 `Test Sources` 文件夹。Wiki 存放位置：独立且可写的本地 `Test Wiki`
+> 文件夹。使用中文。不要搜索 `Test Sources` 之外的内容。
+
+Bootstrap 只引用这个明确选中的索引，不创建本地公司索引，也不从索引推断资料范围。
+这种方式适合快速测试和私人的个人 Wiki。云端同步文件夹也可使用同一本地适配器，但本地可访问并不能证明云端提供方身份、ACL 或治理权限。
+需要这些验证的团队或公司级写入，应使用提供方集成。
 
 ## RAG 质量评估
 

@@ -1,6 +1,6 @@
 ---
 name: company-wiki
-description: "Build and use a permission-aware Company Library Index and Personal Wiki without copying or pre-indexing original documents."
+description: "Build and use a permission-aware Company Library Index and Personal Wiki in an existing cloud drive, without copying or pre-indexing original documents. Also supports explicitly selected local sources and wiki storage."
 ---
 
 # company-wiki / 企业文库
@@ -11,6 +11,12 @@ source reconciliation, maintenance, validation, or promotion over connected orig
 ## Product model
 
 `Company source library → Company Library Index → optional Team Wiki → Personal Wiki → progressive expansion`
+
+Use ordinary native documents and links in the selected cloud-drive destination for the index and wiki, through
+the host's existing document tools. Markdown expresses the examples and local configuration; it is also supported
+for explicitly selected local wiki storage. It is not a required cloud document format. Git manages this skill's
+repository, not the wiki lifecycle: do not require a Git repository, commit-driven updates, fixed `.md` filenames,
+or a separate wiki application. Explicitly selected repositories remain valid original-material sources.
 
 Original documents remain authoritative for content, access, versioning, and retention. The Company Wiki Admin
 governs shared canonical concepts, terminology, aliases, relationships, and source mappings. A user governs

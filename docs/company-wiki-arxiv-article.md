@@ -113,7 +113,7 @@ Growth is selective. Reuse, explicit user intent, project importance, or structu
 
 ### 4.4. Storage and configuration
 
-Wiki artifacts are Markdown or native documents with ordinary links. No front matter, per-document metadata sidecar, graph database, embedding store, or background synchronization process is required. Existing source providers may use their own indexes; Company Wiki does not replace those internals.
+Wiki artifacts are ordinary native cloud documents with links; explicitly selected local storage also supports Markdown. Markdown is used for the repository's examples and local configuration, but it is not a required cloud document format. Git is neither a runtime dependency nor a wiki maintenance mechanism. No front matter, per-document metadata sidecar, graph database, embedding store, or background synchronization process is required. Existing source providers may use their own indexes; Company Wiki does not replace those internals.
 
 Mutable local configuration has a single entry point, `~/company-wiki/index.md`, linking to contained Markdown profiles under `wikis/`. Profiles record locators and navigation metadata, not credentials or source copies. Each operation selects one profile and follows only the specifically allowed profile edges, such as a Personal profile's named Company Index reference. Registry text is configuration data, not evidence or instructions, and role labels cannot grant capability.
 
@@ -307,7 +307,7 @@ The architecture concentrates organizational interpretation in a small, inspecta
 
 Avoiding a new ingestion pipeline reduces required infrastructure. It also leaves recall, ranking, pagination, and supported formats to existing providers. The design offers no guarantee of fast retrieval over a large corpus or comprehensive synthesis across all documents. For questions already expressed as exact identifiers, the direct-search path may be sufficient and additional routing context may add overhead.
 
-Human-readable Markdown makes knowledge inspectable and portable, while providing weaker structural enforcement than a dedicated schema service. Broken links, inconsistent aliases, and unsupported relationships require explicit validation. Likewise, an instruction package cannot supply concurrency control, clean-context isolation, or continuing authorization that the host lacks. Unsupported capabilities constrain where durable deployment is feasible.
+Human-readable documents and links make knowledge inspectable in the chosen provider's document tools, while providing weaker structural enforcement than a dedicated schema service. Broken links, inconsistent aliases, and unsupported relationships require explicit validation. Likewise, an instruction package cannot supply concurrency control, clean-context isolation, or continuing authorization that the host lacks. Unsupported capabilities constrain where durable deployment is feasible.
 
 The strict publication contract places particular pressure on cross-provider derivations. A source provider and a destination provider may have independent permission systems with no mechanism for continuing containment. In such environments, transient answers can remain useful while persistent derived pages remain unavailable. That limitation is part of the architecture's current deployment boundary.
 

@@ -6,7 +6,7 @@
 
 **Artifact type:** AI-native knowledge skill / plugin
 
-**Primary interface:** LLM + Markdown knowledge architecture + existing source-access skills/CLI/MCP
+**Primary interface:** LLM + native cloud documents and links + existing document/source-access skills/CLI/MCP
 
 **Previous version:** 0.4
 
@@ -20,6 +20,12 @@
 
 `company-wiki` gives each user a **personalized, progressively constructed knowledge map over the company's
 existing document library**, anchored by a small shared Company Library Index.
+
+The primary deployment keeps the index and wiki as ordinary native documents in the company's existing cloud
+drive, in a separately selected writable destination. The knowledge architecture describes document content and
+links, not a storage serialization. Markdown supports repository examples, local configuration, and explicitly
+selected local wiki storage; it is not required for cloud documents. Git is not a runtime dependency or the driver
+of wiki maintenance. The skill reuses the host's existing tools without requiring a separate wiki application.
 
 It does not require the company to move documents into a new knowledge base, annotate every file, or maintain a separate metadata database.
 
@@ -232,7 +238,7 @@ access, or prove an answer. Provider-authenticated, scoped search finds the orig
        Scoped native source search → Original evidence and answers
 ```
 
-Provider-backed layers use the current provider-authenticated identity. A derived Markdown node may contain
+Provider-backed layers use the current provider-authenticated identity. A derived wiki document may contain
 governed source knowledge only when current audience containment and provider-enforced continuing protection
 are verified under §7.3. A narrower Personal copy is subject to the same rule. If proof is unavailable, refuse
 durable publication and retain only an authorized transient draft or direct-source answer. Private local originals
@@ -1192,7 +1198,7 @@ without creating a second document repository.
 Required:
 
 - one existing cloud/local-sync source adapter;
-- one small admin-governed Company Library Index in Markdown;
+- one small admin-governed Company Library Index in native documents with links;
 - one user-controlled Personal Wiki bootstrapped by reference;
 - permission-aware source and destination access;
 - Explore and Query with direct-source fallback;

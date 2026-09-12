@@ -3,7 +3,20 @@
 [中文](README.zh-CN.md)
 
 `company-wiki` is a portable agent skill for building and using a permission-aware Company Library Index and
-user-controlled Personal Wiki over existing cloud-drive and repository documents.
+user-controlled Personal Wiki in the company's existing cloud drive. Original documents stay where they are;
+the index and wiki use ordinary native documents and links in a separately selected writable destination.
+
+The agent uses the host's existing document tools to navigate the wiki, search the selected sources, and answer
+with original evidence. Git, Markdown files, and a separately deployed wiki application are not required.
+
+| Layer | Where it lives |
+|---|---|
+| Original company knowledge | Existing cloud documents; explicitly selected repositories or local folders can also be sources |
+| Company Library Index and Personal Wiki | Native documents in the chosen cloud drive; local Markdown storage is also supported when explicitly selected |
+| Skill package, examples, and local configuration | Markdown in this repository and the user's local registry; these are separate from company knowledge |
+
+GitHub distributes the skill. Git commits do not drive wiki maintenance, and users do not need to move their
+documents into a Git repository or adopt a fixed `.md` file layout.
 
 The Company Library Index is a document-native taxonomy and source map:
 
@@ -32,46 +45,7 @@ write back to the source collection.
 - [`docs/`](docs/) — product requirements, schema, and competency material.
 - [`tests/`](tests/) — end-to-end specification, fixtures, and validation scenarios.
 
-## Try the example
-
-Start with [`examples/sample-company/company-wiki-home.md`](examples/sample-company/company-wiki-home.md), then
-make one routing decision from its compact outline before opening source evidence.
-
-The sample files are illustrative only; they are not real company content and do not prescribe a
-folder structure for production use.
-
-The sample wiki now links to seven readable synthetic originals in
-[`examples/sample-company-sources/`](examples/sample-company-sources/), including policy versions,
-customer definitions, metric rules, and a retention report. The source collection remains separate
-from the wiki documents.
-
-For recorded retrieval and answer tests, see the
-[`20-question RAG quality benchmark`](tests/rag-quality/README.md). It combines the existing synthetic
-test corpus with the example wiki and records evidence retrieval, citations, rubric judgments,
-navigation, timing, and token usage. It is a component pilot, not provider or lifecycle acceptance.
-
-### Local-folder demo
-
-No upload is required for a private local demonstration. Prepare a synthetic index fixture, then explicitly select
-it for Personal Bootstrap. Keep the bounded source corpus and writable wiki separate:
-
-```text
-Company Wiki Demo/
-├── Test Index/index.md  # user-prepared synthetic index; read-only Bootstrap reference
-├── Test Sources/   # fixture documents; bounded read/search scope
-└── Test Wiki/      # separate writable Markdown wiki destination
-```
-
-For example, ask:
-
-> Bootstrap a private Personal Wiki named Company Wiki Demo. Selected Company Library Index: the local synthetic
-> `Test Index/index.md` fixture. Original material: the local `Test Sources` folder only. Wiki destination: the
-> separate writable local `Test Wiki` folder. Use English. Do not search outside `Test Sources`.
-
-Bootstrap references that exact index without creating a local Company Index or inferring source scope from it.
-This supports smoke tests and private Personal Wikis. A cloud-synced folder can use the same local adapter, but
-local availability does not prove cloud-provider identity, ACLs, or governance. Use a provider integration for
-Team or Company writes that require those checks.
+## Try it
 
 ### Cloud-drive demo
 
@@ -95,6 +69,45 @@ The fixture corpus should include an alias, a current authoritative document, an
 multi-document question, and a decoy. Test a restricted document too when the provider can represent its ACLs.
 Repeat this setup only for providers the product supports; each provider needs its own acceptance test because
 search, links, and permissions differ.
+
+### Optional local Markdown demo
+
+Start with [`examples/sample-company/company-wiki-home.md`](examples/sample-company/company-wiki-home.md), then
+make one routing decision from its compact outline before opening source evidence.
+
+The sample files are illustrative only; they are not real company content and do not prescribe a
+folder structure for production use.
+
+The sample wiki now links to seven readable synthetic originals in
+[`examples/sample-company-sources/`](examples/sample-company-sources/), including policy versions,
+customer definitions, metric rules, and a retention report. The source collection remains separate
+from the wiki documents.
+
+For recorded retrieval and answer tests, see the
+[`20-question RAG quality benchmark`](tests/rag-quality/README.md). It combines the existing synthetic
+test corpus with the example wiki and records evidence retrieval, citations, rubric judgments,
+navigation, timing, and token usage. It is a component pilot, not provider or lifecycle acceptance.
+
+No upload is required for a private local demonstration. Prepare a synthetic index fixture, then explicitly select
+it for Personal Bootstrap. Keep the bounded source corpus and writable wiki separate:
+
+```text
+Company Wiki Demo/
+├── Test Index/index.md  # user-prepared synthetic index; read-only Bootstrap reference
+├── Test Sources/   # fixture documents; bounded read/search scope
+└── Test Wiki/      # separate writable Markdown wiki destination
+```
+
+For example, ask:
+
+> Bootstrap a private Personal Wiki named Company Wiki Demo. Selected Company Library Index: the local synthetic
+> `Test Index/index.md` fixture. Original material: the local `Test Sources` folder only. Wiki destination: the
+> separate writable local `Test Wiki` folder. Use English. Do not search outside `Test Sources`.
+
+Bootstrap references that exact index without creating a local Company Index or inferring source scope from it.
+This supports smoke tests and private Personal Wikis. A cloud-synced folder can use the same local adapter, but
+local availability does not prove cloud-provider identity, ACLs, or governance. Use a provider integration for
+Team or Company writes that require those checks.
 
 ## RAG quality evaluation
 

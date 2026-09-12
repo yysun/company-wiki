@@ -12,6 +12,10 @@
 
 This document defines requirements for extending `company-wiki` from a curated company-document navigation layer into a **personalized, progressively constructed wiki system** over the company's existing cloud document library.
 
+The primary deployment uses native cloud documents and links for the index and wiki. Markdown and YAML examples
+describe logical content or optional local representations; they do not require Markdown files, a Git repository,
+or commit-driven maintenance. The installed skill's document-format contract governs production representation.
+
 The design is based on three principles:
 
 1. **The company cloud drive remains the source of truth.**
@@ -937,7 +941,7 @@ This allows the wiki to behave as a lightweight knowledge graph without requirin
 
 ### 7.2 Link types
 
-Links MAY initially be plain Markdown links.
+Links SHOULD use the chosen provider's native hyperlinks; local Markdown documents MAY use Markdown links.
 
 Where useful, the system SHOULD support typed relationships such as:
 
@@ -1023,7 +1027,8 @@ derived_access:
 
 The exact serialization MAY evolve.
 
-V1 SHOULD prefer human-readable Markdown plus front matter over a complex database schema.
+V1 SHOULD use ordinary native documents with readable sections and links. Local Markdown is supported;
+front matter and a database schema are not required.
 
 ---
 
@@ -1479,9 +1484,10 @@ The agent MUST NOT:
 
 ---
 
-## 21. Suggested V1 File Structure
+## 21. Optional Local Representation
 
-A user wiki MAY use:
+For explicitly selected local Markdown storage, a user wiki MAY organize readable pages as follows. This is an
+illustrative navigation layout, not a required filesystem structure or a cloud-document naming convention:
 
 ```text
 company-wiki/
@@ -1491,17 +1497,15 @@ company-wiki/
 ├── concepts/
 ├── projects/
 ├── processes/
-├── decisions/
-└── .wiki/
-    ├── config.md
-    └── state.json
+└── decisions/
 ```
 
 `company-library.md` MAY be a logical/dynamic reference rather than a physically duplicated copy of the shared company index.
 
-The `.wiki/` directory SHOULD contain machine-oriented state only when necessary.
+Local configuration uses the separate `~/company-wiki/index.md` registry and contained profiles defined by the
+installed skill. The wiki does not require a `.wiki/` state directory.
 
-Markdown SHALL remain the primary human-readable representation.
+Cloud wiki pages SHALL use ordinary native documents and links; local wiki pages MAY use Markdown.
 
 ---
 
@@ -1595,9 +1599,10 @@ The agent SHALL support direct source search independent of the wiki.
 
 Wiki logic SHALL not depend on a specific cloud-drive provider.
 
-### FR-23 — Markdown-first storage
+### FR-23 — Document-native storage
 
-Wiki artifacts SHOULD remain human-readable Markdown wherever practical.
+Wiki artifacts SHALL remain human-readable documents with links in the selected destination. Cloud destinations
+SHOULD use the provider's native document format; explicitly selected local storage MAY use Markdown.
 
 ### FR-24 — No mandatory vector DB
 
@@ -1625,7 +1630,8 @@ The system SHOULD make it clear how a conclusion relates to source evidence.
 
 ### NFR-3 — Portability
 
-A wiki SHOULD remain usable as ordinary Markdown even outside the product.
+A wiki SHOULD remain readable and navigable through the chosen provider's ordinary document tools without the
+agent skill. Local Markdown pages SHOULD remain usable in ordinary text tools.
 
 ### NFR-4 — Low infrastructure
 
@@ -1670,7 +1676,7 @@ The MVP SHALL demonstrate:
 1. one existing company cloud-drive source;
 2. one Company Library Index governed by an Admin role;
 3. permission-aware source access;
-4. one user-specific Personal Wiki stored as Markdown;
+4. one user-specific Personal Wiki stored as native cloud documents with links;
 5. Personal Wiki bootstrap from the Company Library Index;
 6. `Explore` through wiki-guided and source-backed navigation;
 7. `Query` with direct source search fallback;

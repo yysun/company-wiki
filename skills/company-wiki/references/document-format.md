@@ -1,8 +1,14 @@
 # Human-readable document format
 
-Wiki artifacts are ordinary Markdown and native links; no front matter, YAML, `.wiki/` state, sidecar, or hidden
-database is required. Each scope has a readable home/map whose taxonomy is the governed backbone: canonical node
-title, aliases, one-line scope, source entry point, and primary parent. At most three pages per scope may be marked
+Wiki artifacts are ordinary human-readable documents with native links. In a cloud-drive destination, use the
+provider's native document format and existing document tools. Preserve headings, lists, tables, and links as
+readable document structure; Markdown syntax and `.md` files are not required. Markdown is the representation for
+repository examples and explicitly selected local wiki storage. This contract defines content and relationships,
+not a Git workflow, filename convention, or storage-folder layout.
+
+No front matter, YAML, `.wiki/` state, sidecar, or hidden database is required. Each scope has a readable home/map
+whose taxonomy is the governed backbone: canonical node title, aliases, one-line scope, source entry point, and
+primary parent. At most three pages per scope may be marked
 `Routing page`. Tree position is navigation only; it never implies a relationship. Aliases resolve to canonical
 nodes. A small set of labeled, reviewable typed links—such as `related_to`, `governed_by`, `supersedes`, or
 `depends_on`—forms a discovery overlay when taxonomy placement is insufficient; it is not a generic graph or a

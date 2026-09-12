@@ -2,8 +2,13 @@
 
 **Version:** 0.1  
 **Status:** Draft  
-**Format:** Markdown-first, YAML-compatible examples  
+**Format:** Document-native logical model; Markdown and YAML used for illustrative examples
+
 **Purpose:** Define the minimal AI-readable information architecture used by `company-wiki`.
+
+The model is expressed in ordinary native cloud documents and links. Markdown files are supported for explicitly
+selected local storage; the Markdown and YAML examples below do not mandate a production format, file layout,
+front matter, or Git workflow.
 
 ---
 
@@ -25,7 +30,7 @@ The schema is not intended to represent every document, record, or fact in the o
 
 ## 2. Schema Principles
 
-1. **Markdown first** — readable by humans and LLMs.
+1. **Document native** — readable by humans and LLMs in the chosen provider's ordinary documents.
 2. **Minimal semantics** — model only what improves querying or reasoning.
 3. **Progressive disclosure** — split large schemas by domain.
 4. **Source-preserving** — original systems remain authoritative.
@@ -60,7 +65,7 @@ business_definitions: []
 problem_patterns: []
 ```
 
-A large implementation MAY split these into separate Markdown files.
+A large implementation MAY split these into separate native documents, or Markdown files for local storage.
 
 ---
 
