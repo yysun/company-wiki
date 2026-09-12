@@ -1,0 +1,104 @@
+{
+  "id": "EQ07",
+  "corpus": "example",
+  "question": "Did the price change cause the worse retention rate, and has the outreach experiment launched?",
+  "category": "causal_uncertainty",
+  "status": "completed",
+  "exit_code": 0,
+  "timed_out": false,
+  "elapsed_seconds": 32.732,
+  "response": {
+    "answer": "The evidence does not establish that the price change caused worse retention. Calculated churn rose from 5% in May (12/240) to 6% in June (12/200), but customer losses stayed at 12; the higher rate reflects a smaller starting population, whose decline is unexplained. [E06] Pricing remains a hypothesis: no comparison group or causal analysis was completed. [E07]\n\nOutreach launch is unconfirmed as of September 12, 2026. The July 18 informal note records only a proposal, with no approval, results, or launch date. It does not supersede the July 15 reviewed report or establish a subsequent launch. [E06][E07]",
+    "citations": [
+      {
+        "source_id": "E06",
+        "quote": "This report does not explain why the\nstarting population changed and does not establish a causal effect of pricing or outreach."
+      },
+      {
+        "source_id": "E07",
+        "quote": "No comparison group or causal analysis\nhas been completed."
+      },
+      {
+        "source_id": "E07",
+        "quote": "this note records no approved experiment, results, or\nlaunch date."
+      }
+    ]
+  },
+  "trace_checks": {
+    "integrity_failures": [],
+    "reads": [
+      "W01",
+      "W03",
+      "W04",
+      "W07",
+      "E04",
+      "E05",
+      "E06",
+      "E07"
+    ],
+    "source_reads": [
+      "E04",
+      "E05",
+      "E06",
+      "E07"
+    ],
+    "wiki_reads": [
+      "W01",
+      "W03",
+      "W04",
+      "W07"
+    ],
+    "operations": [
+      {
+        "operation": "read",
+        "values": [
+          "W01"
+        ]
+      },
+      {
+        "operation": "list",
+        "values": []
+      },
+      {
+        "operation": "read",
+        "values": [
+          "W03",
+          "W04",
+          "W07"
+        ]
+      },
+      {
+        "operation": "read",
+        "values": [
+          "E04",
+          "E05",
+          "E06",
+          "E07"
+        ]
+      }
+    ],
+    "search_rounds": 0,
+    "discovery_rounds": 1,
+    "source_characters": 2777,
+    "usage": {
+      "input_tokens": 109694,
+      "cached_input_tokens": 62464,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 568,
+      "reasoning_output_tokens": 0
+    },
+    "query_bounds_ok": true,
+    "routing_order_ok": true,
+    "example_navigation_ok": true
+  },
+  "objective_scores": {
+    "required_source_open_recall": 1.0,
+    "valid_citations": 3,
+    "citation_count": 3,
+    "citation_integrity": 1.0,
+    "all_inline_citations_declared": true,
+    "answer_correctness": null,
+    "answer_grounding": null,
+    "note": "Citation integrity checks exact quotes and observed reads, not semantic entailment. Rubric review is separate."
+  }
+}

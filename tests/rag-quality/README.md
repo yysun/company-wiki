@@ -10,8 +10,9 @@ Twenty questions test retrieval and answer behavior with two bounded synthetic c
   arithmetic across documents, causal uncertainty, and an unanswerable sick-leave question.
 
 Browse the [questions and evaluator answer key](questions.md) and the
-[tracked pilot summary](pilot-2026-09-12.md). Raw scorecards, answers, and traces remain local under
-the Git-ignored `results/` directory.
+[tracked pilot summary](pilot-2026-09-12.md). The [versioned baseline](baselines/2026-09-12/README.md)
+preserves the original answers, scores, retrieval records, and grading decisions. Disposable runs and
+raw CLI logs stay in the Git-ignored `results/` directory.
 
 The example wiki stays in `examples/sample-company/`; original evidence stays separately in
 `examples/sample-company-sources/`. Existing source fixtures are unchanged. No cloud connection or
@@ -105,6 +106,37 @@ python3 tests/rag-quality/report.py tests/rag-quality/results/my-run
 This creates `scores.json` and `report.md`. A report without semantic reviews is valid, but answer
 correctness and grounding remain **not scored**. Edited answers invalidate their old reviews; a
 changed dataset requires the original dataset version for reporting.
+
+## Retain a baseline
+
+Keep `results/` for scratch runs. Promote a reviewed run into a new `baselines/<run-id>/` directory;
+keep failures and unscored cases visible, and never replace the observations with a rerun.
+
+Preserve this explicit evidence set:
+
+- `manifest.json`, `reviews.json`, `source-integrity.json`, and `verification.json` when present;
+- `dataset-at-execution.json`, whose bytes must match the manifest's dataset hash;
+- `runner-at-execution.py` when needed to preserve the exact evaluated code version;
+- each case's exact `response.json` and `result.json`, including citations, ordered retrieval operations,
+  scores, timing, and token usage;
+- regenerated `scores.json` and `report.md`, plus a short README explaining provenance and limits.
+
+Copy the retained answer bytes unchanged so the grading hashes remain valid. Use an allowlist rather
+than copying whole case directories: `prompt.txt`, `trace.jsonl`, stderr, and temporary local paths are
+execution artifacts. Document omitted raw traces; processed retrieval records preserve the observations
+but do not independently reproduce the original command-level validation. Real-data runs additionally
+need an authorized storage destination for their content; this baseline contains synthetic material only.
+
+Archived reports use their own dataset snapshot and check both its hash and the binding between the
+scored answer and the retained response. They can be regenerated without running the model:
+
+```bash
+python3 tests/rag-quality/report.py tests/rag-quality/baselines/2026-09-12
+```
+
+Before committing a baseline, compare its scores with the reviewed run and verify that Git includes the
+baseline evidence while continuing to ignore disposable results. Full raw traces needed for a separate
+audit can be retained as controlled CI artifacts rather than mixed into the baseline.
 
 These questions are development cases, not a hidden release benchmark. Expand with held-out questions,
 larger corpora, repeated runs, and human-calibrated grading before making production-quality claims.

@@ -1,0 +1,86 @@
+{
+  "id": "FQ05",
+  "corpus": "fixture",
+  "question": "I need to file a $5,200 warranty claim for covered equipment. What is the filing mechanism, who runs the process, and whose approval is needed?",
+  "category": "policy_application",
+  "status": "completed",
+  "exit_code": 0,
+  "timed_out": false,
+  "elapsed_seconds": 24.635,
+  "response": {
+    "answer": "File the claim as an **RMA (return merchandise authorization)**. The **Depot Manager** runs the process, and **Service Operations** owns it. Your $5,200 claim requires **Service Director approval** because it exceeds $4,800. [F06]\n\nThe active procedure applies to covered equipment and has been effective since September 1, 2025. It does not specify a submission portal or form. [F06]",
+    "citations": [
+      {
+        "source_id": "F06",
+        "quote": "A warranty claim is filed as an RMA (return merchandise authorization)."
+      },
+      {
+        "source_id": "F06",
+        "quote": "Process owner: Service Operations\nRun by: Depot Manager"
+      },
+      {
+        "source_id": "F06",
+        "quote": "Claims over $4,800 need Service Director approval."
+      },
+      {
+        "source_id": "F06",
+        "quote": "Status: Active procedure\nEffective: 2025-09-01"
+      },
+      {
+        "source_id": "F06",
+        "quote": "This procedure applies to warranty claims for covered equipment."
+      }
+    ]
+  },
+  "trace_checks": {
+    "integrity_failures": [],
+    "reads": [
+      "F06"
+    ],
+    "source_reads": [
+      "F06"
+    ],
+    "wiki_reads": [],
+    "operations": [
+      {
+        "operation": "search",
+        "values": [
+          "warranty|claim"
+        ]
+      },
+      {
+        "operation": "read",
+        "values": [
+          "F06"
+        ]
+      },
+      {
+        "operation": "list",
+        "values": []
+      }
+    ],
+    "search_rounds": 1,
+    "discovery_rounds": 2,
+    "source_characters": 500,
+    "usage": {
+      "input_tokens": 82874,
+      "cached_input_tokens": 60672,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 476,
+      "reasoning_output_tokens": 16
+    },
+    "query_bounds_ok": true,
+    "routing_order_ok": true,
+    "example_navigation_ok": false
+  },
+  "objective_scores": {
+    "required_source_open_recall": 1.0,
+    "valid_citations": 5,
+    "citation_count": 5,
+    "citation_integrity": 1.0,
+    "all_inline_citations_declared": true,
+    "answer_correctness": null,
+    "answer_grounding": null,
+    "note": "Citation integrity checks exact quotes and observed reads, not semantic entailment. Rubric review is separate."
+  }
+}

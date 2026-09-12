@@ -1,0 +1,107 @@
+{
+  "id": "EQ05",
+  "corpus": "example",
+  "question": "What is the monthly customer churn formula, and how do trial accounts and customers first acquired during the month affect it?",
+  "category": "metric_definition",
+  "status": "completed",
+  "exit_code": 0,
+  "timed_out": false,
+  "elapsed_seconds": 40.808,
+  "response": {
+    "answer": "Monthly customer churn rate = (customers in the eligible starting population whose last paid subscription ends during the calendar month ÷ eligible customers at the start of that month) × 100%. [E05]\n\nThe starting population consists of paid subscribers, excluding trial-only and internal test accounts. Customers first acquired during the month are excluded from both numerator and denominator—even if they churn that month. [E05]\n\nA cancellation request alone is not churn; the last paid subscription must actually end. These canonical definitions are effective June 1, 2026. [E04][E05]",
+    "citations": [
+      {
+        "source_id": "E05",
+        "quote": "Customers acquired during the month do not enter either the numerator or denominator."
+      },
+      {
+        "source_id": "E05",
+        "quote": "Exclude trial-only accounts, internal test accounts, and customers first acquired during the month."
+      },
+      {
+        "source_id": "E05",
+        "quote": "Monthly customer churn rate equals eligible customers lost during the calendar month divided by\neligible customers at the start of that month, multiplied by 100 percent."
+      },
+      {
+        "source_id": "E04",
+        "quote": "A cancellation\nrequest is not churn until the subscription ends."
+      },
+      {
+        "source_id": "E05",
+        "quote": "Status: Canonical\nEffective: 2026-06-01"
+      },
+      {
+        "source_id": "E04",
+        "quote": "Status: Canonical\nEffective: 2026-06-01"
+      }
+    ]
+  },
+  "trace_checks": {
+    "integrity_failures": [],
+    "reads": [
+      "W01",
+      "W03",
+      "W07",
+      "E04",
+      "E05"
+    ],
+    "source_reads": [
+      "E04",
+      "E05"
+    ],
+    "wiki_reads": [
+      "W01",
+      "W03",
+      "W07"
+    ],
+    "operations": [
+      {
+        "operation": "read",
+        "values": [
+          "W01"
+        ]
+      },
+      {
+        "operation": "list",
+        "values": []
+      },
+      {
+        "operation": "read",
+        "values": [
+          "W03",
+          "W07"
+        ]
+      },
+      {
+        "operation": "read",
+        "values": [
+          "E04",
+          "E05"
+        ]
+      }
+    ],
+    "search_rounds": 0,
+    "discovery_rounds": 1,
+    "source_characters": 1659,
+    "usage": {
+      "input_tokens": 108699,
+      "cached_input_tokens": 84864,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 609,
+      "reasoning_output_tokens": 0
+    },
+    "query_bounds_ok": true,
+    "routing_order_ok": true,
+    "example_navigation_ok": true
+  },
+  "objective_scores": {
+    "required_source_open_recall": 1.0,
+    "valid_citations": 6,
+    "citation_count": 6,
+    "citation_integrity": 1.0,
+    "all_inline_citations_declared": true,
+    "answer_correctness": null,
+    "answer_grounding": null,
+    "note": "Citation integrity checks exact quotes and observed reads, not semantic entailment. Rubric review is separate."
+  }
+}

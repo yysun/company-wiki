@@ -1,0 +1,87 @@
+{
+  "id": "EQ03",
+  "corpus": "example",
+  "question": "I am covered by the annual leave policy and want six consecutive working days off. Who must approve?",
+  "category": "policy_application",
+  "status": "completed",
+  "exit_code": 0,
+  "timed_out": false,
+  "elapsed_seconds": 32.542,
+  "response": {
+    "answer": "Six consecutive working days off require approval from both your line manager and a People Partner under the approved policy effective March 1, 2026. [E01]",
+    "citations": [
+      {
+        "source_id": "E01",
+        "quote": "Requests for\nsix or more consecutive working days require both the line manager and a People Partner to approve."
+      }
+    ]
+  },
+  "trace_checks": {
+    "integrity_failures": [],
+    "reads": [
+      "W01",
+      "W02",
+      "E01",
+      "E02",
+      "E03"
+    ],
+    "source_reads": [
+      "E01",
+      "E02",
+      "E03"
+    ],
+    "wiki_reads": [
+      "W01",
+      "W02"
+    ],
+    "operations": [
+      {
+        "operation": "read",
+        "values": [
+          "W01"
+        ]
+      },
+      {
+        "operation": "list",
+        "values": []
+      },
+      {
+        "operation": "read",
+        "values": [
+          "W02"
+        ]
+      },
+      {
+        "operation": "read",
+        "values": [
+          "E01",
+          "E02",
+          "E03"
+        ]
+      }
+    ],
+    "search_rounds": 0,
+    "discovery_rounds": 1,
+    "source_characters": 1795,
+    "usage": {
+      "input_tokens": 109326,
+      "cached_input_tokens": 85376,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 400,
+      "reasoning_output_tokens": 0
+    },
+    "query_bounds_ok": true,
+    "routing_order_ok": true,
+    "example_navigation_ok": true
+  },
+  "objective_scores": {
+    "required_source_open_recall": 1.0,
+    "valid_citations": 1,
+    "citation_count": 1,
+    "citation_integrity": 1.0,
+    "all_inline_citations_declared": true,
+    "answer_correctness": null,
+    "answer_grounding": null,
+    "note": "Citation integrity checks exact quotes and observed reads, not semantic entailment. Rubric review is separate."
+  }
+}

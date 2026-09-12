@@ -1,0 +1,117 @@
+{
+  "id": "EQ02",
+  "corpus": "example",
+  "question": "I found vacation figures of 15, 18 and 22 days. Which is current on September 12, 2026?",
+  "category": "version_conflict",
+  "status": "completed",
+  "exit_code": 0,
+  "timed_out": false,
+  "elapsed_seconds": 29.857,
+  "response": {
+    "answer": "As of September 12, 2026, the current entitlement is **18 paid vacation days per calendar year** for full-time employees in the Canadian office. The policy is approved and effective March 1, 2026. [E01]\n\n- **15 days:** the former entitlement, now superseded. [E02]\n- **22 days:** an unapproved draft proposed for March 1, 2027; not currently in force. [E03]",
+    "citations": [
+      {
+        "source_id": "E01",
+        "quote": "Status: Approved\nEffective: 2026-03-01"
+      },
+      {
+        "source_id": "E01",
+        "quote": "Scope: Full-time employees in the sample company's Canadian office"
+      },
+      {
+        "source_id": "E01",
+        "quote": "Eligible employees receive 18 paid annual leave days per calendar year."
+      },
+      {
+        "source_id": "E02",
+        "quote": "Status: Superseded by [Annual leave policy](hr-policy-current.md)"
+      },
+      {
+        "source_id": "E02",
+        "quote": "Eligible employees received 15 paid annual leave days per calendar year."
+      },
+      {
+        "source_id": "E03",
+        "quote": "Status: Draft; not approved\nProposed effective date: 2027-03-01"
+      },
+      {
+        "source_id": "E03",
+        "quote": "The proposal would increase paid annual leave to 22 days per calendar year."
+      }
+    ]
+  },
+  "trace_checks": {
+    "integrity_failures": [],
+    "reads": [
+      "W01",
+      "W02",
+      "W04",
+      "W06",
+      "E01",
+      "E02",
+      "E03"
+    ],
+    "source_reads": [
+      "E01",
+      "E02",
+      "E03"
+    ],
+    "wiki_reads": [
+      "W01",
+      "W02",
+      "W04",
+      "W06"
+    ],
+    "operations": [
+      {
+        "operation": "read",
+        "values": [
+          "W01"
+        ]
+      },
+      {
+        "operation": "list",
+        "values": []
+      },
+      {
+        "operation": "read",
+        "values": [
+          "W02",
+          "W04",
+          "W06"
+        ]
+      },
+      {
+        "operation": "read",
+        "values": [
+          "E01",
+          "E02",
+          "E03"
+        ]
+      }
+    ],
+    "search_rounds": 0,
+    "discovery_rounds": 1,
+    "source_characters": 1795,
+    "usage": {
+      "input_tokens": 109313,
+      "cached_input_tokens": 85120,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 599,
+      "reasoning_output_tokens": 0
+    },
+    "query_bounds_ok": true,
+    "routing_order_ok": true,
+    "example_navigation_ok": true
+  },
+  "objective_scores": {
+    "required_source_open_recall": 1.0,
+    "valid_citations": 7,
+    "citation_count": 7,
+    "citation_integrity": 1.0,
+    "all_inline_citations_declared": true,
+    "answer_correctness": null,
+    "answer_grounding": null,
+    "note": "Citation integrity checks exact quotes and observed reads, not semantic entailment. Rubric review is separate."
+  }
+}

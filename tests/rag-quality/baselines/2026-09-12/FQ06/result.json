@@ -1,0 +1,66 @@
+{
+  "id": "FQ06",
+  "corpus": "fixture",
+  "question": "Does a claim for exactly $4,800 trigger the Service Director approval threshold in the warranty procedure?",
+  "category": "numeric_boundary",
+  "status": "completed",
+  "exit_code": 0,
+  "timed_out": false,
+  "elapsed_seconds": 15.984,
+  "response": {
+    "answer": "No. The active warranty procedure, effective September 1, 2025, requires Service Director approval for claims **over $4,800**. Exactly $4,800 does not trigger that threshold. [F06]",
+    "citations": [
+      {
+        "source_id": "F06",
+        "quote": "Claims over $4,800 need Service Director approval."
+      }
+    ]
+  },
+  "trace_checks": {
+    "integrity_failures": [],
+    "reads": [
+      "F06"
+    ],
+    "source_reads": [
+      "F06"
+    ],
+    "wiki_reads": [],
+    "operations": [
+      {
+        "operation": "search",
+        "values": [
+          "warranty|4,800|4800|Service Director"
+        ]
+      },
+      {
+        "operation": "read",
+        "values": [
+          "F06"
+        ]
+      }
+    ],
+    "search_rounds": 1,
+    "discovery_rounds": 1,
+    "source_characters": 533,
+    "usage": {
+      "input_tokens": 61358,
+      "cached_input_tokens": 40192,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 264,
+      "reasoning_output_tokens": 0
+    },
+    "query_bounds_ok": true,
+    "routing_order_ok": true,
+    "example_navigation_ok": false
+  },
+  "objective_scores": {
+    "required_source_open_recall": 1.0,
+    "valid_citations": 1,
+    "citation_count": 1,
+    "citation_integrity": 1.0,
+    "all_inline_citations_declared": true,
+    "answer_correctness": null,
+    "answer_grounding": null,
+    "note": "Citation integrity checks exact quotes and observed reads, not semantic entailment. Rubric review is separate."
+  }
+}

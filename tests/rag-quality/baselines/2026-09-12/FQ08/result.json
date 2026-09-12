@@ -1,0 +1,92 @@
+{
+  "id": "FQ08",
+  "corpus": "fixture",
+  "question": "What changed in lapsed accounts in Q2, where was the rise concentrated, and what is Kestrel? Did its migration cause the increase?",
+  "category": "multi_source_diagnosis",
+  "status": "completed",
+  "exit_code": 0,
+  "timed_out": false,
+  "elapsed_seconds": 29.487,
+  "response": {
+    "answer": "Lapsed accounts—those with no active service contract for at least 60 days—rose from 41 to 58 in Q2 2026: an increase of 17 (about 41%). Hospitality accounted for 14 of the 17 additional lapsed accounts, roughly 82% of the net rise. [F07][F09]\n\nKestrel is the codename for the Unified Invoicing Platform. Its approved charter set initial goals of one invoice per customer and retiring legacy billing exports. [F10]\n\nThe migration is not established as the cause. The Q2 review identifies migration-related invoicing delays and a service price increase effective April 1, 2026 as two possible factors; neither is confirmed. [F09]",
+    "citations": [
+      {
+        "source_id": "F07",
+        "quote": "An account is a lapsed account when it has no active service contract for 60 days or more."
+      },
+      {
+        "source_id": "F09",
+        "quote": "Lapsed accounts rose from 41 to 58 in Q2 2026, concentrated in the hospitality segment (+14)."
+      },
+      {
+        "source_id": "F10",
+        "quote": "Project Kestrel is the codename of the Unified Invoicing Platform."
+      },
+      {
+        "source_id": "F10",
+        "quote": "## Original goals\n\n- one invoice per customer;\n- retire the legacy billing exports."
+      },
+      {
+        "source_id": "F09",
+        "quote": "Two possible factors are under review, and neither is confirmed:\n\n- a service price increase effective 2026-04-01;\n- invoicing delays from the Kestrel migration."
+      }
+    ]
+  },
+  "trace_checks": {
+    "integrity_failures": [],
+    "reads": [
+      "F07",
+      "F09",
+      "F10"
+    ],
+    "source_reads": [
+      "F07",
+      "F09",
+      "F10"
+    ],
+    "wiki_reads": [],
+    "operations": [
+      {
+        "operation": "search",
+        "values": [
+          "lapsed|kestrel"
+        ]
+      },
+      {
+        "operation": "read",
+        "values": [
+          "F07",
+          "F09",
+          "F10"
+        ]
+      },
+      {
+        "operation": "list",
+        "values": []
+      }
+    ],
+    "search_rounds": 1,
+    "discovery_rounds": 2,
+    "source_characters": 1403,
+    "usage": {
+      "input_tokens": 84753,
+      "cached_input_tokens": 62080,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 629,
+      "reasoning_output_tokens": 28
+    },
+    "query_bounds_ok": true,
+    "routing_order_ok": true,
+    "example_navigation_ok": false
+  },
+  "objective_scores": {
+    "required_source_open_recall": 1.0,
+    "valid_citations": 5,
+    "citation_count": 5,
+    "citation_integrity": 1.0,
+    "all_inline_citations_declared": true,
+    "answer_correctness": null,
+    "answer_grounding": null,
+    "note": "Citation integrity checks exact quotes and observed reads, not semantic entailment. Rubric review is separate."
+  }
+}

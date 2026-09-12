@@ -1,0 +1,80 @@
+{
+  "id": "FQ09",
+  "corpus": "fixture",
+  "question": "Can you give me the approved telemetry sharing policy? Sales notes refer to it and the offsite discussed it.",
+  "category": "missing_evidence",
+  "status": "completed",
+  "exit_code": 0,
+  "timed_out": false,
+  "elapsed_seconds": 27.489,
+  "response": {
+    "answer": "I couldn’t find an approved telemetry sharing policy in the supplied corpus as of September 12, 2026.\n\n- The October 2025 offsite recorded an action to draft a policy, explicitly not an approval. [F11]\n- The January 2026 sales notes say to follow a policy but explicitly do not identify an approved policy or its location. [F08]\n\nThese references establish neither approved sharing rules nor scope, effective date, or supersession. Ask Service Operations for the approved document and approval record before treating the sales reference as authorization to share telemetry.",
+    "citations": [
+      {
+        "source_id": "F11",
+        "quote": "The notes record discussion and an action item, not an approved policy."
+      },
+      {
+        "source_id": "F08",
+        "quote": "This note does not identify an approved policy or its location."
+      }
+    ]
+  },
+  "trace_checks": {
+    "integrity_failures": [],
+    "reads": [
+      "F08",
+      "F11",
+      "F12"
+    ],
+    "source_reads": [
+      "F08",
+      "F11",
+      "F12"
+    ],
+    "wiki_reads": [],
+    "operations": [
+      {
+        "operation": "search",
+        "values": [
+          "telemetry|sharing|offsite"
+        ]
+      },
+      {
+        "operation": "list",
+        "values": []
+      },
+      {
+        "operation": "read",
+        "values": [
+          "F08",
+          "F11",
+          "F12"
+        ]
+      }
+    ],
+    "search_rounds": 1,
+    "discovery_rounds": 2,
+    "source_characters": 1278,
+    "usage": {
+      "input_tokens": 84859,
+      "cached_input_tokens": 62208,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 443,
+      "reasoning_output_tokens": 0
+    },
+    "query_bounds_ok": true,
+    "routing_order_ok": true,
+    "example_navigation_ok": false
+  },
+  "objective_scores": {
+    "required_source_open_recall": 1.0,
+    "valid_citations": 2,
+    "citation_count": 2,
+    "citation_integrity": 1.0,
+    "all_inline_citations_declared": true,
+    "answer_correctness": null,
+    "answer_grounding": null,
+    "note": "Citation integrity checks exact quotes and observed reads, not semantic entailment. Rubric review is separate."
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "id": "FQ07",
+  "corpus": "fixture",
+  "question": "For customer-health reporting, should I use 60 or 90 days without a contract? Sales calls the customers dormant.",
+  "category": "definition_conflict",
+  "status": "completed",
+  "exit_code": 0,
+  "timed_out": false,
+  "elapsed_seconds": 20.778,
+  "response": {
+    "answer": "Use **60 days or more without an active service contract** for customer-health reporting, and label the account **“lapsed.”** This is the canonical Customer Success Operations definition explicitly scoped to reporting and account review. [F07]\n\nSales’ **90-day “dormant”** terminology comes from informal notes dated January 12, 2026. They show no approved replacement or supersession of the reporting definition; the canonical source lists no effective date. [F08][F07]",
+    "citations": [
+      {
+        "source_id": "F07",
+        "quote": "An account is a lapsed account when it has no active service contract for 60 days or more."
+      },
+      {
+        "source_id": "F07",
+        "quote": "Use this definition for customer-health reporting and account review."
+      },
+      {
+        "source_id": "F08",
+        "quote": "Status: Informal notes\nOwner: Sales Enablement\nDate: 2026-01-12"
+      },
+      {
+        "source_id": "F08",
+        "quote": "Sales notes call customers with no contract in 90 days dormant customers."
+      }
+    ]
+  },
+  "trace_checks": {
+    "integrity_failures": [],
+    "reads": [
+      "F07",
+      "F08"
+    ],
+    "source_reads": [
+      "F07",
+      "F08"
+    ],
+    "wiki_reads": [],
+    "operations": [
+      {
+        "operation": "search",
+        "values": [
+          "dormant|customer.health|without a contract"
+        ]
+      },
+      {
+        "operation": "read",
+        "values": [
+          "F07",
+          "F08"
+        ]
+      }
+    ],
+    "search_rounds": 1,
+    "discovery_rounds": 1,
+    "source_characters": 778,
+    "usage": {
+      "input_tokens": 61509,
+      "cached_input_tokens": 40192,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 403,
+      "reasoning_output_tokens": 0
+    },
+    "query_bounds_ok": true,
+    "routing_order_ok": true,
+    "example_navigation_ok": false
+  },
+  "objective_scores": {
+    "required_source_open_recall": 1.0,
+    "valid_citations": 4,
+    "citation_count": 4,
+    "citation_integrity": 1.0,
+    "all_inline_citations_declared": true,
+    "answer_correctness": null,
+    "answer_grounding": null,
+    "note": "Citation integrity checks exact quotes and observed reads, not semantic entailment. Rubric review is separate."
+  }
+}

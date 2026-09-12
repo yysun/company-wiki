@@ -1,0 +1,78 @@
+{
+  "id": "FQ10",
+  "corpus": "fixture",
+  "question": "Explain why the July platform release caused the robot telemetry gaps.",
+  "category": "false_premise",
+  "status": "completed",
+  "exit_code": 0,
+  "timed_out": false,
+  "elapsed_seconds": 23.407,
+  "response": {
+    "answer": "The evidence does not establish that the July platform release caused the telemetry gaps. The incident review opened July 21 records that gaps began after the release, but explicitly says no root cause is confirmed. Timing alone does not prove causation. [F12]\n\nService Operations is comparing the release timeline with service logs and configuration changes. The supported conclusion is that the cause remains under investigation; no causal mechanism is established. [F12]",
+    "citations": [
+      {
+        "source_id": "F12",
+        "quote": "Robot telemetry gaps began after the July platform release."
+      },
+      {
+        "source_id": "F12",
+        "quote": "No root cause is confirmed."
+      },
+      {
+        "source_id": "F12",
+        "quote": "The team is comparing the release timeline with service logs and configuration changes."
+      }
+    ]
+  },
+  "trace_checks": {
+    "integrity_failures": [],
+    "reads": [
+      "F12"
+    ],
+    "source_reads": [
+      "F12"
+    ],
+    "wiki_reads": [],
+    "operations": [
+      {
+        "operation": "search",
+        "values": [
+          "July|telemetry|robot"
+        ]
+      },
+      {
+        "operation": "read",
+        "values": [
+          "F12"
+        ]
+      },
+      {
+        "operation": "list",
+        "values": []
+      }
+    ],
+    "search_rounds": 1,
+    "discovery_rounds": 2,
+    "source_characters": 648,
+    "usage": {
+      "input_tokens": 83176,
+      "cached_input_tokens": 60928,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 435,
+      "reasoning_output_tokens": 25
+    },
+    "query_bounds_ok": true,
+    "routing_order_ok": true,
+    "example_navigation_ok": false
+  },
+  "objective_scores": {
+    "required_source_open_recall": 1.0,
+    "valid_citations": 3,
+    "citation_count": 3,
+    "citation_integrity": 1.0,
+    "all_inline_citations_declared": true,
+    "answer_correctness": null,
+    "answer_grounding": null,
+    "note": "Citation integrity checks exact quotes and observed reads, not semantic entailment. Rubric review is separate."
+  }
+}

@@ -1,0 +1,215 @@
+{
+  "created_at": "2026-09-12T14:13:35.923332+00:00",
+  "model": "gpt-6-astra",
+  "reasoning_effort": "high",
+  "mode": "query-contract component pilot",
+  "cli_version": "codex-cli 0.154.0",
+  "dataset_sha256": "f1d34da1b835ea51cde3a5049c3c3cd5108ab91214b209b768785735187ae54a",
+  "runner_sha256": "258436c4df1b2b42cb92d53ed02b0696f3da1b63a9c159ee7c83213a492e8196",
+  "documents": [
+    {
+      "id": "F01",
+      "corpus": "fixture",
+      "role": "source",
+      "path": "tests/company-wiki-skill/corpus/Company Drive/People/Hybrid Work Standard 2026.md",
+      "sha256": "697754347fed3431ef971c63ca37540c9b5a99697528edc2a09ccc9cce1c0160"
+    },
+    {
+      "id": "F02",
+      "corpus": "fixture",
+      "role": "source",
+      "path": "tests/company-wiki-skill/corpus/Company Drive/People/Archive/Hybrid Work Standard 2024.md",
+      "sha256": "1fda5f1f82a4de83c548b3f2ee8c803f2179c6cbc20ddcc337816fe3629aff0b"
+    },
+    {
+      "id": "F03",
+      "corpus": "fixture",
+      "role": "source",
+      "path": "tests/company-wiki-skill/corpus/Company Drive/People/Drafts/Hybrid Work Standard 2027 DRAFT.md",
+      "sha256": "1a9629996eba44234b14b7a79a3e5c7eee3efe6f6d3a68fe1f63d233140fad91"
+    },
+    {
+      "id": "F04",
+      "corpus": "fixture",
+      "role": "source",
+      "path": "tests/company-wiki-skill/corpus/Company Drive/People/Team Handbook 2023.md",
+      "sha256": "368e1470b111bf9b105553e0ff69ed1255d9fc247e3c517f60f52a0a005c168d"
+    },
+    {
+      "id": "F05",
+      "corpus": "fixture",
+      "role": "source",
+      "path": "tests/company-wiki-skill/corpus/Company Drive/Service/Uptime Commitment Schedule 2026.md",
+      "sha256": "ca5498fbd09f176ddf6a931f62c60cd1b61f5c2efea3d583c3aaf703fbc1f408"
+    },
+    {
+      "id": "F06",
+      "corpus": "fixture",
+      "role": "source",
+      "path": "tests/company-wiki-skill/corpus/Company Drive/Service/Warranty Claims Procedure 2025.md",
+      "sha256": "ed1f58186943afef1013728d52c80a87465758e717694af561cdf728ae6531a9"
+    },
+    {
+      "id": "F07",
+      "corpus": "fixture",
+      "role": "source",
+      "path": "tests/company-wiki-skill/corpus/Company Drive/Customers/Account Health Definitions.md",
+      "sha256": "1af90f8606df6aeaa34285d1e3d763e27160dbad93a58576a48e29933bdcba6d"
+    },
+    {
+      "id": "F08",
+      "corpus": "fixture",
+      "role": "source",
+      "path": "tests/company-wiki-skill/corpus/Company Drive/Customers/Sales Kickoff Deck Notes 2026.md",
+      "sha256": "4176a38123509223c6008f45b79d145e7078230a99e4c25dcb931426b7ff0f63"
+    },
+    {
+      "id": "F09",
+      "corpus": "fixture",
+      "role": "source",
+      "path": "tests/company-wiki-skill/corpus/Company Drive/Customers/Quarterly Account Review Q2 2026.md",
+      "sha256": "9d765fc8a2279d2b0bf2b686b9c3b95b47a05a54057622453f70760624ce69cc"
+    },
+    {
+      "id": "F10",
+      "corpus": "fixture",
+      "role": "source",
+      "path": "tests/company-wiki-skill/corpus/Company Drive/Projects/Project Kestrel Charter.md",
+      "sha256": "28e9f995c7ac38fd6a83433b05ea514e3142a15b07364584b2d19bf142ea700e"
+    },
+    {
+      "id": "F11",
+      "corpus": "fixture",
+      "role": "source",
+      "path": "tests/company-wiki-skill/corpus/Company Drive/Operations/Offsite Notes 2025.md",
+      "sha256": "4ad83b1ce91294ed9fc858ec3f980a9f7cd452b5daf69b0b94f61c11c33120c4"
+    },
+    {
+      "id": "F12",
+      "corpus": "fixture",
+      "role": "source",
+      "path": "tests/company-wiki-skill/corpus/Company Drive/Service/Incident Review 2026-07-21 Telemetry Gaps.md",
+      "sha256": "5272a068685844e77f6aeedb815c4a89cad5b8047de8c0b337955f5be2a5e94d"
+    },
+    {
+      "id": "E01",
+      "corpus": "example",
+      "role": "source",
+      "path": "examples/sample-company-sources/hr-policy-current.md",
+      "sha256": "fc630c91962614c7a9f5369c3bebb04eeef29743a4bee7f17e2f4c48d254fce9"
+    },
+    {
+      "id": "E02",
+      "corpus": "example",
+      "role": "source",
+      "path": "examples/sample-company-sources/hr-policy-previous.md",
+      "sha256": "063aed25b347dab382a9339c308093fa99c33a50fc40aaa8b28caca665e31cd0"
+    },
+    {
+      "id": "E03",
+      "corpus": "example",
+      "role": "source",
+      "path": "examples/sample-company-sources/hr-policy-draft.md",
+      "sha256": "139182dc32dcc7e0f05d3709e18a9b353acfd3499fb3b29d9b772ec608f85e17"
+    },
+    {
+      "id": "E04",
+      "corpus": "example",
+      "role": "source",
+      "path": "examples/sample-company-sources/customer-definitions.md",
+      "sha256": "f1c0c1f5fc6d27613e4f06c929ed7c88fdd99c2ca44f3e79d8d008552904f736"
+    },
+    {
+      "id": "E05",
+      "corpus": "example",
+      "role": "source",
+      "path": "examples/sample-company-sources/product-metric.md",
+      "sha256": "bcaea7a4fec9f797bab0f09c9789757e3481e6bb4ef4a298a6e73625cab1bde5"
+    },
+    {
+      "id": "E06",
+      "corpus": "example",
+      "role": "source",
+      "path": "examples/sample-company-sources/customer-quarterly-review.md",
+      "sha256": "2e23c8eafbfa6e2c86d474ec9c3df6108f1716145014583fab403f234ce67b59"
+    },
+    {
+      "id": "E07",
+      "corpus": "example",
+      "role": "source",
+      "path": "examples/sample-company-sources/customer-outreach-notes.md",
+      "sha256": "ff701485bfc6b5ce3df359452c5e0c7b13e1d013cee85980a225043b2154601a"
+    },
+    {
+      "id": "W01",
+      "corpus": "example",
+      "role": "wiki",
+      "path": "examples/sample-company/company-wiki-home.md",
+      "sha256": "e9cab58fae1563bffe2e35d312cf940ba3b0147f798eeda5a252eb4361417e70"
+    },
+    {
+      "id": "W02",
+      "corpus": "example",
+      "role": "wiki",
+      "path": "examples/sample-company/people-guide.md",
+      "sha256": "1b8db31ff9d065ddd803e0694986828c5c2ecd295219120412eb9ff857107cc7"
+    },
+    {
+      "id": "W03",
+      "corpus": "example",
+      "role": "wiki",
+      "path": "examples/sample-company/customer-guide.md",
+      "sha256": "65c920b3eab6bb6006dc2c476a2341842aac5c8ccef25ae0ecc80688c55c807d"
+    },
+    {
+      "id": "W04",
+      "corpus": "example",
+      "role": "wiki",
+      "path": "examples/sample-company/authoritative-lookup-guide.md",
+      "sha256": "3c754b53f65077c4bc43a7fbe59ed0ed74db9d268b11c65d828a3baad5769ad1"
+    },
+    {
+      "id": "W05",
+      "corpus": "example",
+      "role": "wiki",
+      "path": "examples/sample-company/question-guide.md",
+      "sha256": "66e51c4e307a79e8061932662ae5f11b88940935916beb2623e8169ded729df7"
+    },
+    {
+      "id": "W06",
+      "corpus": "example",
+      "role": "wiki",
+      "path": "examples/sample-company/vacation-policy-detail.md",
+      "sha256": "f5f42cdc4d478b341626b45faa9961b59ddc754456af935b06a2ad6c99fb346a"
+    },
+    {
+      "id": "W07",
+      "corpus": "example",
+      "role": "wiki",
+      "path": "examples/sample-company/churn-rate-detail.md",
+      "sha256": "6a88db7fc61d75f6752c076c364013e466e2aefd595f7374de10e23d7c72ac9b"
+    }
+  ],
+  "case_ids": [
+    "FQ01",
+    "FQ02",
+    "FQ03",
+    "FQ04",
+    "FQ05",
+    "FQ06",
+    "FQ07",
+    "FQ08",
+    "FQ09",
+    "FQ10",
+    "FQ11",
+    "FQ12",
+    "EQ01",
+    "EQ02",
+    "EQ03",
+    "EQ04",
+    "EQ05",
+    "EQ06",
+    "EQ07",
+    "EQ08"
+  ]
+}

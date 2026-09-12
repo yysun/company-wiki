@@ -17,9 +17,11 @@ from benchmark import HERE, REPOSITORY, dataset, digest, save
 
 
 def report(root: Path) -> None:
-    gold = dataset()
+    snapshot = root / "dataset-at-execution.json"
+    gold_path = snapshot if snapshot.is_file() else HERE / "dataset.json"
+    gold = json.loads(snapshot.read_text()) if snapshot.is_file() else dataset()
     manifest = json.loads((root / "manifest.json").read_text())
-    if manifest["dataset_sha256"] != digest((HERE / "dataset.json").read_bytes()):
+    if manifest["dataset_sha256"] != digest(gold_path.read_bytes()):
         raise ValueError("dataset changed since execution; use the recorded dataset version")
     reviews_path = root / "reviews.json"
     reviews = json.loads(reviews_path.read_text()) if reviews_path.exists() else {"reviewer": None, "cases": {}}
@@ -32,6 +34,10 @@ def report(root: Path) -> None:
             rows.append({"id": case_id, "corpus": case["corpus"], "status": "not_run"})
             continue
         result = json.loads(path.read_text())
+        if result["status"] == "completed":
+            response = json.loads((root / case_id / "response.json").read_text())
+            if result["response"] != response:
+                raise ValueError(f"{case_id}: scored response differs from the retained answer")
         row = {"id": case_id, "corpus": case["corpus"], "status": result["status"],
                "rubric_passed": None, "rubric_total": len(case["criteria"]), "grounded": None,
                "strict_answer_pass": None, "result": result}
@@ -52,6 +58,7 @@ def report(root: Path) -> None:
     completed = [r for r in rows if r["status"] == "completed"]
     reviewed = [r for r in completed if r["rubric_passed"] is not None]
     example_runs = [r for r in completed if r["corpus"] == "example"]
+    has_raw_traces = bool(rows) and all((root / r["id"] / "trace.jsonl").is_file() for r in rows)
     summary = {
         "total_cases": len(rows), "completed_cases": len(completed), "reviewed_cases": len(reviewed),
         "invalid_or_not_run": len(rows) - len(completed), "reviewer": reviews.get("reviewer"),
@@ -111,7 +118,9 @@ def report(root: Path) -> None:
               "- Twenty short synthetic questions; no large-corpus retrieval, long documents, live provider, or ACL acceptance claim.",
               "- Questions and gold criteria were authored by an agent; human calibration is still needed.",
               "- Correct-source recall uses the predeclared required documents, not an exhaustive relevance judgment.",
-              "- Raw CLI traces, exact answers, prompts, source hashes, timing, token usage, and rubric reviews are retained.",
+              ("- Raw CLI traces, exact answers, prompts, source hashes, timing, token usage, and rubric reviews are retained."
+               if has_raw_traces else
+               "- This baseline retains exact answers, processed retrieval records, source hashes, timing, token usage, and rubric reviews. Raw CLI traces and prompts remain local execution artifacts."),
               "- CLI token usage includes host prompt/skill overhead. No monetary cost or pure retrieval-latency claim is made.",
               "- Original-source checksums are in `source-integrity.json`; example navigation is recorded per case.", "",
               f"Reviewer: `{json.dumps(reviews.get('reviewer'), ensure_ascii=False)}`", ""]

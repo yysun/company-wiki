@@ -1,0 +1,84 @@
+{
+  "id": "FQ03",
+  "corpus": "fixture",
+  "question": "Who owns the current hybrid standard, and who can approve an exception?",
+  "category": "ownership",
+  "status": "completed",
+  "exit_code": 0,
+  "timed_out": false,
+  "elapsed_seconds": 22.438,
+  "response": {
+    "answer": "People Operations owns the current Hybrid Work Standard 2026, approved and effective February 1, 2026. The department head approves exceptions to its three-office-days-per-week schedule for employees eligible for hybrid work. [F01] The 2024 standard is superseded; the 2027 draft is unapproved. [F02][F03]",
+    "citations": [
+      {
+        "source_id": "F01",
+        "quote": "Status: Approved\nEffective: 2026-02-01\nOwner: People Operations"
+      },
+      {
+        "source_id": "F01",
+        "quote": "The department head approves exceptions to the standard schedule."
+      },
+      {
+        "source_id": "F02",
+        "quote": "Status: Superseded by Hybrid Work Standard 2026"
+      },
+      {
+        "source_id": "F03",
+        "quote": "This document has not been approved and does not establish a current requirement."
+      }
+    ]
+  },
+  "trace_checks": {
+    "integrity_failures": [],
+    "reads": [
+      "F01",
+      "F02",
+      "F03"
+    ],
+    "source_reads": [
+      "F01",
+      "F02",
+      "F03"
+    ],
+    "wiki_reads": [],
+    "operations": [
+      {
+        "operation": "search",
+        "values": [
+          "hybrid|exception"
+        ]
+      },
+      {
+        "operation": "read",
+        "values": [
+          "F01",
+          "F02",
+          "F03"
+        ]
+      }
+    ],
+    "search_rounds": 1,
+    "discovery_rounds": 1,
+    "source_characters": 1196,
+    "usage": {
+      "input_tokens": 61762,
+      "cached_input_tokens": 40320,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 359,
+      "reasoning_output_tokens": 0
+    },
+    "query_bounds_ok": true,
+    "routing_order_ok": true,
+    "example_navigation_ok": false
+  },
+  "objective_scores": {
+    "required_source_open_recall": 1.0,
+    "valid_citations": 4,
+    "citation_count": 4,
+    "citation_integrity": 1.0,
+    "all_inline_citations_declared": true,
+    "answer_correctness": null,
+    "answer_grounding": null,
+    "note": "Citation integrity checks exact quotes and observed reads, not semantic entailment. Rubric review is separate."
+  }
+}

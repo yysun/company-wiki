@@ -117,11 +117,13 @@ The [September 12, 2026 pilot](tests/rag-quality/pilot-2026-09-12.md) used `gpt-
 Citation integrity checks exact quotes and observed source reads; semantic support is reviewed separately.
 The same agent authored the cases and reviewed the answers. This single run on short synthetic documents
 does not establish production accuracy or the incremental benefit of wiki routing. Provider permissions
-and full lifecycle acceptance remain separate tests. The runner also has 7 scoring tests alongside the
-23 existing adapter/contract tests; all 30 passed.
+and full lifecycle acceptance remain separate tests. The pilot also passed all 30 scoring and
+adapter/contract tests.
 
-Raw runs stay local under the Git-ignored `tests/rag-quality/results/` directory. The tracked pilot summary
-preserves the measurements and their limits; the benchmark guide explains how to rerun and score new cases.
+The [versioned baseline](tests/rag-quality/baselines/2026-09-12/README.md) preserves the original answers,
+citations, retrieval records, grading decisions, scores, and dataset/code versions. A clone can inspect
+the evidence and regenerate the scorecard without rerunning the model. Disposable runs and raw CLI logs
+stay in the Git-ignored `tests/rag-quality/results/` directory.
 
 ## Lifecycle
 

@@ -1,0 +1,113 @@
+{
+  "id": "EQ06",
+  "corpus": "example",
+  "question": "Calculate May and June 2026 customer churn rates. Did we lose more customers in June, and what explains the arithmetic change?",
+  "category": "multi_source_calculation",
+  "status": "completed",
+  "exit_code": 0,
+  "timed_out": false,
+  "elapsed_seconds": 46.831,
+  "response": {
+    "answer": "May 2026 churn: 12 ÷ 240 × 100 = **5%**. June: 12 ÷ 200 × 100 = **6%**, using the canonical formula and reviewed counts. [E05][E06]\n\n**No—we lost 12 eligible customers in each month.** The rate rose by 1 percentage point (20% relative) because the starting population fell from 240 to 200 while losses stayed constant. This explains the arithmetic, not why the population shrank; the report does not establish that cause. [E06]\n\nAlthough the metric became effective June 1, the July 15 reviewed report explicitly applies the same rules to both months, supporting this comparison. Pricing remains an untested hypothesis; the outreach note records no approved experiment or results. [E05][E06][E07]",
+    "citations": [
+      {
+        "source_id": "E05",
+        "quote": "Effective: 2026-06-01"
+      },
+      {
+        "source_id": "E05",
+        "quote": "Monthly customer churn rate equals eligible customers lost during the calendar month divided by\neligible customers at the start of that month, multiplied by 100 percent."
+      },
+      {
+        "source_id": "E06",
+        "quote": "| May 2026 | 240 | 12 |\n| June 2026 | 200 | 12 |"
+      },
+      {
+        "source_id": "E06",
+        "quote": "Both rows apply the same population rules and exclusions. This report does not explain why the\nstarting population changed"
+      },
+      {
+        "source_id": "E07",
+        "quote": "No comparison group or causal analysis\nhas been completed."
+      },
+      {
+        "source_id": "E07",
+        "quote": "this note records no approved experiment, results, or\nlaunch date."
+      }
+    ]
+  },
+  "trace_checks": {
+    "integrity_failures": [],
+    "reads": [
+      "W01",
+      "W03",
+      "W07",
+      "E04",
+      "E05",
+      "E06",
+      "E07"
+    ],
+    "source_reads": [
+      "E04",
+      "E05",
+      "E06",
+      "E07"
+    ],
+    "wiki_reads": [
+      "W01",
+      "W03",
+      "W07"
+    ],
+    "operations": [
+      {
+        "operation": "read",
+        "values": [
+          "W01"
+        ]
+      },
+      {
+        "operation": "list",
+        "values": []
+      },
+      {
+        "operation": "read",
+        "values": [
+          "W03",
+          "W07"
+        ]
+      },
+      {
+        "operation": "read",
+        "values": [
+          "E04",
+          "E05",
+          "E06",
+          "E07"
+        ]
+      }
+    ],
+    "search_rounds": 0,
+    "discovery_rounds": 1,
+    "source_characters": 2777,
+    "usage": {
+      "input_tokens": 109105,
+      "cached_input_tokens": 102272,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 685,
+      "reasoning_output_tokens": 0
+    },
+    "query_bounds_ok": true,
+    "routing_order_ok": true,
+    "example_navigation_ok": true
+  },
+  "objective_scores": {
+    "required_source_open_recall": 1.0,
+    "valid_citations": 6,
+    "citation_count": 6,
+    "citation_integrity": 1.0,
+    "all_inline_citations_declared": true,
+    "answer_correctness": null,
+    "answer_grounding": null,
+    "note": "Citation integrity checks exact quotes and observed reads, not semantic entailment. Rubric review is separate."
+  }
+}

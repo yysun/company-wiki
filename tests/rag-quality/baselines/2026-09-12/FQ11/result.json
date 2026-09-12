@@ -1,0 +1,93 @@
+{
+  "id": "FQ11",
+  "corpus": "fixture",
+  "question": "Has Kestrel already delivered one invoice per customer and retired the legacy billing exports?",
+  "category": "intent_vs_completion",
+  "status": "completed",
+  "exit_code": 0,
+  "timed_out": false,
+  "elapsed_seconds": 29.266,
+  "response": {
+    "answer": "Not established as of 2026-09-12. Kestrel’s charter, approved on 2025-11-03, lists one invoice per customer and retirement of legacy billing exports as original goals—not completed outcomes. [F10]\n\nThe later Q2 2026 review mentions migration-related invoicing delays as an unconfirmed possible factor in account changes; it does not confirm delivery. [F09] The supplied corpus contains no completion sign-off, export-retirement effective date, or superseding decision. Treat both outcomes as unverified.",
+    "citations": [
+      {
+        "source_id": "F10",
+        "quote": "The charter records the approved project intent and initial goals."
+      },
+      {
+        "source_id": "F10",
+        "quote": "- one invoice per customer;\n- retire the legacy billing exports."
+      },
+      {
+        "source_id": "F09",
+        "quote": "Two possible factors are under review, and neither is confirmed:"
+      },
+      {
+        "source_id": "F09",
+        "quote": "- invoicing delays from the Kestrel migration."
+      }
+    ]
+  },
+  "trace_checks": {
+    "integrity_failures": [],
+    "reads": [
+      "F10",
+      "F11",
+      "F09"
+    ],
+    "source_reads": [
+      "F10",
+      "F11",
+      "F09"
+    ],
+    "wiki_reads": [],
+    "operations": [
+      {
+        "operation": "list",
+        "values": []
+      },
+      {
+        "operation": "read",
+        "values": [
+          "F10",
+          "F11"
+        ]
+      },
+      {
+        "operation": "search",
+        "values": [
+          "Kestrel|invoic|billing|exports"
+        ]
+      },
+      {
+        "operation": "read",
+        "values": [
+          "F09"
+        ]
+      }
+    ],
+    "search_rounds": 1,
+    "discovery_rounds": 2,
+    "source_characters": 1271,
+    "usage": {
+      "input_tokens": 106315,
+      "cached_input_tokens": 100992,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 541,
+      "reasoning_output_tokens": 0
+    },
+    "query_bounds_ok": true,
+    "routing_order_ok": true,
+    "example_navigation_ok": false
+  },
+  "objective_scores": {
+    "required_source_open_recall": 1.0,
+    "valid_citations": 4,
+    "citation_count": 4,
+    "citation_integrity": 1.0,
+    "all_inline_citations_declared": true,
+    "answer_correctness": null,
+    "answer_grounding": null,
+    "note": "Citation integrity checks exact quotes and observed reads, not semantic entailment. Rubric review is separate."
+  }
+}

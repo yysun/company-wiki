@@ -1,0 +1,99 @@
+{
+  "id": "EQ04",
+  "corpus": "example",
+  "question": "A customer requested cancellation yesterday but their paid subscription ends next month. Are they already churned? Does no recent login make them inactive?",
+  "category": "definition_application",
+  "status": "completed",
+  "exit_code": 0,
+  "timed_out": false,
+  "elapsed_seconds": 38.716,
+  "response": {
+    "answer": "No. As of September 12, they are still active if their paid subscription remains active until next month. Yesterday’s cancellation request does not count as churn: churn occurs when their **last paid subscription ends**. If another paid subscription remains active, they have not churned. [E04]\n\nNo recent login does **not** make them inactive; active status depends on their paid subscription, not login activity. These canonical subscription-reporting definitions took effect June 1, 2026. [E04]",
+    "citations": [
+      {
+        "source_id": "E04",
+        "quote": "A cancellation\nrequest is not churn until the subscription ends."
+      },
+      {
+        "source_id": "E04",
+        "quote": "A customer with another active paid subscription\nhas not churned."
+      },
+      {
+        "source_id": "E04",
+        "quote": "An account is not inactive merely because its users have not logged in."
+      },
+      {
+        "source_id": "E04",
+        "quote": "Status: Canonical\nEffective: 2026-06-01"
+      }
+    ]
+  },
+  "trace_checks": {
+    "integrity_failures": [],
+    "reads": [
+      "W01",
+      "W03",
+      "W07",
+      "E04",
+      "E05"
+    ],
+    "source_reads": [
+      "E04",
+      "E05"
+    ],
+    "wiki_reads": [
+      "W01",
+      "W03",
+      "W07"
+    ],
+    "operations": [
+      {
+        "operation": "read",
+        "values": [
+          "W01"
+        ]
+      },
+      {
+        "operation": "list",
+        "values": []
+      },
+      {
+        "operation": "read",
+        "values": [
+          "W03",
+          "W07"
+        ]
+      },
+      {
+        "operation": "read",
+        "values": [
+          "E04",
+          "E05"
+        ]
+      }
+    ],
+    "search_rounds": 0,
+    "discovery_rounds": 1,
+    "source_characters": 1659,
+    "usage": {
+      "input_tokens": 108687,
+      "cached_input_tokens": 84864,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 522,
+      "reasoning_output_tokens": 0
+    },
+    "query_bounds_ok": true,
+    "routing_order_ok": true,
+    "example_navigation_ok": true
+  },
+  "objective_scores": {
+    "required_source_open_recall": 1.0,
+    "valid_citations": 4,
+    "citation_count": 4,
+    "citation_integrity": 1.0,
+    "all_inline_citations_declared": true,
+    "answer_correctness": null,
+    "answer_grounding": null,
+    "note": "Citation integrity checks exact quotes and observed reads, not semantic entailment. Rubric review is separate."
+  }
+}

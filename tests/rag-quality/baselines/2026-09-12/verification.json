@@ -1,0 +1,31 @@
+{
+  "scoring_tests_passed": 7,
+  "existing_adapter_contract_tests_passed": 23,
+  "example_links_checked": 45,
+  "broken_example_links": 0,
+  "trace_revalidation": {
+    "FQ01": true,
+    "FQ02": true,
+    "FQ03": true,
+    "FQ04": true,
+    "FQ05": true,
+    "FQ06": true,
+    "FQ07": true,
+    "FQ08": true,
+    "FQ09": true,
+    "FQ10": true,
+    "FQ11": true,
+    "FQ12": true,
+    "EQ01": true,
+    "EQ02": true,
+    "EQ03": true,
+    "EQ04": true,
+    "EQ05": true,
+    "EQ06": true,
+    "EQ07": true,
+    "EQ08": true
+  },
+  "trace_validator_sha256": "166f0accae39cf54fda9e1bf894aa0a4f807231743d725a3773f7faf5f59c254",
+  "runner_at_execution_sha256": "258436c4df1b2b42cb92d53ed02b0696f3da1b63a9c159ee7c83213a492e8196",
+  "note": "Final review rejects unknown completed tool events by default. All 20 recorded traces revalidated with identical measurements; model runs were not repeated."
+}
