@@ -1,10 +1,12 @@
 # Human-readable document format
 
 Wiki artifacts are ordinary Markdown and native links; no front matter, YAML, `.wiki/` state, sidecar, or hidden
-database is required. Each scope has a readable home/map with a navigation tree and compact routing outline: node
-title, alias, one-line scope, source entry point, primary parent, and cross-branch/cross-scope edge labels. At most
-three pages per scope may be marked `Routing page`. Tree position is navigation only; it never implies a relationship.
-Aliases resolve to canonical nodes; backlinks and optional typed links form the discovery graph.
+database is required. Each scope has a readable home/map whose taxonomy is the governed backbone: canonical node
+title, aliases, one-line scope, source entry point, and primary parent. At most three pages per scope may be marked
+`Routing page`. Tree position is navigation only; it never implies a relationship. Aliases resolve to canonical
+nodes. A small set of labeled, reviewable typed links—such as `related_to`, `governed_by`, `supersedes`, or
+`depends_on`—forms a discovery overlay when taxonomy placement is insufficient; it is not a generic graph or a
+replacement for native source search.
 
 Near a substantive generated/curated claim retain, when available: original source URI/ID, section, source version,
 checked date, relationship, verification/freshness state, and origin (`source text`, `agent-generated`,

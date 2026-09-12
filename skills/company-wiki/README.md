@@ -1,11 +1,12 @@
 # company-wiki / 企业文库
 
 `company-wiki` is a portable Agent Skill for an admin-governed Company Library Index and a user-controlled
-Personal Wiki. Ordinary documents are nodes and native links are edges. The tree is navigation, the graph is
-discovery, and a single routing decision selects original evidence before the agent answers with citations.
+Personal Wiki. The Index taxonomy is the governed backbone: it records canonical terms, aliases, source routes, and
+authority guidance. A small set of typed native links forms the useful discovery graph on top, while native source
+search retrieves original evidence before the agent answers with citations.
 
 The drive is the durable home of the wiki. This package does not impose folders, YAML records, a graph
-database, a provider-side search/evidence index, embeddings, source copies, or a connector. The small local
+database, a provider-side derived search/evidence index, embeddings, source copies, or a connector. The small local
 Markdown registry is configuration only. A flat document collection is valid.
 
 ## Package layout
@@ -28,7 +29,7 @@ Markdown registry is configuration only. A flat document collection is valid.
 The entry document is [`company-wiki-home.md`](../../examples/sample-company/company-wiki-home.md).
 Open it first, then follow the shortest relevant path:
 
-`routing context → one route decision → original evidence`
+`taxonomy and routing context → one route decision → native source search → original evidence`
 
 For example, a workplace-policy question chooses the people route and source evidence together; a customer
 metric question chooses the customer route and source evidence together. The outline ranks likely routes but
@@ -91,8 +92,9 @@ registry and must report that limitation.
    a whole-drive search: source discovery stays inside locations the user explicitly specifies.
 3. Add a new or changed source by selecting its exact native target. Review the proposed wiki changes,
    then approve them if they correctly preserve authority, conflicts, and evidence links.
-4. Ask company questions normally. The Personal Wiki ranks routes, but never limits source search; the agent
-   makes one routing decision, reads relevant original evidence, and cites documents it actually opened.
+4. Ask company questions normally. The taxonomy resolves canonical terms and aliases, while the few relevant typed
+   links guide discovery; neither limits source search. The agent makes one routing decision, searches registered
+   source locations, reads relevant original evidence, and cites documents it actually opened.
 5. Ask it to Curate or Maintain structure, or Validate links and coverage. Every durable change has its own
    concrete proposal and approval; corrections are not approval. Validation is always read-only.
 

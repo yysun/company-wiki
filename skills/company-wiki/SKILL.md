@@ -17,8 +17,9 @@ governs shared canonical concepts, terminology, aliases, relationships, and sour
 personal structure and durable personal content. Lower scopes reference shared knowledge instead of copying it.
 Team is a representable scope, not a separate V1 workflow.
 
-The wiki is a router, not a gate; a Personal Wiki is a retrieval prior, not a boundary; the tree navigates and
-the graph discovers; original documents prove; and each Query or Explore operation has one routing phase.
+The wiki is a router, not a gate. Its taxonomy is the governed backbone; a small set of reviewable typed links
+forms the useful discovery graph on top; and native source search retrieves original evidence. A Personal Wiki is
+a retrieval prior, not a boundary, and each Query or Explore operation has one routing phase.
 
 ## Operating boundaries
 
@@ -54,9 +55,10 @@ original-source content 40,000 Unicode characters. Stop at an exhausted bound an
 ## Retrieval and answer contract
 
 For Query and Explore, read the compact routing context together: the selected Personal home and, through its named
-edge, the visible Company Index home, plus at most three declared routing pages per scope. In one decision choose
-candidate nodes, graph edges, source routes, and direct searches. Then retrieve evidence in bounded rounds; do not
-return to wiki routing or run a second route-selection phase. A direct-source bypass may read no wiki page.
+edge, the visible Company Index taxonomy home, plus at most three declared routing pages per scope. In one decision
+choose canonical concepts and aliases, the few relevant typed links, source routes, and direct searches. Then
+retrieve evidence in bounded rounds; do not return to wiki routing or run a second route-selection phase. A
+direct-source bypass may read no wiki page.
 
 Explore is transient and may offer Curate. Query is read-only, retrieves the smallest useful original evidence,
 cites every factual claim, and states uncertainty or conflicts. Never modify original sources, create source copies,

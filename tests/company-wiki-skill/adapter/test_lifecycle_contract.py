@@ -30,6 +30,33 @@ class LifecycleContractTest(unittest.TestCase):
         self.assertIn("return to routing", query)
         self.assertIn("Bypass both wikis", query)
 
+    def test_taxonomy_is_backbone_and_source_search_is_evidence_layer(self) -> None:
+        skill = text("skills/company-wiki/SKILL.md")
+        query = text("skills/company-wiki/references/query.md")
+        document_format = text("skills/company-wiki/references/document-format.md")
+        init = text("skills/company-wiki/references/init.md")
+        validate = text("skills/company-wiki/references/validate.md")
+        requirement = text(".docs/reqs/2026/09/11/req-taxonomy-wiki-scoped-cloud-drive-search.md")
+        prd = text("docs/company-wiki_PRD_v0.5.md")
+        behavior = text(".docs/tests/test-taxonomy-wiki-scoped-cloud-drive-search.md")
+        for phrase in (
+            "taxonomy is the governed backbone",
+            "typed links",
+            "native source search",
+        ):
+            self.assertIn(phrase, skill)
+        self.assertIn("cloud-drive search as the evidence retrieval layer", query)
+        self.assertIn("small diverse evidence set", query)
+        self.assertIn("not a generic graph", document_format)
+        self.assertIn("typed discovery", init)
+        self.assertIn("taxonomy aliases", validate)
+        self.assertIn("without usable source routes", validate)
+        self.assertIn("Taxonomy = the governed backbone", requirement)
+        self.assertIn("Typed links = the small useful graph on top", prd)
+        self.assertIn("Cloud-drive search = evidence retrieval", prd)
+        self.assertNotIn("LLM-native virtual knowledge graph", prd)
+        self.assertIn("T5 — Taxonomy and search metadata preserve access boundaries", behavior)
+
     def test_scopes_legacy_and_authority(self) -> None:
         registry = text("skills/company-wiki/references/registry.md")
         protocol = text("skills/company-wiki/references/change-protocol.md")

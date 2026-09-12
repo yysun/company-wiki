@@ -23,6 +23,11 @@ existing document library**, anchored by a small shared Company Library Index.
 
 It does not require the company to move documents into a new knowledge base, annotate every file, or maintain a separate metadata database.
 
+Personalization is deliberate knowledge accumulation, not a private document cache. A Personal Wiki retains the
+user's durable working context—reused concepts and routes, project and decision context, annotations, hypotheses,
+priorities, and reusable investigation patterns—so later questions start with better judgment. Original documents
+remain the evidence for company facts and must be rechecked when those facts are used.
+
 The product has three logical knowledge scopes over the same authoritative sources:
 
 - a Company Library Index governed by a Company Wiki Admin;
@@ -177,13 +182,24 @@ Information Architecture
 + Problem-Solving Model
 ```
 
-This is intentionally lighter than a formal enterprise ontology but richer than a folder hierarchy or taxonomy.
-The Company Library Index carries the shared portion of this model. Personal Wikis add user-specific routes,
-projects, investigations, annotations, hypotheses, and priorities without redefining canonical company concepts.
+This starts with a governed taxonomy rather than a formal enterprise ontology or generic knowledge graph. The
+taxonomy carries canonical terms, aliases, source maps, authority, and primary navigation; a small set of typed
+links records reviewable relationships that hierarchy cannot express. The Company Library Index carries the shared
+portion of this model. Personal Wikis add user-specific routes, projects, investigations, annotations, hypotheses,
+priorities, and reusable working context without redefining canonical company concepts or mirroring their documents.
 
 ---
 
 ## 6. Conceptual Architecture
+
+```text
+Taxonomy = the governed backbone
+Typed links = the small useful graph on top
+Cloud-drive search = evidence retrieval
+```
+
+The taxonomy and typed links select and expand a bounded search plan; they never replace source retrieval, grant
+access, or prove an answer. Provider-authenticated, scoped search finds the original documents that do.
 
 ```text
 ┌──────────────────────────────────────────────────────────┐
@@ -194,7 +210,7 @@ projects, investigations, annotations, hypotheses, and priorities without redefi
                            ▼
 ┌──────────────────────────────────────────────────────────┐
 │ Company Library Index                                   │
-│ Small shared semantic/navigation skeleton               │
+│ Governed taxonomy and source map                        │
 │ Admin-governed and permission-aware                     │
 └──────────────────────────┬───────────────────────────────┘
                            │ reference, not copy
@@ -206,10 +222,10 @@ projects, investigations, annotations, hypotheses, and priorities without redefi
 └────────────┬────────────┘  └──────────────┬──────────────┘
              └──────────────┬───────────────┘
                             ▼
-               Explore / Query / Curate
+        Taxonomy/typed-link routing → Explore / Query / Curate
                             │
                             ▼
-              Original-source evidence and answers
+       Scoped native source search → Original evidence and answers
 ```
 
 All layers use the current provider-authenticated identity. A shared Markdown node may contain derived knowledge
@@ -221,10 +237,15 @@ public evidence, or refuse the shared write.
 
 ## 7. Virtual Knowledge Layer
 
-`company-wiki` should behave like an **LLM-native virtual knowledge graph composed of shared and personal
-overlays**.
+`company-wiki` should behave like a **taxonomy-backed virtual knowledge layer composed of shared and personal
+overlays**. Typed links form a deliberately small discovery graph, not a graph-first retrieval or inference system.
 
 The schema models important concepts and relationships, but the underlying knowledge remains in its original systems.
+
+A Personal Wiki is therefore a **retrieval prior**: a user-owned accumulation of durable context that helps the LLM
+choose where to look and how to investigate. It may preserve personal interpretations and hypotheses when clearly
+labeled, but it is not an authoritative copy of source material. A fact derived from company sources remains subject
+to current-source access, version, and evidence checks at answer time.
 
 Example:
 
@@ -242,7 +263,7 @@ authority:
   rule: canonical_over_historical
 ```
 
-The system does not need to materialize every policy document into a graph.
+The system does not need to materialize every policy document into a taxonomy or graph.
 
 Instead, the LLM reads the concept definition and source route, then queries the original source.
 
@@ -409,7 +430,8 @@ Contains:
 
 - Personal Wiki identity and ownership scope;
 - a reference to the visible Company Library Index;
-- the user's highest-value topics, projects, or current investigations; and
+- the user's highest-value topics, projects, current investigations, and durable working context; and
+- reused concepts, source routes, decision context, annotations, hypotheses, priorities, and investigation patterns;
 - pointers to deeper personal or shared sections.
 
 Example:
@@ -850,7 +872,7 @@ Retrieval may include:
 - metadata filtering;
 - API query;
 - database query;
-- graph traversal;
+- bounded typed-link traversal;
 - source-code search.
 
 Query must also support direct-source fallback when the wiki has no useful route, the request names an exact
@@ -896,15 +918,18 @@ approval; Query itself is read-only.
 
 ## 13. Retrieval Strategy
 
-Retrieval is pluggable.
+Retrieval is pluggable, but its layer responsibilities are fixed: the governed taxonomy resolves company language
+and source routes; the small typed-link overlay supports discovery; and source-system search retrieves evidence.
 
 Preferred order:
 
 1. use the Personal Wiki to reuse a known route;
-2. use the Company Library Index to reduce the search space;
-3. use native source search directly when the maps are missing or insufficient;
-4. use lexical and semantic search together when available;
-5. add derived indexes only when they solve demonstrated retrieval failures.
+2. resolve canonical concepts, aliases, authority cues, and source routes through the Company Library Index
+   taxonomy;
+3. use only the few relevant typed links to expand discovery where hierarchy is insufficient;
+4. use native source search directly when the maps are missing, stale, unrelated, or insufficient;
+5. use lexical and semantic search together when available;
+6. add derived indexes only when they solve demonstrated retrieval failures.
 
 Possible optional retrieval infrastructure:
 
@@ -1235,7 +1260,11 @@ The system should know not only where knowledge is but how different classes of 
 ### 22.10 Personal use drives growth
 
 The Company Library Index gives users a starting map. Actual questions, investigations, projects, and explicitly
-selected sources determine what enters each Personal Wiki.
+selected sources determine what enters each Personal Wiki. The result is personalized knowledge accumulation: the
+user retains durable judgment and routing context that repeatedly improves future work, while the cloud drive
+continues to hold documents and the authoritative evidence they contain. Per-document summaries or metadata
+abstractions are not the default; create a document-level entry only for an exceptional, high-value source that
+needs explicit authority or routing treatment.
 
 ### 22.11 Shared knowledge requires stronger proof
 
@@ -1264,8 +1293,8 @@ Possible later versions:
 
 ### v1.0
 - schema evolution with human approval;
-- optional virtual knowledge graph;
-- GraphRAG / hierarchical retrieval integration;
+- optional richer typed-link graph retrieval after measured multi-hop gaps;
+- GraphRAG / hierarchical retrieval integration after evaluation justifies it;
 - organization-wide evaluation suite;
 - host-independent skill/plugin packaging.
 

@@ -5,11 +5,12 @@
 `company-wiki` is a portable agent skill for building and using a permission-aware Company Library Index and
 user-controlled Personal Wiki over existing cloud-drive and repository documents.
 
-The wiki is a document-native knowledge graph:
+The Company Library Index is a document-native taxonomy and source map:
 
-- ordinary documents are the nodes;
-- native hyperlinks, bookmarks, and heading links are the edges;
-- a navigation tree guides reading while graph links support discovery;
+- the taxonomy is the governed backbone for canonical terms, aliases, authority, and source routes;
+- a navigation tree organizes the taxonomy without claiming relationships;
+- a small set of typed native links supplies the useful discovery graph on top;
+- scoped cloud-drive or repository search retrieves original evidence;
 - answers cite the evidence actually read and distinguish facts from uncertainty.
 
 It does not require a vector database, graph database, metadata sidecar, central document repository,
@@ -68,9 +69,9 @@ language. For example:
 > Ingest this newly approved policy. Show me the proposed wiki changes before applying them, and preserve the
 > original document link instead of copying its content.
 
-The assistant starts with the wiki's home page, follows the most relevant links, and uses the original
-documents as evidence. It should say when information is missing, restricted, outdated, or uncertain,
-and should ask for approval before making wiki changes.
+The assistant resolves the question through the taxonomy, uses only the few relevant typed links, then searches the
+registered source locations and reads original evidence. It should say when information is missing, restricted,
+outdated, or uncertain, and should ask for approval before making wiki changes.
 
 Before creating a wiki, the assistant confirms four required inputs: wiki name, original-material location
 and scope, writable wiki destination, and content language. Key domains, owners, core/source-of-truth
@@ -85,8 +86,10 @@ whole cloud drive.
 
 ## Design principles
 
+- The taxonomy is the governed backbone; typed links are the small useful graph on top; source search retrieves
+  evidence.
 - The wiki routes but never gates; the Personal Wiki is a retrieval prior, not a boundary.
-- The tree is for navigation and the graph is for discovery; routing happens once, before evidence retrieval.
+- The tree is for navigation and typed links are for discovery; routing happens once, before evidence retrieval.
 - Reconcile selected new evidence through Add Source; do not turn initialization into an exhaustive import.
 - Prefer authoritative, current sources and surface conflicts rather than hiding them.
 - Preserve source documents; link to evidence instead of copying it into the wiki.

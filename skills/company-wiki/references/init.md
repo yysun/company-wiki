@@ -10,7 +10,8 @@ whose evidence audience does not contain the index audience. Build the smallest 
 disclosure map of concepts, entities, systems, processes, policies, projects, decisions, metrics, and source
 entry points—not a flat file catalog.
 
-Propose the home, nodes, primary-parent tree, compact routing outline, aliases, and cross-branch discovery edges.
-Each node has one primary tree route; graph edges never replace it or imply a relationship. Apply only through the
-[durable change protocol](change-protocol.md), then register the scoped Company Index profile. Sampling is never a
-prerequisite for Personal Wiki Bootstrap.
+Propose the taxonomy home, nodes, primary-parent tree, compact routing outline, aliases, and the few typed discovery
+links that add value beyond taxonomy placement. Each node has one primary tree route; typed links never replace that
+route, imply an unsupported relationship, or create a generic graph. Apply only through the [durable change
+protocol](change-protocol.md), then register the scoped Company Index profile. Sampling is never a prerequisite for
+Personal Wiki Bootstrap.
