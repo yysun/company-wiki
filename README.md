@@ -169,6 +169,8 @@ stay in the Git-ignored `tests/rag-quality/results/` directory.
 - **Init** creates a small, admin-governed Company Library Index from representative sampling.
 - **Bootstrap** creates a minimal Personal Wiki by reference, without resampling or copying the company corpus.
 - **Explore** is transient; **Query** answers from same-operation original evidence and remains read-only.
+- Either may suggest one useful lesson for optional **Curate**. Approved investigation patterns guide later
+  routing, while current originals still establish the facts. The skill stays stable during use.
 - **Curate**, **Add Source**, and **Maintain** propose and then apply approved durable changes.
 - **Validate** is read-only graph and freshness inspection.
 

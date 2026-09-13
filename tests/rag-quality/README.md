@@ -186,3 +186,7 @@ revalidation of all 51 earlier traces without changing their outcomes.
 The [comparison after citation and command fixes](query-comparison-fixed-2026-09-13.md) is the latest
 full comparison: both references share the fixes, so only retrieval guidance differs. It preserves
 all 40 first attempts and reports a new empty-output failure separately from two diagnostic retries.
+
+The [Query learning-handoff comparison](query-learning-2026-09-13.md) evaluates approved-pattern routing and optional
+Curate suggestions. Both versions passed all 20 RAG questions; six separate synthetic stage probes check the new
+handoff and its boundaries. The report separates observed effort changes from unmeasured cross-query learning.

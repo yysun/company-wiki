@@ -74,6 +74,7 @@ choose canonical concepts and aliases, the few relevant typed links, source rout
 retrieve evidence in bounded rounds; do not return to wiki routing or run a second route-selection phase. A
 direct-source bypass may read no wiki page.
 
-Explore is transient and may offer Curate. Query is read-only, retrieves the smallest useful original evidence,
-cites every factual claim, and states uncertainty or conflicts. Never modify original sources, create source copies,
-embeddings, a database, sidecar, queue, ledger, watcher, or hidden retrieval state.
+Explore is transient. Query is read-only, retrieves the smallest useful original evidence, cites every factual claim,
+and states uncertainty or conflicts. Either may offer a useful, evidence-backed lesson for optional Curate; only
+approved wiki changes carry learning into later queries. The skill stays stable during use. Never modify original
+sources, create source copies, embeddings, a database, sidecar, queue, ledger, watcher, or hidden retrieval state.
