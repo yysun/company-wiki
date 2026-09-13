@@ -212,6 +212,9 @@ language. For example:
 The assistant resolves the question through the taxonomy, uses only the few relevant typed links, then searches the
 registered source locations and reads original evidence. It should say when information is missing, restricted,
 outdated, or uncertain, and should ask for approval before making wiki changes.
+Each query checks the requesting user's current source access and compares available source versions with wiki
+provenance. Matching versions still require current original evidence; missing version metadata alone does not block
+an authorized read. Denied sources cannot be replaced with old wiki summaries, and queries never silently refresh pages.
 
 Before creating a wiki, the assistant confirms four required inputs: wiki name, original-material location
 and scope, writable wiki destination, and content language. Key domains, owners, core/source-of-truth

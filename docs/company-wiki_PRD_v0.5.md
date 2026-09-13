@@ -259,6 +259,12 @@ choose where to look and how to investigate. It may preserve personal interpreta
 labeled, but it is not an authoritative copy of source material. A fact derived from company sources remains subject
 to current-source access, version, and evidence checks at answer time.
 
+For each source used, enforce the requesting user's current provider access and compare available native versions
+with provenance already in the permitted routing context. A broader service-account read needs a requester access
+gate. Unchanged versions do not prove continued access or replace same-operation evidence reads; missing version
+metadata alone does not block an authorized current read. Denied sources cannot be replaced by saved summaries.
+Report material wiki drift or unresolved revision inconsistencies without changing stored versions or check timestamps.
+
 Example:
 
 ```yaml

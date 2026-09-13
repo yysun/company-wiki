@@ -44,6 +44,34 @@ small diverse evidence set rather than exhausting the bound on near-duplicate re
 status, effective date, version, and supersession before synthesis; report a finite-bound limitation when the
 available reads cannot establish a complete answer.
 
+## Check source access, version, and current evidence
+
+For each source needed by Query or Explore, check access and version independently during this operation:
+
+1. **Current requester access.** Let the provider enforce the requesting user's current access before source
+   metadata or content enters the model. A successful read under that user's authenticated identity can establish
+   read access; do not require a separate ACL enumeration solely for Query. If a connector uses a broader bot or
+   service account, require a host/provider-enforced requester access check before exposing its results. An old
+   role label, prior successful read, unchanged version, or readable personal wiki never substitutes for this check.
+   If current source access is denied or cannot be established, exclude that source from the answer's evidence;
+   do not fall back to its old wiki summary, earlier answer, or retained source text. Report only a safe availability
+   limit, without distinguishing hidden from absent documents or disclosing restricted metadata.
+2. **Version comparison.** Obtain the source's current native revision/version when the interface exposes one,
+   preferably with the metadata/content already being retrieved. Compare it with the recorded version for that
+   exact source in the permitted wiki context, if present. A changed version makes affected wiki claims potentially
+   stale; compare the relevant original passages before asserting a substantive change. An unchanged version proves
+   neither current access nor the correctness of a wiki claim. Modification/check timestamps are only hints, not
+   equivalent version identifiers. If current or recorded version metadata is unavailable, continue with the
+   authorized current original and state any material comparison limit; do not invent a version, block solely for
+   its absence, or add a wiki routing phase to hunt for missing provenance.
+3. **Current evidence.** Read the relevant original passages in this operation even when the version is unchanged.
+   Use a version attached to the retrieved content when available. If detected version drift between metadata and
+   passage reads leaves a claim dependent on mixed revisions, reread the affected evidence within the remaining
+   bounds or report the unresolved limit; do not present the mixture as one verified revision. Answer from the
+   current authorized evidence and flag materially outdated wiki claims in the response. Query/Explore never
+   persist version, freshness, or `Evidence checked` changes; offer any durable refresh through approved Maintain
+   or Curate. These checks do not reset retrieval bounds or require scanning unrelated sources.
+
 Check metadata/size before reads. For long documents, prefer native section or range reads around relevant hits
 when the host supports them. Merge overlapping requested ranges where supported, and expand context enough to
 include governing definitions, exceptions, table headers and units, effective dates, and supersession notices

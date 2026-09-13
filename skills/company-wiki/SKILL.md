@@ -74,6 +74,10 @@ choose canonical concepts and aliases, the few relevant typed links, source rout
 retrieve evidence in bounded rounds; do not return to wiki routing or run a second route-selection phase. A
 direct-source bypass may read no wiki page.
 
+For each source used, verify the requesting user's current access and compare available native versions with loaded
+wiki provenance. Read relevant original evidence in the same operation even when versions match; missing version
+metadata alone does not block an authorized current read. Query reports drift without silently refreshing the wiki.
+
 Explore is transient. Query is read-only, retrieves the smallest useful original evidence, cites every factual claim,
 and states uncertainty or conflicts. Either may offer a useful, evidence-backed lesson for optional Curate; only
 approved wiki changes carry learning into later queries. The skill stays stable during use. Never modify original

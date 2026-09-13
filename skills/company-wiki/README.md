@@ -124,7 +124,9 @@ registry and must report that limitation.
    them if they correctly preserve authority, conflicts, and evidence links.
 4. Ask company questions normally. The taxonomy resolves canonical terms and aliases, while the few relevant typed
    links guide discovery; neither limits source search. The agent makes one routing decision, searches registered
-   source locations, reads relevant original evidence, and cites documents it actually opened.
+   source locations, verifies the requesting user's current access, compares available source versions with loaded
+   wiki provenance, and reads original evidence in the same query even when versions match. Missing version metadata
+   alone does not block an authorized read. It cites the originals and reports material wiki drift without editing pages.
 5. Ask it to Curate or Maintain structure, or Validate links and coverage. Every durable change has its own
    concrete proposal and approval; corrections are not approval. Validation is always read-only.
 
