@@ -1,5 +1,16 @@
 # Changelog
 
+## Unreleased
+
+### Fixed
+
+- Separate read-and-answer, transient-draft, and publication capabilities for existing plugins, MCP tools,
+  CLIs, and APIs. Source connectivity no longer implies support for publishing wiki changes.
+- Keep ordinary authorized answers independent of destination write tools, ACL enumeration, and optional source
+  revisions. Preserve requester access checks, including for broader service accounts.
+- Route missing publication capabilities to an authorized transient result without wiki or registry writes;
+  distinguish source freshness from destination concurrency protection and preserve disclosure boundaries.
+
 ## 1.1.0 — 2026-09-13
 
 ### Added

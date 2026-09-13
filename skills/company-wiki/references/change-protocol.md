@@ -3,6 +3,12 @@
 Init, Bootstrap, Curate, Add Source, Maintain, and promotion share this protocol. It applies to provider pages
 and registration; original sources are never written. Apply the [publication boundary](publication.md) first.
 
+This is the publish capability level, not a prerequisite for authorized reading or transient drafting. If an
+operation required by the plan lacks current authorization or protected-write support, return the authorized
+transient proposal with that blocker and make no wiki or registry writes. Do not present it as ready to apply or
+ask for approval as a substitute for the missing capability. Source freshness comparisons and destination
+concurrency protection are separate checks; an available source revision does not satisfy the latter.
+
 For wiki pages, include the [page timestamp rules](document-format.md#page-timestamps) in the proposal: which
 fields are preserved, set to the actual creation/edit/check time, or marked unknown/not fully checked. Persist
 them with the approved, protected page write; timestamps do not authorize additional writes.

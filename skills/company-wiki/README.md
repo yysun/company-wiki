@@ -27,7 +27,7 @@ Markdown registry is configuration only. A flat document collection is valid.
 - `references/curate.md` — make durable navigation knowledge or promote it by scope.
 - `references/add-source.md` — discover candidates from search criteria and reconcile selected sources (`Ingest` alias).
 - `references/change-protocol.md` — shared authority, approval, and failure contract for writes.
-- `references/publication.md` — provider-managed access, explicit source inheritance, safe generation, and legacy cleanup.
+- `references/publication.md` — read/draft/publish capability levels, provider-managed access, safe generation, and legacy cleanup.
 - `references/registry.md` — select and safely persist user-level wiki configuration.
 - `references/query.md` — route once, refine searches, read bounded evidence, and verify exact quotations.
 - `references/maintain.md` — propose and apply corrections, repairs, and restructuring.
@@ -135,3 +135,16 @@ app already provides. For non-drive sources it uses only the host's correspondin
 or API tools. It never invents a connector, calls an undocumented provider API, or assumes a new integration.
 It reports unreachable sources, missing link metadata, and permission limits instead of inventing facts or
 building retrieval infrastructure.
+
+Assess source access and wiki publication separately using [capability levels](references/publication.md#capability-levels):
+
+- **Read and answer:** current requester-authorized evidence with source citations. Separate ACL enumeration,
+  native source revisions, and destination write tools are not required for ordinary answers. A broader service
+  account requires host/provider-enforced requester authorization before results enter the model.
+- **Draft changes:** an authorized transient proposal when publishing is unavailable. State the blocker and that
+  nothing was saved; the draft is not cleared for a different audience or a manual publication workaround.
+- **Publish changes:** approved writes only when the exact destination's authority, audience, and required
+  conditional/exclusive update or idempotent/conditional create capabilities are verified.
+
+Missing publication support does not block authorized reading. Source revisions describe evidence; they do not
+protect destination writes. The skill does not implement permission checks or concurrency control in place of the provider.

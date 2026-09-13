@@ -71,7 +71,9 @@ states:
 
 If the comparison finds no material delta, report that the wiki is already current and make no change. Do not
 create a duplicate page or link, processing receipt, metadata record, or log entry. Otherwise wait for explicit
-approval of the proposal. “Ingest this source” is not approval of edits that have not yet been proposed.
+approval of the proposal only when the publication capabilities are available. Otherwise return the authorized
+transient draft and its specific blocker under [capability levels](publication.md#capability-levels), with no wiki
+or registry writes. “Ingest this source” is not approval of edits that have not yet been proposed.
 
 ## Revalidate and apply
 

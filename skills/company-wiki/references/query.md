@@ -2,7 +2,9 @@
 
 Both routes are read-only. Select one profile through [Registry](registry.md), then apply the access model and pre-read
 rules in [Publication](publication.md) before loading any wiki title, route, or content. Ordinary authorized wiki
-reads rely on current provider permissions. For known unsafe legacy content or explicit continuous inheritance,
+reads rely on current provider permissions. Use its read-and-answer capability level: do not require publication
+preflight, destination write tools, separate ACL enumeration, or source revision metadata to answer.
+For known unsafe legacy content or explicit continuous inheritance,
 if required disclosure safety cannot be established without exposing the page's bytes, skip it and use the separately
 registered source-search scope.
 Do not load a stale restricted alias and rely on a prompt to suppress it. Make one routing decision from
@@ -125,7 +127,8 @@ change protocol. Only an approved, successfully saved pattern may inform a later
 later factual answers still require current original evidence. Do not edit the skill, ask users to edit it, create
 hidden memory, or treat a suggestion or its acceptance as proof that the pattern improves retrieval.
 
-Expose ordinary wiki routes only through currently authorized provider-visible metadata. Recheck current source
-access/audience for source-derived response claims and links, and apply the additional pre-read protection for known
+Expose ordinary wiki routes only through currently authorized provider-visible metadata. Recheck current requester
+access for source-derived response claims and links; do not require wiki-destination audience proof for an answer
+to that authorized requester. Apply the additional pre-read protection for known
 unsafe legacy routes or explicit continuous inheritance. Fail closed on unavailable required access; source search
 metadata and unavailable-route diagnostics obey the same disclosure boundary.

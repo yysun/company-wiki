@@ -12,6 +12,16 @@ the index and wiki use ordinary native documents and links in a separately selec
 The agent uses the host's existing document tools to navigate the wiki, search the selected sources, and answer
 with original evidence. Git, Markdown files, and a separately deployed wiki application are not required.
 
+Existing plugins, MCP tools, CLIs, and APIs can provide source access, including to documents in business systems.
+Support is determined per operation: **read and answer**, **draft changes**, or **publish changes**. Current reads
+under the requesting user's identity can support answers without separate ACL enumeration, source revision metadata,
+or wiki write tools. A broader service account still needs provider-enforced requester access checks.
+
+Publication additionally requires verified destination authority and audience, plus protected writes. When those
+capabilities are unavailable, the skill can return an authorized transient draft and state what prevents saving it.
+That draft is not cleared for the wiki audience. Source access and wiki publication may use different integrations;
+one working connector does not establish both. See [capability levels](skills/company-wiki/references/publication.md#capability-levels).
+
 ![How to use company-wiki: set up your wiki, ask questions with source citations, and approve wiki updates.](docs/assets/company-wiki-quickstart-v1.png)
 
 | Layer | Where it lives |

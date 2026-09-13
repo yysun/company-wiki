@@ -3,10 +3,51 @@
 Read this after registry selection, before discovery, wiki reads, generation, or durable changes. These are
 capability requirements on the host/provider, not permission claims the model can establish from prose.
 
+## Capability levels
+
+Use the host's existing, documented plugin, MCP, CLI, or API operations. Determine support for the requested
+operation from the exposed tool contract and current authorization; the integration mechanism alone guarantees
+neither access control nor safe writes. Evaluate source and wiki-destination capabilities separately, even when
+they use the same provider. Do not add a connector, permission service, version store, or persistent capability cache.
+
+| Level | Required capabilities | Supported result |
+|---|---|---|
+| Read and answer | Scoped discovery when needed, current requester-authorized reads, and usable source identifiers or links for citations | Query and Explore; the read-only Validate checks the interface can establish |
+| Draft changes | Authorized reads of the selected evidence and any wiki content needed for concrete edits; a response audience authorized for that evidence | A transient proposal in the current conversation, with publication blockers stated; no wiki or registry writes |
+| Publish changes | Read capabilities plus exact-destination write/govern authority, verified current audience containment, safe permissions from creation, and the protected create/update operations required by the plan | Approved writes through the [change protocol](change-protocol.md), including protected registration when needed |
+
+For ordinary reads, a successful operation authenticated as the requesting user can establish access; separate
+ACL enumeration is unnecessary. A broader bot or service account needs a host/provider-enforced requester check
+before returning metadata or content to the model. Missing requester authorization blocks that evidence at every
+level. Preserve the additional pre-read gates below for known unsafe legacy content and explicit continuous inheritance.
+
+Source revision metadata is optional for Query and Explore: read current evidence in the same operation and report
+material comparison limits. Destination write permissions, audience enumeration, and conditional-write support
+are not prerequisites for ordinary read-only answers. Validate reports checks it cannot perform as inspection
+limits; missing ACL visibility alone does not establish a leak or invalidate otherwise authorized evidence.
+
+If publication requirements are unavailable, continue only the authorized reads and transient drafting useful to
+the request. State the specific missing capability and that nothing was saved; do not ask for approval to bypass
+it or imply that user confirmation supplies provider enforcement. A draft for the requester is not cleared for
+the intended wiki audience. Until destination disclosure is verified, do not generate an artifact for that audience
+or instruct the user to copy the draft there. If existing target content cannot safely be read, provide an outline
+or limitation instead of inventing an exact replacement. Follow the clean-generation rules below before preparing
+shared content.
+
+Capability fallback preserves each lifecycle's registry, source-selection, and read bounds. A draft does not create
+a registration or turn Init into a completed wiki. Without a profile, direct-source Query/Explore still needs an
+exact user-supplied source locator under [Registry](registry.md). Bootstrap still uses only the selected index
+reference; it cannot discover or sample source bodies.
+
+For publication, check the operations actually in the plan: protected creates and protected updates are separate
+capabilities. Reading a source revision does not prove that the destination supports conditional writes. Source
+timestamps and content hashes cannot replace provider-enforced destination version conditions or an equivalent
+exclusive-write mechanism. The skill delegates permission and concurrency enforcement to the host/provider.
+
 ## Current authorization and provider-managed access
 
-Default to provider-managed wiki access: the cloud provider enforces the destination's own permissions. Verify
-authenticated source access, exact-destination write/govern capability, and current source/destination audiences.
+For publication, default to provider-managed wiki access: the cloud provider enforces the destination's own
+permissions. Verify authenticated source access, exact-destination write/govern capability, and current source/destination audiences.
 Respect applicable confidentiality and publication restrictions. Each required check returns verified, denied,
 or unavailable; denied or unavailable current authorization blocks the affected publication. A scope/owner label,
 user assurance, local file access, or successful write probe is not provider proof of disclosure authority.

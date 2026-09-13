@@ -9,6 +9,9 @@ does not block ordinary provider-managed Bootstrap; do not invent a different Bo
 A legacy profile cannot authorize Bootstrap. If the selected index is unavailable, create nothing and offer
 direct-source Query only when the user supplies an accessible exact source location.
 
+Missing protected-create or registration support likewise leaves only an authorized transient reference proposal
+under [capability levels](publication.md#capability-levels); no personal home or registry entry is created.
+
 Do not sample the company corpus, read index child pages, copy the index, bulk-generate pages, chunk/embed
 documents, or require a database. Treat the supplied index-home target as opaque: create a minimal personal home
 with a `Company Library Index` link only—no child title, alias, summary, or relationship. Include readable sections
