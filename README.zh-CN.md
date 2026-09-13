@@ -11,6 +11,8 @@
 智能助手通过宿主已有的文档工具浏览 Wiki、搜索指定资料，并依据原始证据回答问题。
 使用它不需要 Git、Markdown 文件或单独部署的 Wiki 应用。
 
+![company-wiki 使用指南：创建 Wiki、提出问题并获得原始证据引用、审阅并批准 Wiki 更新。](docs/assets/company-wiki-quickstart-zh-CN-v1.png)
+
 | 层面 | 存放位置 |
 |---|---|
 | 企业原始知识 | 现有云端文档；明确指定的仓库或本地文件夹也可以作为来源 |

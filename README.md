@@ -12,6 +12,8 @@ the index and wiki use ordinary native documents and links in a separately selec
 The agent uses the host's existing document tools to navigate the wiki, search the selected sources, and answer
 with original evidence. Git, Markdown files, and a separately deployed wiki application are not required.
 
+![How to use company-wiki: set up your wiki, ask questions with source citations, and approve wiki updates.](docs/assets/company-wiki-quickstart-v1.png)
+
 | Layer | Where it lives |
 |---|---|
 | Original company knowledge | Existing cloud documents; explicitly selected repositories or local folders can also be sources |
