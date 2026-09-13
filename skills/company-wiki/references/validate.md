@@ -7,6 +7,11 @@ without usable source routes, version drift, stale summaries, missing provenance
 contradictions, superseded knowledge, suspicious relationships, permission leakage, important gaps, missing primary
 parents, typed-link-only nodes, and routing-outline/tree drift.
 
+Check the [page timestamps](document-format.md#page-timestamps): report missing fields, malformed or timezone-less
+timestamps, and full-page evidence-check claims unsupported by the available provenance. A recent `Updated` value
+does not establish fresh evidence. Report `Unknown` or `Not fully checked` as provenance limits, not malformed dates;
+do not change either field during validation.
+
 Recheck current evidence access and audience before treating a derived claim as usable; check continuing protection
 only for explicit continuous-inheritance requirements. Report current mismatches, unknown lineage or required
 protection, and unsafe legacy exposure without quoting restricted titles, routes, or content. Distinguish these

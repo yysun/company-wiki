@@ -61,10 +61,10 @@ original-source content 40,000 Unicode characters. Stop at an exhausted bound an
 | Create a Company Library Index | [Init](references/init.md), [Change protocol](references/change-protocol.md), [Document format](references/document-format.md) |
 | Create a Personal Wiki | [Bootstrap](references/bootstrap.md), [Change protocol](references/change-protocol.md), [Document format](references/document-format.md) |
 | Explore or answer | [Query and Explore](references/query.md) |
-| Curate or promote | [Curate](references/curate.md), [Change protocol](references/change-protocol.md) |
-| Add evidence by exact target or search criteria / Ingest | [Add Source](references/add-source.md), [Change protocol](references/change-protocol.md) |
-| Correct or restructure | [Maintain](references/maintain.md), [Change protocol](references/change-protocol.md) |
-| Inspect graph health | [Validate](references/validate.md) |
+| Curate or promote | [Curate](references/curate.md), [Change protocol](references/change-protocol.md), [Document format](references/document-format.md) |
+| Add evidence by exact target or search criteria / Ingest | [Add Source](references/add-source.md), [Change protocol](references/change-protocol.md), [Document format](references/document-format.md) |
+| Correct or restructure | [Maintain](references/maintain.md), [Change protocol](references/change-protocol.md), [Document format](references/document-format.md) |
+| Inspect graph health | [Validate](references/validate.md), [Document format](references/document-format.md) |
 
 ## Retrieval and answer contract
 

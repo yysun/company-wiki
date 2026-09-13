@@ -3,6 +3,10 @@
 Init, Bootstrap, Curate, Add Source, Maintain, and promotion share this protocol. It applies to provider pages
 and registration; original sources are never written. Apply the [publication boundary](publication.md) first.
 
+For wiki pages, include the [page timestamp rules](document-format.md#page-timestamps) in the proposal: which
+fields are preserved, set to the actual creation/edit/check time, or marked unknown/not fully checked. Persist
+them with the approved, protected page write; timestamps do not authorize additional writes.
+
 1. Propose exact scope, destination, affected targets, evidence and versions, conflicts, preserved organization,
    ordered writes, current audience result, and applicable access model. Record continuing-protection coverage only
    when continuous source inheritance is explicitly required under [Publication](publication.md). Include per-target
