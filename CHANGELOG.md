@@ -1,5 +1,33 @@
 # Changelog
 
+## 1.1.0 — 2026-09-13
+
+### Added
+
+- Query can use approved investigation patterns during initial routing and offer one useful lesson for
+  optional Curate after answering. Curation preserves evidence, applicability, and uncertainty; the skill
+  stays stable during use and Query remains read-only.
+- Bounded Add Source discovery by title, keywords, or filename pattern, followed by exact user selection
+  before reconciliation reads.
+- Visible `Updated` and `Evidence checked` timestamps on generated wiki pages, with explicit handling of
+  partial checks, unknown history, and unchanged content.
+- Six synthetic learning-handoff scenarios and a fresh before/after Query benchmark.
+
+### Changed
+
+- Publication guidance distinguishes provider-managed wiki permissions and current audience checks from
+  explicitly required continuing source-permission inheritance. Source and destination boundaries remain separate.
+
+### Validation and known limitations
+
+- All 41 existing benchmark, adapter, and lifecycle tests passed.
+- The [Query learning comparison](tests/rag-quality/query-learning-2026-09-13.md) passed all 20 answers in
+  both conditions, with exact citations at 55/55 before and 56/56 after. Learning scenarios improved from
+  5/6 to 6/6; the difference was a useful optional Curate suggestion, not factual answer accuracy.
+- In that single run, source reads fell 8.2% and source characters fell 6.0%, while input tokens rose 4.6%.
+  Elapsed time was essentially unchanged. These synthetic, agent-reviewed results do not establish
+  production reliability or accumulated cross-query learning gains.
+
 ## 1.0.0 — 2026-09-13
 
 Initial versioned release of the portable Company Library Index and Personal Wiki skill.

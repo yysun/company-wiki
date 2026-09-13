@@ -2,7 +2,7 @@
 
 [English](README.md) · [更新日志](CHANGELOG.md)
 
-**版本：** `1.0.0`
+**版本：** `1.1.0`
 **仓库：** https://github.com/yysun/company-wiki
 
 `company-wiki` 是一个便携的智能助手技能，用来在企业现有云盘中建立和使用权限感知的公司索引与个人 Wiki。

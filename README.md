@@ -2,7 +2,7 @@
 
 [中文](README.zh-CN.md) · [Changelog](CHANGELOG.md)
 
-**Version:** `1.0.0`
+**Version:** `1.1.0`
 **Repository:** https://github.com/yysun/company-wiki
 
 `company-wiki` is a portable agent skill for building and using a permission-aware Company Library Index and
