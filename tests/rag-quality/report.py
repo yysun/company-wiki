@@ -81,23 +81,28 @@ def report(root: Path) -> None:
     save(root / "scores.json", {"summary": summary, "cases": rows})
     def fraction(value: object) -> str:
         return "not scored" if value is None else f"{float(value):.1%}"
+    def counted_rate(passed: int, total: int, unit: str) -> str:
+        return f"{fraction(passed / total if total else None)} ({passed}/{total} {unit})"
     lines = ["# Synthetic RAG quality pilot", "",
              f"Run: {manifest['created_at']}. Model: `{manifest['model']}`; reasoning: `{manifest['reasoning_effort']}`.", "",
              "This evaluates retrieval and answer behavior under the company-wiki Query contract. It does not execute",
              "registry selection, initialization, curation, provider permissions, or publication. Fixture cases use",
              "direct source discovery; example cases use the shipped example wiki and synthetic originals.", "",
              "These are different corpora, so their results do not establish the incremental benefit of wiki routing.", "",
-             f"Completed: **{len(completed)}/{len(rows)}**. Semantically reviewed: **{len(reviewed)}/{len(rows)}**.", "",
+             f"Valid executions: **{counted_rate(len(completed), len(rows), 'cases')}**. "
+             f"Semantically reviewed: **{len(reviewed)}/{len(rows)}**.", "",
              "| Measurement | Result |", "|---|---:|",
              f"| Strict answer pass (all rubric items + grounded) | {fraction(summary['strict_answer_pass_rate'])} |",
              f"| Answer rubric coverage | {fraction(summary['answer_rubric_coverage'])} |",
              f"| Answers grounded in original evidence (semantic review) | {fraction(summary['grounded_answer_rate'])} |",
              f"| Required-source-open recall, mean per question | {fraction(summary['required_source_open_recall'])} |",
-             f"| Citation integrity (exact quote + original read + inline reference) | {summary['valid_citations']}/{summary['citation_count']} |",
+             f"| Citation integrity (exact quote + original read + inline reference) | {counted_rate(summary['valid_citations'], summary['citation_count'], 'quotes')} |",
              f"| Within Query retrieval bounds | {summary['query_bounds_passes']}/{len(completed)} |",
              f"| Example navigation contract | {summary['example_navigation_passes']}/{summary['example_navigation_cases']} |",
              f"| Mean original documents opened | {summary['mean_source_reads']} |",
              f"| Mean elapsed seconds | {round(summary['mean_elapsed_seconds'], 1) if completed else 'not recorded'} |", "",
+             "Execution rates count cases; citation rates count quotations from valid executions only. Fewer quotes",
+             "do not imply a lower pass rate. Invalid executions remain visible and receive no quality scores.", "",
              "Citation integrity does not prove that a quote entails its associated claim. Semantic reviews assess",
              "the full answer against the sources and the explicit rubric. A review by an agent is not human validation.", "",
              "| Case | Corpus / category | Rubric | Grounded | Source recall | Sources opened | Seconds |",

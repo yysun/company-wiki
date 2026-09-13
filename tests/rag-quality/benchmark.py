@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Run and record a synthetic retrieval/answer pilot with an evaluator-only answer key.
 
-The evaluated Codex process gets a read-only corpus tool and one question, never the gold criteria.
+The evaluated Codex process gets a frozen Query reference, a read-only corpus tool and one question,
+never the gold criteria. Benchmark tool and routing constraints take precedence over lifecycle steps.
 Trace checks detect tool bypasses; they are evaluation integrity checks, not provider ACL enforcement.
 Only synthetic documents are copied. Existing skill, user registry, and original fixtures are unchanged.
 """
@@ -79,7 +80,19 @@ def tool(args: argparse.Namespace) -> int:
     return 0
 
 
-def inspect_trace(trace: str, corpus: Path, documents: list[dict]) -> dict:
+def create_launcher(corpus: Path) -> Path:
+    """Bind a short session command to this corpus, independently of the caller's cwd."""
+    launcher = corpus.parent / "corpus-tool"
+    command = [sys.executable, "-B", str(Path(__file__).resolve()), "tool", "--corpus",
+               str(corpus.resolve()), "--"]
+    # End option parsing before caller arguments so they cannot override --corpus.
+    launcher.write_text("#!/bin/sh\nexec " + shlex.join(command) + ' "$@"\n', encoding="utf-8")
+    launcher.chmod(0o500)
+    return launcher
+
+
+def inspect_trace(trace: str, corpus: Path, documents: list[dict], *, launcher: Path | None = None) -> dict:
+    """Check one command contract; omitted launcher selects the historical long-path contract."""
     by_id = {d["id"]: d for d in documents}
     reads, failures, operations = [], [], []
     usage, source_chars, searches, discovery_rounds = {}, 0, 0, 0
@@ -98,20 +111,25 @@ def inspect_trace(trace: str, corpus: Path, documents: list[dict]) -> dict:
         if kind != "command_execution":
             continue
         tokens = shell_tokens(item.get("command", "")) or []
-        valid = (
-            len(tokens) >= 6
-            and "$(" not in item.get("command", "") and "`" not in item.get("command", "")
-            and resolved_executable(tokens[0]) == resolved_executable(sys.executable)
-            and Path(tokens[1]).resolve() == Path(__file__).resolve()
-            and tokens[2:4] == ["tool", "--corpus"]
-            and Path(tokens[4]).resolve() == corpus.resolve()
-            and tokens[5] in {"list", "search", "read"}
-        )
+        if launcher is None:
+            action_index = 5
+            valid = (
+                len(tokens) >= 6
+                and resolved_executable(tokens[0]) == resolved_executable(sys.executable)
+                and Path(tokens[1]).resolve() == Path(__file__).resolve()
+                and tokens[2:4] == ["tool", "--corpus"]
+                and Path(tokens[4]).resolve() == corpus.resolve()
+            )
+        else:
+            action_index = 1
+            valid = len(tokens) >= 2 and tokens[0] == f"./{launcher.name}"
+        valid = (valid and "$(" not in item.get("command", "") and "`" not in item.get("command", "")
+                 and tokens[action_index] in {"list", "search", "read"})
         if not valid:
             failures.append("non-allowlisted command: " + item.get("command", ""))
             continue
-        action = tokens[5]
-        values = tokens[6:]
+        action = tokens[action_index]
+        values = tokens[action_index + 1:]
         if ((action == "list" and values) or (action == "search" and len(values) != 1)
                 or (action == "read" and (not values or any(v not in by_id for v in values)))):
             failures.append("invalid corpus tool arguments")
@@ -208,7 +226,14 @@ def run(args: argparse.Namespace) -> int:
     cases = [c for c in gold["cases"] if not args.only or c["id"] in args.only.split(",")]
     if not cases:
         raise ValueError("no selected cases")
+    query_contract_bytes = args.query_contract.read_bytes()
+    query_contract = query_contract_bytes.decode("utf-8")
+    if not query_contract.strip():
+        raise ValueError("Query reference must not be empty")
     args.output.mkdir(parents=True, exist_ok=False)
+    (args.output / "query-contract-at-execution.md").write_bytes(query_contract_bytes)
+    (args.output / "dataset-at-execution.json").write_bytes((HERE / "dataset.json").read_bytes())
+    (args.output / "runner-at-execution.py").write_bytes(Path(__file__).read_bytes())
     snapshots = []
     for doc in gold["documents"]:
         text = (REPOSITORY / doc["path"]).read_text()
@@ -220,6 +245,7 @@ def run(args: argparse.Namespace) -> int:
         "cli_version": subprocess.check_output(["codex", "--version"], text=True).strip(),
         "dataset_sha256": digest((HERE / "dataset.json").read_bytes()),
         "runner_sha256": digest(Path(__file__).read_bytes()),
+        "query_contract_sha256": digest(query_contract_bytes),
         "documents": [{k: d[k] for k in ("id", "corpus", "role", "path", "sha256")} for d in snapshots],
         "case_ids": [c["id"] for c in cases],
     })
@@ -232,20 +258,37 @@ def run(args: argparse.Namespace) -> int:
             documents = [d for d in snapshots if d["corpus"] == case["corpus"]]
             corpus = workspace / "corpus.json"
             save(corpus, documents)
+            launcher = create_launcher(corpus)
+            launcher_bytes = launcher.read_bytes()
+            corpus_hash = digest(corpus.read_bytes())
+            (destination / "corpus-tool-at-execution.sh").write_bytes(launcher_bytes)
+            save(destination / "tool-binding.json", {
+                "invocation": f"./{launcher.name}", "launcher_path": str(launcher),
+                "launcher_sha256": digest(launcher_bytes), "corpus_path": str(corpus),
+                "corpus_sha256": corpus_hash,
+            })
             schema = workspace / "schema.json"
             save(schema, SCHEMA)
-            invocation = shlex.join([sys.executable, str(Path(__file__).resolve()), "tool", "--corpus", str(corpus)])
+            invocation = f"./{launcher.name}"
             route = ("Read W01 first, then optionally up to three additional wiki documents in one routing phase. "
                      "Choose relevant routes before reading or searching originals. Do not return to wiki reads after original evidence."
                      if case["corpus"] == "example" else
                      "There is no wiki for this fixture corpus. Use direct source discovery and original evidence.")
             prompt = f"""You are the system under test in a synthetic company-wiki retrieval/answer component benchmark.
+Apply the retrieval and answer guidance in this frozen Query reference:
+<query_reference>
+{query_contract}
+</query_reference>
+The following benchmark-specific rules take precedence over the reference. Registry selection, provider access,
+publication checks, and following reference links are outside this synthetic component test.
 This is not a live lifecycle invocation: do not open installed skills, the user's registry, cloud apps, or other files.
 All supplied documents are synthetic. The corpus tool is your only allowed tool and contains the entire permitted corpus.
 Execute shell commands ONLY in these exact forms, one invocation per command, without shell chaining:
 {invocation} list
 {invocation} search 'case-insensitive regular expression'
 {invocation} read ID [ID ...]
+Run these commands from the supplied working directory. The launcher is already bound to this case's corpus;
+do not add a corpus path, interpreter, or other flags.
 List returns a document directory, search returns original-source snippets, and read returns complete selected documents.
 Use list to resolve IDs for relative Markdown links. Never inspect the tool implementation or corpus file directly.
 {route}
@@ -254,6 +297,9 @@ Use at most two directory-listing/source-search calls combined, five original do
 Compare scope, approval, effective date, and supersession. Distinguish evidence from inference, missing evidence, and uncertainty.
 Answer the question concisely in its language. Cite factual assertions using source IDs like [E01] from originals read in this operation.
 Return JSON matching the schema. For each cited source, include a short exact quote in citations that helps verify your answer.
+Each decoded quote must be a contiguous substring of the original text you read. Preserve source whitespace,
+line breaks, punctuation, and wording. Encode source line breaks with JSON newline escapes; do not replace them
+with spaces. Check quotes against the already-read text before returning; keep paraphrases in the answer only.
 Do not cite wiki pages as proof of company facts. No writing, external access, additional agents, or file inspection is authorized.
 Evaluation date: {gold['as_of']}.
 Question: {case['question']}
@@ -277,7 +323,7 @@ Question: {case['question']}
             elapsed = time.monotonic() - start
             (destination / "trace.jsonl").write_text(trace)
             (destination / "stderr.txt").write_text(stderr)
-            checks = inspect_trace(trace, corpus, documents)
+            checks = inspect_trace(trace, corpus, documents, launcher=launcher)
             response_path = destination / "response.json"
             try:
                 response = json.loads(response_path.read_text())
@@ -285,8 +331,14 @@ Question: {case['question']}
             except (OSError, ValueError, KeyError, AssertionError):
                 response = {"answer": "", "citations": []}
                 checks["integrity_failures"].append("missing or invalid final response")
-            if digest(corpus.read_bytes()) != digest((json.dumps(documents, indent=2, ensure_ascii=False) + "\n").encode()):
-                checks["integrity_failures"].append("corpus snapshot changed")
+            for artifact, expected_hash, label in ((corpus, corpus_hash, "corpus snapshot"),
+                                                    (launcher, digest(launcher_bytes), "corpus launcher")):
+                try:
+                    unchanged = digest(artifact.read_bytes()) == expected_hash
+                except OSError:
+                    unchanged = False
+                if not unchanged:
+                    checks["integrity_failures"].append(f"{label} missing or changed")
             valid = process.returncode == 0 and not timed_out and not checks["integrity_failures"]
             scores = objective_scores(case, response, checks, documents) if valid else None
             result = {"id": case["id"], "corpus": case["corpus"], "question": case["question"],
@@ -316,6 +368,9 @@ def main() -> int:
     runner.add_argument("--effort", default="high", choices=["low", "medium", "high", "xhigh"])
     runner.add_argument("--only", help="comma-separated case IDs")
     runner.add_argument("--timeout", type=int, default=180)
+    runner.add_argument("--query-contract", type=Path,
+                        default=REPOSITORY / "skills/company-wiki/references/query.md",
+                        help="Query reference to embed and snapshot; defaults to the current skill reference")
     args = parser.parse_args()
     if args.command == "tool":
         return tool(args)
