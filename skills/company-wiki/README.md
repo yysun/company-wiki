@@ -1,5 +1,10 @@
 # company-wiki / 企业文库
 
+**Version:** `1.0.0`
+**Repository:** https://github.com/yysun/company-wiki
+
+See the [changelog](../../CHANGELOG.md) for release changes and known limitations.
+
 `company-wiki` is a portable Agent Skill for an admin-governed Company Library Index and a user-controlled
 Personal Wiki. The Index taxonomy is the governed backbone: it records canonical terms, aliases, source routes, and
 authority guidance. A small set of typed native links forms the useful discovery graph on top, while native source
@@ -24,7 +29,7 @@ Markdown registry is configuration only. A flat document collection is valid.
 - `references/change-protocol.md` — shared authority, approval, and failure contract for writes.
 - `references/publication.md` — current/continuing protection, safe generation, pre-read gates, and legacy cleanup.
 - `references/registry.md` — select and safely persist user-level wiki configuration.
-- `references/query.md` — traverse the graph and investigate questions.
+- `references/query.md` — route once, refine searches, read bounded evidence, and verify exact quotations.
 - `references/maintain.md` — propose and apply corrections, repairs, and restructuring.
 - `references/validate.md` — inspect graph health, source drift, gaps, and contradictions without writing.
 - `references/document-format.md` — node, edge, disclosure, question-guide, and validation guidance.

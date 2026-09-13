@@ -1,6 +1,9 @@
 # company-wiki / 企业文库
 
-[中文](README.zh-CN.md)
+[中文](README.zh-CN.md) · [Changelog](CHANGELOG.md)
+
+**Version:** `1.0.0`
+**Repository:** https://github.com/yysun/company-wiki
 
 `company-wiki` is a portable agent skill for building and using a permission-aware Company Library Index and
 user-controlled Personal Wiki in the company's existing cloud drive. Original documents stay where they are;
@@ -116,14 +119,33 @@ test corpus and 8 questions using the example wiki and its separate original sou
 authority, conflicting versions, policy boundaries, multi-document reasoning, missing evidence, and
 English/Chinese queries. Browse the [questions and answer key](tests/rag-quality/questions.md).
 
-The [September 12, 2026 pilot](tests/rag-quality/pilot-2026-09-12.md) used `gpt-6-astra` with high reasoning:
+The [September 13 comparison](tests/rag-quality/query-comparison-fixed-2026-09-13.md) evaluates the
+strengthened Query guidance in version 1.0.0: searches target missing evidence, reads preserve relevant
+context within the existing bounds, and exact quotations retain source whitespace. Both conditions use
+the same citation guidance and fixed corpus-tool launcher, with `gpt-6-astra` and high reasoning.
+
+| Measurement | Original retrieval | Strengthened retrieval |
+|---|---:|---:|
+| Valid executions | 100% (20/20 cases) | 95% (19/20 cases) |
+| Semantic answer passes among valid executions | 100% (20/20) | 100% (19/19) |
+| Exact citation integrity | 100% (69/69 quotes) | 100% (49/49 quotes) |
+| Chinese question | Pass | Pass |
+
+On the same 19 valid questions, strengthened retrieval used 19.0% fewer source reads and 17.0% fewer
+source characters. Quotation counts differ; citation integrity remained 100%. One updated execution
+recorded an empty `list` response and remains invalid. Separate diagnostic retries do not replace it.
+These are observations from one run per question, with agent grading; they do not establish an accuracy
+gain or production reliability.
+
+For historical context, the [September 12 pilot](tests/rag-quality/pilot-2026-09-12.md) used a hardcoded
+benchmark prompt that did not load the Query reference:
 
 | Measurement | Result |
 |---|---:|
 | Answers passing every rubric item and grounding review | 20/20 |
 | Answer rubric items, agent-reviewed | 59/59 |
 | Required original documents retrieved | 100% |
-| Citation integrity checks | 90/90 |
+| Citation integrity checks | 100% (90/90 quotes) |
 | Example navigation checks | 8/8 |
 | Mean source documents opened / elapsed time | 2.7 / 29.0 seconds |
 
