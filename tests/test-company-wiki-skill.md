@@ -177,8 +177,9 @@ preserved when present. A file listing or metadata response counts as discovery,
 The skill must report unsupported provider behavior rather than substituting a guessed path or custom API.
 
 For governed publication, additionally verify identity, exact write/govern capability, current audiences,
-continuing protection across all native exposure surfaces, protected pre-read metadata, conditional/exclusive
-updates, and idempotent/conditional creates with exact outcome reconciliation. The bundled local adapter implements
+provider-enforced destination permissions, protected pre-read metadata where needed, conditional/exclusive updates,
+and idempotent/conditional creates with exact outcome reconciliation. Verify continuing source inheritance across
+native surfaces only when explicitly required. The bundled local adapter implements
 only `list`, `read`, `preflight`, and `write`; it cannot establish these enterprise guarantees. Company publication
 scenarios require a capable provider/harness; their positive paths cannot pass using filesystem permissions alone.
 Use [publication/recovery acceptance](../.docs/tests/test-wiki-publication-recovery.md) for the refusal paths and
@@ -216,7 +217,7 @@ and `2026-08-20` for later scenarios.
   sidecar, processing receipt, mandatory log, queue, or watcher. Test-harness state remains outside source,
   wiki, and registry roots.
   All routes also apply `references/publication.md`: pre-read disclosure gates and destination-authorized clean
-  generation, continuing provider protection for governed publication, version/idempotency guards, and exact-outcome
+  generation, provider-managed current access and any explicitly required continuous inheritance, version/idempotency guards, and exact-outcome
   recovery. Unknown write outcomes are not confirmed failures; no automatic rollback is allowed.
 - **C3 — No restricted leak:** no wiki document or response contains the compensation values or grade
   ranges from the restricted fixture.

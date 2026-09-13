@@ -174,6 +174,8 @@ stay in the Git-ignored `tests/rag-quality/results/` directory.
 
 Here, **Ingest** is the compatibility alias for deliberate **Add Source** reconciliation. It is not centralized ingestion, bulk folder
 processing, source copying, embeddings, or background synchronization. One source at a time is the default.
+Titles, keywords, and filename patterns can start bounded candidate discovery within the registered source scope.
+The user selects exact candidates before reconciliation reads their bodies; matching a search does not select a source.
 
 ## How people use it
 
@@ -202,6 +204,8 @@ language. For example:
 
 > Ingest this newly approved policy. Show me the proposed wiki changes before applying them, and preserve the
 > original document link instead of copying its content.
+
+> Add reports named `EDU-C**测试报告` to this wiki. Search its registered sources and show me the candidates to select.
 
 The assistant resolves the question through the taxonomy, uses only the few relevant typed links, then searches the
 registered source locations and reads original evidence. It should say when information is missing, restricted,
@@ -233,12 +237,13 @@ whole cloud drive.
 - Keep maintenance explicit: propose changes and require approval for edits.
 - Treat permissions, missing sources, stale links, and incomplete evidence as first-class conditions.
 
-Durable provider-derived content requires verified identity, exact-destination authority, current audience
-containment, and provider-enforced continuing protection. That protection must cover native pages, titles/search
-previews, history, and exports after source or destination permissions change. It applies to Personal copies,
-index references, and all contributing metadata as well as shared summaries. An ACL snapshot alone is insufficient;
-unsupported publication returns an authorized transient draft or direct-source answer. The skill does not add ACL
-sync and cannot recall downloaded copies. Unsafe legacy pages must be gated before their bytes enter the model.
+Wiki permissions are managed by the cloud provider. Publication requires verified source access, exact-destination
+authority, current audience containment, and safe destination permissions from creation, including metadata and
+Personal references. Missing proof of future source-to-wiki permission propagation does not block ordinary publication.
+Continuous inheritance is required only when explicitly requested by the user or governing policy; in that case,
+the provider must enforce it across native content, previews, history, and exports. Unavailable required authorization
+returns an authorized transient draft or direct-source answer. The skill supplies no ACL sync or recall of downloaded
+copies. Known unsafe legacy pages must be gated before their bytes enter the model.
 
 Shared generation uses only destination-authorized evidence; excluded prior context requires clean regeneration
 or refusal. Removing a citation does not make a restricted derivation safe. Registry roles grant no authority.

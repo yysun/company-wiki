@@ -2,9 +2,10 @@
 
 Require an explicitly selected visible Company Library Index (registered profile or exact native home target) and a
 separate writable Personal Wiki destination. Verify identity, personal-destination write capability, and audience.
-Check [Publication](publication.md) for the index reference's current and continuing disclosure protection; a
-generic label does not make an index link exempt. If unavailable, create nothing and offer the authorized transient
-reference; do not invent a different Bootstrap route.
+Check [Publication](publication.md) for the index reference's current disclosure authorization and any explicitly
+required continuous inheritance; a generic label does not make an index link exempt. If required authorization is
+unavailable, create nothing and offer the authorized transient reference. Missing future-inheritance proof alone
+does not block ordinary provider-managed Bootstrap; do not invent a different Bootstrap route.
 A legacy profile cannot authorize Bootstrap. If the selected index is unavailable, create nothing and offer
 direct-source Query only when the user supplies an accessible exact source location.
 

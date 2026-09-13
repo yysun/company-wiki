@@ -22,12 +22,15 @@ These boundaries apply to `Init → Bootstrap → Explore ↔ Query → Curate �
 - Every workflow reads the registry entry first and uses only one selected, contained profile. A direct route
   supplied by the user is allowed only where the skill's missing-registry contract explicitly permits it.
 - Source discovery and reads stay inside the profile's registered original-material locations and scopes.
-  Add Source (with Ingest as a compatibility alias) additionally requires the user to select exact source documents or an explicitly bounded batch; a
-  topic, folder, or collection never silently expands into an all-source operation.
+  Add Source (with Ingest as a compatibility alias) may use user-supplied search criteria to discover candidates
+  within those bounds. Before reading source bodies for reconciliation, it requires exact user-selected documents
+  or an explicitly bounded batch; a topic, pattern, folder, or collection never silently expands into an all-source operation.
 - Wiki writes stay inside the profile's verified destination and require a concrete approved plan, apply-time
   rereads, and conditional/exclusive write protection. Provider-governed content additionally requires authenticated
-  provider identity, exact-scope capability/governance, current audience containment, and provider-enforced continuing
-  protection across native exposure surfaces. Unavailable proof blocks publication. Only user-owned local originals
+  provider identity, exact-scope capability/governance, and current audience containment. The provider enforces the
+  wiki's own permissions by default; continuing source inheritance is required only by an explicit user or governing
+  requirement. Unavailable current authorization or explicitly required protection blocks affected publication;
+  unavailable future-inheritance proof alone does not. Only user-owned local originals
   and synthetic fixtures in a verified private destination may use effective local identity/access; synced/exported
   governed evidence and Team/Company writes never qualify for that exception.
 - Gate unsafe derived metadata/content before model ingestion, and generate shared artifacts only from evidence

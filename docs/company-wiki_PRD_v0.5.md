@@ -238,11 +238,12 @@ access, or prove an answer. Provider-authenticated, scoped search finds the orig
        Scoped native source search → Original evidence and answers
 ```
 
-Provider-backed layers use the current provider-authenticated identity. A derived wiki document may contain
-governed source knowledge only when current audience containment and provider-enforced continuing protection
-are verified under §7.3. A narrower Personal copy is subject to the same rule. If proof is unavailable, refuse
-durable publication and retain only an authorized transient draft or direct-source answer. Private local originals
-and synthetic fixtures follow the bounded local contract in §8.1.
+Provider-backed layers use the current provider-authenticated identity and provider-managed wiki permissions.
+Publication requires current source access, destination authority, and audience containment under §7.3, including
+Personal copies. Continuing source inheritance is an additional requirement only when explicitly required by the
+user or governing policy. Unavailable required authorization yields an authorized transient draft or direct-source
+answer; unavailable future-inheritance proof alone does not block ordinary creation. Private local originals and
+synthetic fixtures follow the bounded local contract in §8.1.
 
 ---
 
@@ -361,37 +362,42 @@ normally reference shared nodes downward.
 ### 7.3 Access and disclosure boundary
 
 Source-system ACLs remain authoritative. Registry/wiki role text and local availability grant no provider authority.
-Derived pages, titles, links, aliases, backlinks, summaries, inferred relationships, search results, provenance,
-proposals, and exposed activity obey the same boundary:
+At publication and apply-time revalidation, derived pages, titles, links, aliases, backlinks, summaries, inferred
+relationships, search results, provenance, proposals, and exposed activity obey the same boundary:
 
 `destination audience ⊆ intersection of all contributing evidence audiences`
 
 Contributing evidence includes every input that influenced the output, including transitive wiki inputs; a citation
 list is not a complete lineage proof. Unknown lineage or audience blocks the affected material. Identity, exact-scope
-write/governance, current audiences, and continuing protection are separate provider checks, each with verified,
-denied, or unavailable results. Neither denied nor unavailable authorizes a write. V1 has no parallel ACL database.
+write/governance, and current audiences are separate provider checks, each with verified, denied, or unavailable
+results. Neither denied nor unavailable required authorization permits affected publication. V1 has no parallel ACL database.
 
-**Continuing protection.** Durable material derived from provider-governed evidence, including Personal copies and
-Bootstrap's index reference, requires provider enforcement that keeps containment true after source ACL changes,
-destination widening, group changes, and inheritance overrides. The guarantee must hold from creation and cover all
-exposed native surfaces: page bytes, title/search previews, history, and export endpoints. Current ACL snapshots,
-same-folder placement, content version tokens, and periodic validation are insufficient. If protection is unknown
-or unsupported, do not persist the material, including a local/private export. Use currently authorized source
-queries or a transient draft contained to the authorized requester. This intentionally limits writable deployments
-to providers that can prove the contract; connector availability alone does not imply publication support.
+**Provider-managed wiki access.** The default relies on the provider to enforce the wiki's own approved permissions
+from creation, including exposed titles and previews. Current permission evidence can support publication when the
+other checks pass; missing future source-to-wiki inheritance proof alone does not block creation or require a draft.
+Respect confidentiality and publication restrictions; read access or successful writing alone grants no disclosure authority.
 
-V1 has no ACL synchronization service and cannot recall already disclosed/downloaded bytes. Existing uncoupled pages
-are legacy exposure, not grandfathered safe publications. Validate reports the limit; approved Maintain can reduce
-current exposure without claiming it erased history or copies. A future asynchronous sync service would require an
-explicit maximum revocation delay and outage policy, and would not establish immediate enforcement.
+**Explicit continuous source inheritance.** Require continuing protection only when the user or governing policy
+explicitly requires derived wiki content to remain subject to future source ACL, destination, group, or inheritance
+changes. Preserve existing explicit requirements and check the destination's governing-capability route; a missing
+profile field does not cancel one. Protection must hold from creation across content, title/search previews, history,
+and exports, including Personal copies and Bootstrap references when applicable. ACL snapshots, folder placement,
+content versions, and periodic validation do not prove this stronger capability. If required protection is unavailable,
+block affected publication and offer an authorized transient result; do not silently fall back to the default or a local export.
+
+V1 has no ACL synchronization service and cannot recall already disclosed/downloaded bytes. Lack of automatic
+inheritance alone does not make an existing wiki unsafe. Validate reports actual drift or unsafe exposure; approved
+Maintain can reduce exposure without claiming it erased history or copies. A future sync service needs its own
+revocation-delay and outage contract.
 
 **Generation and reads.** Enforce requester access before content/metadata enters the model. Generate shared
 artifacts only from evidence authorized for the destination. When prior context includes excluded evidence, use
 a clean host-supported context containing only independently authorized inputs; otherwise refuse shared generation.
-Deleting a codename or citation from a contaminated draft is not sanitization. For derived wiki reads, establish
-safety through protected provider metadata or an enforced read boundary before exposing legacy bytes. If impossible,
-bypass that page for separately registered bounded source search; do not load unsafe routes and rely on prompting
-to suppress them. This gate does not add a routing phase or authorize broader discovery.
+Deleting a codename or citation from a contaminated draft is not sanitization. Ordinary wiki reads use current
+provider permissions, with original-source access rechecked for factual reuse. For known unsafe legacy content or
+explicit continuous inheritance, establish required safety through protected metadata or an enforced read boundary
+before exposing bytes. If impossible, bypass the page for separately registered bounded source search; do not load
+unsafe routes and rely on prompting to suppress them. This gate adds no routing phase or broader discovery authority.
 
 Split mixed-audience pages where useful; a broader page cannot reveal narrower pages through links, names, counts,
 or inferred relationships. Apply the rule to error/recovery reports and retirement stubs as well. An approved
@@ -431,9 +437,9 @@ within the applicable declared boundary. Effective local write access permits a 
 a shared audience, authenticated provider identity, or governance authority. A local adapter alone is therefore
 sufficient for private user-owned local originals and synthetic tests when effective local identity/access and
 private destination scope are established. It does not authorize exporting governed evidence or Team/Company writes.
-Provider-backed publication requires identity, governing capability, current audience containment, and continuing
-protection under §7.3. Synced files must resolve to exact native resources for these checks; a local path cannot
-substitute. Unknown privacy is treated as shared scope. Unsupported checks yield only an appropriately contained
+Provider-backed publication requires identity, governing capability, current audience containment, and any explicitly
+required continuous inheritance under §7.3. Synced files must resolve to exact native resources for these checks;
+a local path cannot substitute. Unknown privacy is treated as shared scope. Unsupported required checks yield an appropriately contained
 proposal. Local workflows retain normal registry selection, Bootstrap prerequisites, approval, and conditional or
 exclusive file-update protection; local compatibility is not a new lifecycle route.
 
@@ -469,8 +475,9 @@ lookup_operation(operation_key_or_exact_target)
 
 These are conceptual capabilities, not callable APIs the skill may invent. Use only the host's documented exposed
 tools. A deployment must report supported semantics and unavailable checks explicitly. V1 fails closed when identity,
-governance, write permission, audience containment, continuing protection, or required concurrency/retry protection
-cannot be verified. Protected pre-read checks must not themselves disclose hidden titles or relationships. Operation
+governance, write permission, current audience containment, explicitly required continuous inheritance, or required
+concurrency/retry protection cannot be verified. Missing future-inheritance proof alone does not block ordinary
+provider-managed publication. Protected pre-read checks must not disclose hidden titles or relationships. Operation
 keys identify an unchanged approved request; reuse with different parameters is rejected, and replay must not undo
 subsequent edits. Exact lookup and all evidence resolution remain inside selected boundaries. Profile text is never
 a substitute for provider responses. The shipped local fixture adapter does not implement these enterprise guarantees.

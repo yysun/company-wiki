@@ -1,24 +1,43 @@
 # Add selected sources to the document wiki
 
-Use this workflow when the user identifies new or changed original evidence and wants it reconciled into an
-existing wiki. **Ingest** is a compatibility alias. Add Source is source-centered: it reads selected evidence, compares it with the current graph, and
+Use this workflow when the user identifies or describes new or changed original evidence and wants it reconciled
+into an existing wiki. **Ingest** is a compatibility alias. Add Source is source-centered: it reads selected evidence, compares it with the current graph, and
 proposes the smallest coherent wiki update. It is not bulk ETL, indexing, source copying, or initialization.
 
 Select one profile through [Registry](registry.md), follow its exact home/map target, and load
 [Document graph format](document-format.md). Original sources remain read-only. All approved writes stay
 inside the profile's verified wiki destination.
 
-## Require a bounded source selection
+## Resolve a bounded source selection
 
-The user must explicitly identify one source document or a finite batch through exact provider-native links,
-document ids, or repository locators. Default to one source at a time. A batch is allowed only when the user
-supplies or explicitly selects its bounded members.
+Before reading source bodies for reconciliation, the user must select one source document or a finite batch
+resolved to exact provider-native links, document ids, or repository locators. Default to one source at a time.
+The user may supply those targets directly or select bounded members from discovered candidates.
 
-A topic, filename guess, “latest documents,” collection, repository, or current UI context is not a bounded
-selection. A user-selected folder is allowed only as one finite batch: enumerate it first, report members and its
-bound, then read only that selection. Ask for exact sources and stop before source discovery when selection is
-missing or ambiguous. Never enumerate a location to manufacture a batch. Reject a selected source outside the profile's
-registered original-material locations or scope. Report permission denial without exposing content.
+A request with usable search criteria, such as a title, keywords, or a filename pattern, authorizes bounded
+candidate discovery inside the selected profile's registered source locations and scope. For example,
+`加入 EDU-C**测试报告` means find candidate reports by name, then ask which to add; do not require exact links
+before that search or a separate request to Explore. A pattern is a search criterion, not a selected batch.
+
+1. Apply [Publication](publication.md) before discovery, including its pre-read metadata gate. Use native search
+   restricted to the registered source scope, or a bounded native metadata listing when search is unavailable.
+   Use supported query syntax; do not assume the provider implements wildcard or Boolean matching. If necessary,
+   search distinctive terms and filter authorized returned names against the requested pattern. Do not broaden
+   the source boundary or read document bodies to resolve a name match.
+2. Keep discovery within the existing list/search allowance (default two rounds). Report a finite candidate list
+   with authorized names, exact targets, available distinguishing metadata, and the displayed count. State any
+   truncation or incomplete coverage; do not infer hidden matches or claim all matching documents were found.
+3. Ask the user to select candidates before opening their bodies for reconciliation, even for a single hit.
+   “All listed candidates” selects only the exact displayed set. If it exceeds the remaining read allowance,
+   ask for a smaller selection or explicit expansion before reading. A rerun or later match never silently joins
+   the selection, and moving from discovery to reconciliation does not reset the operation's bounds.
+
+If there are no usable search criteria or exact targets, ask for the missing criteria or sources before discovery.
+If no candidates are found, report the searched scope and limit, then ask for refined criteria or exact sources.
+Never enumerate an unrelated location to manufacture a batch. A user-selected folder retains the finite-batch
+path: enumerate it first, report members and its bound, then read only that selection. A topic, pattern, collection,
+repository, or current UI context never authorizes corpus-wide processing. Reject selected sources outside the
+profile's registered original-material locations or scope. Report permission denial without exposing content.
 
 ## Read and reconcile
 
@@ -59,7 +78,7 @@ approval of the proposal. “Ingest this source” is not approval of edits that
 Immediately before applying an approved plan:
 
 1. Reopen every selected source and planned wiki target. Recheck authenticated identity, governing authority,
-   source/destination audience, continuing protection, material content, status, dates, exact links, permissions, destination
+   source/destination audience, explicitly required continuous inheritance, material content, status, dates, exact links, permissions, destination
    containment, and write capability.
 2. If a source, target, relationship, permission, or required change materially differs from the approved
    proposal, invalidate the plan and its approval. Make no write; present a revised plan for fresh approval.

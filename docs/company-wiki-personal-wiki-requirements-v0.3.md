@@ -1093,7 +1093,7 @@ Restricted sources
        ↓
 Derived wiki node
        ↓
-Access remains source-constrained
+Provider-managed wiki access; source access rechecked for factual reuse
 ```
 
 ### 10.2 Shared wiki content
@@ -1109,17 +1109,21 @@ Removing a citation or codename is not proof of sanitization. Proposals and diag
 
 ### 10.3 Native ACL preference
 
-Provider-derived personal and shared wiki files MUST have provider-enforced continuing audience containment from
-creation, including after source ACL, group, inheritance, or destination-audience changes. Verify native content,
-title/search previews, history, and export coverage. Current ACL snapshots and folder placement alone are insufficient.
-If the host cannot prove protection, retain only an authorized transient draft or direct-source answer; a private
-local export is not a substitute. V1 adds no parallel ACL database or synchronization service and cannot recall
-already disclosed/downloaded copies.
+Provider-derived personal and shared wiki files default to provider-managed destination permissions. The provider
+MUST enforce the approved wiki audience from creation, including exposed metadata. Current publication authority
+and audience containment remain required; unavailable future source-to-wiki inheritance proof alone MUST NOT block
+ordinary publication or require a transient draft.
 
-Before reading derived wiki bytes, establish current evidence safety through protected provider metadata or an
-enforced read boundary. Unsafe legacy routes must be bypassed before model ingestion, using separately registered
-bounded source search. Validate is read-only; approved disclosure cleanup may remove unsafe current fields without
-preserving restricted stubs, but MUST report unresolved native history/search exposure.
+Continuous source inheritance MUST be verified only when explicitly required by the user or applicable governing
+policy. Preserve any existing explicit requirement. For that model, verify protection after source ACL, group,
+inheritance, and destination changes across content, title/search previews, history, and exports. Current snapshots
+and periodic checks do not prove this guarantee. If required protection is unavailable, retain only an authorized
+transient result; do not switch models or use a local export to bypass it. V1 supplies no ACL synchronization or recall.
+
+Ordinary wiki reads use provider-enforced current access; factual reuse requires current source evidence. For known
+unsafe legacy content or explicit continuous inheritance, establish required disclosure safety before loading bytes,
+or bypass the page for separately registered bounded source search. Lack of automatic inheritance alone does not
+establish leakage. Validate is read-only; approved cleanup MUST report unresolved native history/search exposure.
 
 ### 10.4 Durable changes and recovery
 

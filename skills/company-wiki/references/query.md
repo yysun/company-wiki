@@ -1,8 +1,10 @@
 # Explore and Query
 
-Both routes are read-only. Select one profile through [Registry](registry.md), then apply the pre-read gate in
-[Publication](publication.md) before loading any wiki title, route, or content. If a legacy page's evidence safety
-cannot be established without exposing its bytes, skip it and use the separately registered source-search scope.
+Both routes are read-only. Select one profile through [Registry](registry.md), then apply the access model and pre-read
+rules in [Publication](publication.md) before loading any wiki title, route, or content. Ordinary authorized wiki
+reads rely on current provider permissions. For known unsafe legacy content or explicit continuous inheritance,
+if required disclosure safety cannot be established without exposing the page's bytes, skip it and use the separately
+registered source-search scope.
 Do not load a stale restricted alias and rely on a prompt to suppress it. Make one routing decision from
 its compact context: Personal home as prior, named Company Index taxonomy home as router, and at most three declared
 routing pages per scope. Resolve canonical concepts and aliases, choose the few relevant typed links, likely source
@@ -68,5 +70,7 @@ recovers the original passage. Before returning, check each quote against the so
 and confirm that it supports the associated claim. Shorten a quote only if the remaining passage still supports
 the claim; never rewrite the source or remove qualifications to make a quote match.
 
-Recheck current source access/audience before exposing a derived route; fail closed on unavailable access.
-Source search metadata, unavailable-route diagnostics, and response links obey the same disclosure boundary.
+Expose ordinary wiki routes only through currently authorized provider-visible metadata. Recheck current source
+access/audience for source-derived response claims and links, and apply the additional pre-read protection for known
+unsafe legacy routes or explicit continuous inheritance. Fail closed on unavailable required access; source search
+metadata and unavailable-route diagnostics obey the same disclosure boundary.

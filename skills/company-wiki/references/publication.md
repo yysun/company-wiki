@@ -3,14 +3,16 @@
 Read this after registry selection, before discovery, wiki reads, generation, or durable changes. These are
 capability requirements on the host/provider, not permission claims the model can establish from prose.
 
-## Authority and continuing protection
+## Current authorization and provider-managed access
 
-Check authenticated identity, exact-destination write/govern capability, current source/destination audiences,
-and continuing protection separately. Each check returns verified, denied, or unavailable; neither denied nor
-unavailable permits publication. A scope/owner label, user assurance, local file access, or successful write probe
-is not provider proof. Broader or unknown Personal audiences follow the shared-write rules.
+Default to provider-managed wiki access: the cloud provider enforces the destination's own permissions. Verify
+authenticated source access, exact-destination write/govern capability, and current source/destination audiences.
+Respect applicable confidentiality and publication restrictions. Each required check returns verified, denied,
+or unavailable; denied or unavailable current authorization blocks the affected publication. A scope/owner label,
+user assurance, local file access, or successful write probe is not provider proof of disclosure authority.
+Broader or unknown Personal audiences follow the shared-write rules.
 
-For every source-derived page and exposed field, require:
+At publication and apply-time revalidation, require for every source-derived page and exposed field:
 
 `destination audience ⊆ intersection of all contributing evidence audiences`
 
@@ -19,18 +21,33 @@ and interpretations, including transitive inputs through other wiki pages; it is
 Resolve evidence only inside registered source bounds. Missing lineage or unavailable audience proof blocks that
 material; do not search outside the profile or trust a wiki's claim that it is safe.
 
-For provider-governed evidence, also require provider-enforced continuing containment: source ACL changes,
-destination widening, group changes, and inheritance overrides must not expose derived bytes to a broader audience.
-Verify coverage for every native exposure surface the deployment offers, including content, titles/search previews,
-history, and export endpoints. A current ACL snapshot, same-folder placement, content version, or scheduled check
-does not prove continuing protection. The guarantee must apply from creation onward, without a temporarily broad
-page or title. Apply it to provider-derived Personal copies and Bootstrap's index reference as well as shared pages.
+The provider must enforce the approved wiki audience from creation, including exposed titles and previews;
+do not create broadly visible content and tighten it afterward. Current permission evidence can support ordinary
+publication when the other requirements pass. Missing proof of future source-to-wiki permission propagation alone
+must not block Init, Bootstrap, Add Source, Curate, or Maintain, or force an otherwise authorized result into a draft.
 
-If that guarantee is unavailable, do not persist the governed material. Use currently authorized source queries or
-a transient draft visible only to an authorized requester. Never substitute a private local export. V1 provides no
-ACL synchronization service; it cannot recall already disclosed/downloaded bytes. Existing unsafe copies require
-explicit repair; a package update does not revoke them. A future asynchronous sync feature would need a separate
-bounded-delay guarantee and failure policy, not a claim of immediate revocation.
+The wiki's permissions govern the published document. V1 supplies no automatic source-to-wiki ACL synchronization
+and cannot recall already disclosed/downloaded bytes. State this limitation when relevant; do not promise that a
+source revocation changes existing wiki access. Validate can report later drift and Maintain can propose repairs.
+Absence of automatic inheritance alone does not establish unsafe exposure or require a new approval.
+
+## Explicit continuous source inheritance
+
+Require provider-enforced continuing protection only when the user or applicable governing policy explicitly
+requires the destination's derived content to remain subject to future source-permission changes. Check the selected
+destination's governing-capability route and preserve any existing explicit requirement through proposals, follow-ups,
+and retries. A missing profile field never cancels a known requirement; registry prose is not proof of enforcement.
+
+For this access model, source ACL changes, destination widening, group changes, and inheritance overrides must not
+expose derived bytes to a broader audience. Verify every native exposure surface the deployment offers, including
+content, titles/search previews, history, and export endpoints. A current ACL snapshot, same-folder placement,
+content version, or scheduled check does not prove continuing protection. The guarantee must apply from creation
+onward, including Personal copies and Bootstrap's index reference when that requirement applies.
+
+If explicitly required protection is denied or unavailable, block the affected publication and offer only currently
+authorized source queries or a transient draft visible to an authorized requester. Do not silently switch to the
+default model or substitute a private local export. Prompts, approval, and local tests cannot supply provider
+enforcement. A future asynchronous sync feature would need its own revocation-delay and failure contract.
 
 Private local originals and synthetic fixtures may use effective local identity/access and a verified private
 destination without claiming enterprise governance or cloud revocation. This exception does not cover synced or
@@ -45,11 +62,15 @@ excluded evidence, regenerate in a host-supported clean context containing only 
 bounded task. If isolation is unavailable, refuse shared generation; removing tokens/citations from a contaminated
 draft is not sanitization. Independently supported material may be generated from clean authorized evidence.
 
-Before opening a derived wiki page, use protected provider metadata or a provider-enforced read boundary to establish
-current evidence access and disclosure safety, including legacy titles/routes. Do not first load unsafe bytes and
-then ask the model to ignore them. If the host cannot establish the boundary without exposing those bytes, skip the
-page and use bounded direct-source search when separately registered. Do not invent lineage or infer source scope
-from the inaccessible page. This pre-read gate is not an extra wiki routing phase.
+For ordinary wiki reads, use the provider's current access controls for the page and its metadata; lack of automatic
+source inheritance alone is not a reason to bypass an authorized wiki. Recheck original evidence access before
+reusing factual claims; a readable wiki is not a substitute for same-operation source evidence.
+
+For known unsafe legacy content or a destination with explicit continuous source inheritance, establish the required
+disclosure safety through protected metadata or a provider-enforced read boundary before titles, routes, or content
+enter the model. Do not load unsafe bytes and then ask the model to ignore them. If the boundary cannot be established
+without exposing those bytes, skip the page and use bounded direct-source search when separately registered. Do not
+invent lineage or infer source scope from an inaccessible page. This pre-read gate is not an extra wiki routing phase.
 
 Split mixed-audience content into separately protected pages when useful. A broader page must not name, link, count,
 alias, or infer the existence of a narrower page. Apply the same rule to proposals, error messages, recovery reports,

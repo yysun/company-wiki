@@ -4,8 +4,9 @@ Init, Bootstrap, Curate, Add Source, Maintain, and promotion share this protocol
 and registration; original sources are never written. Apply the [publication boundary](publication.md) first.
 
 1. Propose exact scope, destination, affected targets, evidence and versions, conflicts, preserved organization,
-   ordered writes, audience result, and continuing-protection coverage. Include per-target version conditions,
-   create/retry semantics, exact lookup targets, and supported operation keys. Create/verify dependencies before
+   ordered writes, current audience result, and applicable access model. Record continuing-protection coverage only
+   when continuous source inheritance is explicitly required under [Publication](publication.md). Include per-target
+   version conditions, create/retry semantics, exact lookup targets, and supported operation keys. Create/verify dependencies before
    exposing links to them; this ordering reduces partial graph inconsistency but does not hide native search results.
    Every intermediate write must satisfy the publication boundary. A source selection or correction request is not
    approval of edits.
@@ -15,14 +16,15 @@ and registration; original sources are never written. Apply the [publication bou
    when it already covers the concrete unchanged action. Registry index registration binds the exact selected-entry
    delta under the narrow unrelated-entry merge rule in [Registry](registry.md); source/page version drift is not exempt.
 3. Immediately before apply, recheck identity; exact write/govern capability; source/destination audiences;
-   continuing protection; source and target versions/content/links; and target preflight. Any material change,
-   unavailable result, or failed preflight invalidates approval and writes nothing before apply. If discovered
-   between writes, stop further writes and reconcile partial state. A content ETag does not prove unchanged ACLs.
+   any explicitly required continuous inheritance; source and target versions/content/links; and target preflight.
+   Any material change, unavailable required result, or failed preflight invalidates approval and writes nothing before
+   apply. If discovered between writes, stop further writes and reconcile partial state. A content ETag does not prove unchanged ACLs.
 4. Use provider-enforced conditional updates tied to the approved version, or a verified equivalent exclusive-write
    mechanism spanning recheck and write. Rereading alone does not prevent a concurrent overwrite. Creates require
    provider-supported idempotency or conditional create-if-absent at an exact target with reconcilable outcomes.
    Unsupported protection yields a proposal, not a blind overwrite/create. Recheck per-target authorization before
-   each write; source/destination continuing protection must be enforced by the provider during the write as well.
+   each write; the provider must enforce the approved destination permissions from creation. Continuous source
+   inheritance is an additional provider requirement only when the applicable access model explicitly requires it.
 5. Write in order, verify each result, and stop at first failure or unknown outcome. Verify identity, exact target,
    resulting version/content, and protection before counting success. Do not roll back or continue after a partial
    write. A timeout or missing response is unknown, not evidence that the provider made no change.

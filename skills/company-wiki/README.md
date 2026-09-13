@@ -25,9 +25,9 @@ Markdown registry is configuration only. A flat document collection is valid.
 - `references/init.md` — initialize a home/map and the first reading paths.
 - `references/bootstrap.md` — create a minimal Personal Wiki by reference.
 - `references/curate.md` — make durable navigation knowledge or promote it by scope.
-- `references/add-source.md` — reconcile explicitly selected sources (`Ingest` compatibility alias).
+- `references/add-source.md` — discover candidates from search criteria and reconcile selected sources (`Ingest` alias).
 - `references/change-protocol.md` — shared authority, approval, and failure contract for writes.
-- `references/publication.md` — current/continuing protection, safe generation, pre-read gates, and legacy cleanup.
+- `references/publication.md` — provider-managed access, explicit source inheritance, safe generation, and legacy cleanup.
 - `references/registry.md` — select and safely persist user-level wiki configuration.
 - `references/query.md` — route once, refine searches, read bounded evidence, and verify exact quotations.
 - `references/maintain.md` — propose and apply corrections, repairs, and restructuring.
@@ -63,7 +63,9 @@ any durable write.
 `Init → Bootstrap → Explore ↔ Query → Curate → Add Source → Maintain → Validate`
 
 Add Source is the explicit bridge between discovery and durable knowledge. The user selects one new source by
-default, or supplies a finite batch. The agent reads it, compares it with relevant wiki nodes and evidence,
+default, or supplies a finite batch. A title, keywords, or filename pattern can first produce a bounded candidate
+list inside the registered source scope; the user selects exact members before their bodies are read. The agent
+reads the selection, compares it with relevant wiki nodes and evidence,
 and presents the exact proposed edits. Source selection permits reading but not those edits; the agent writes
 only after approval and revalidation. An unchanged source produces no edit or receipt. Validate is separately
 read-only, while fixes route to Maintain.
@@ -76,11 +78,12 @@ Wiki documents are organization data. Keep them in the drive and preserve them w
 this skill. Do not move them into the installed package or treat package updates as a migration of the
 organization's knowledge.
 
-Publication requires verified identity, exact-scope authority, current audience containment, and provider-enforced
-continuing protection for all contributing evidence and native exposure surfaces, including history and previews.
-Personal copies and index links are included. Snapshot-only ACL integrations cannot publish governed material;
-use authorized transient drafts or direct-source answers. Shared generation excludes restricted context before
-synthesis; unsafe legacy wiki reads are gated before content enters the model. V1 supplies no sync or recall service.
+Publication uses provider-managed wiki permissions by default and requires current source access, exact-scope
+authority, audience containment, and safe permissions from creation. Personal copies and index links are included.
+Unavailable future source-permission inheritance alone does not block publication. Require continuing protection
+across native surfaces only for an explicit user or governing requirement; missing required authorization yields
+an authorized transient draft or direct-source answer. Shared generation excludes restricted context before synthesis;
+known unsafe legacy reads are gated before model ingestion. V1 supplies no ACL sync or recall service.
 
 Private user-owned local originals/tests remain supported with verified local identity/access and private scope;
 synced/exported evidence does not inherit that exception. Writes require conditional/exclusive updates and
@@ -116,8 +119,9 @@ registry and must report that limitation.
    example, “创建一个财务文库” already supplies the name, finance scope, and Chinese language; the agent can
    ask only for the unknown original-material location and writable destination. A subject never authorizes
    a whole-drive search: source discovery stays inside locations the user explicitly specifies.
-3. Add a new or changed source by selecting its exact native target. Review the proposed wiki changes,
-   then approve them if they correctly preserve authority, conflicts, and evidence links.
+3. Add new or changed sources by exact native targets or search criteria such as `加入 EDU-C**测试报告`.
+   For search criteria, select from the returned candidates first. Review the proposed wiki changes, then approve
+   them if they correctly preserve authority, conflicts, and evidence links.
 4. Ask company questions normally. The taxonomy resolves canonical terms and aliases, while the few relevant typed
    links guide discovery; neither limits source search. The agent makes one routing decision, searches registered
    source locations, reads relevant original evidence, and cites documents it actually opened.
