@@ -2,7 +2,7 @@
 
 **Technical manuscript — revised September 14, 2026**
 
-**Implementation scope:** version 1.1.0 and subsequent source-access and capability fixes through `bc896b7`.
+**Implementation scope:** version 1.2.0, including source-access, capability, authorization, source-resolution, budget, and routing fixes.
 
 ## Abstract
 
@@ -266,7 +266,7 @@ A failed response is not necessarily a failed write. A timeout may follow a comm
 
 The repository implements the product primarily as a portable instruction package in `skills/company-wiki/`, supported by focused lifecycle references. The package delegates search, reads, authentication, and conditional writes to the host and its existing provider tools. There is no independent production service in this repository that can enforce those provider capabilities on its own.
 
-Version 1.1.0 adds optional Query-to-Curate learning, bounded Add Source candidate discovery, and visible page timestamps, alongside provider-managed publication guidance. The inspected state also includes subsequent Query source-access/version checks and the read/draft/publish capability separation. The evaluation below identifies the earlier guidance snapshots actually exercised; its results do not validate these later capability and access changes.
+Version 1.1.0 introduced optional Query-to-Curate learning, bounded Add Source candidate discovery, and visible page timestamps, alongside provider-managed publication guidance. Version 1.2.0 adds Query source-access/version checks, read/draft/publish capability separation, bounded task authorization, direct resolution of unambiguous source selections, separate retrieval and verification budgets, and one evidence-triggered routing follow-up. The evaluation below identifies the earlier guidance snapshots actually exercised; its results do not validate these later changes.
 
 The shipped examples demonstrate flat linked documents and separate synthetic originals. A deterministic local lifecycle adapter provides bounded logical targets and fault controls. Static contract tests check that required workflow rules remain present; adapter tests exercise local behavior. These mechanisms support development and regression detection, but a successful static assertion or simulated permission failure does not establish production access enforcement.
 
@@ -445,7 +445,7 @@ The completed synthetic pilot and subsequent guidance comparisons demonstrate se
 
 ## Appendix A. Artifact Provenance and Reproducibility
 
-This revision describes version 1.1.0 and subsequent authorization, source-resolution, budget, and routing fixes inspected on September 14, 2026. Historical benchmark measurements retain their recorded code, fixed read caps, and initial-only routing contract; they do not validate the newer defaults. The primary product sources are the [changelog](../CHANGELOG.md), [README](../README.md), [PRD v0.5](company-wiki_PRD_v0.5.md), [skill package](../skills/company-wiki/SKILL.md), and its [document format](../skills/company-wiki/references/document-format.md), [Query protocol](../skills/company-wiki/references/query.md), [Curate workflow](../skills/company-wiki/references/curate.md), [Add Source workflow](../skills/company-wiki/references/add-source.md), [publication boundary](../skills/company-wiki/references/publication.md), and [change protocol](../skills/company-wiki/references/change-protocol.md). Where planning documents are broader or older, the current focused workflow references define the operation described here.
+This revision describes version 1.2.0, inspected on September 14, 2026. Historical benchmark measurements retain their recorded code, fixed read caps, and initial-only routing contract; they do not validate the newer defaults. The primary product sources are the [changelog](../CHANGELOG.md), [README](../README.md), [PRD v0.5](company-wiki_PRD_v0.5.md), [skill package](../skills/company-wiki/SKILL.md), and its [document format](../skills/company-wiki/references/document-format.md), [Query protocol](../skills/company-wiki/references/query.md), [Curate workflow](../skills/company-wiki/references/curate.md), [Add Source workflow](../skills/company-wiki/references/add-source.md), [publication boundary](../skills/company-wiki/references/publication.md), and [change protocol](../skills/company-wiki/references/change-protocol.md). Where planning documents are broader or older, the current focused workflow references define the operation described here.
 
 The experimental evidence comes from the [benchmark definition](../tests/rag-quality/README.md), [dataset](../tests/rag-quality/dataset.json), [runner](../tests/rag-quality/benchmark.py), [versioned September 12 baseline](../tests/rag-quality/baselines/2026-09-12/README.md), [corrected retrieval comparison](../tests/rag-quality/query-comparison-fixed-2026-09-13.md), and [learning comparison](../tests/rag-quality/query-learning-2026-09-13.md). This revision adds six forced-listing diagnostics and a fresh 40-session comparison, with source-backed semantic review of all answers, documented in the [synchronous execution follow-up](../tests/rag-quality/query-execution-2026-09-14.md).
 

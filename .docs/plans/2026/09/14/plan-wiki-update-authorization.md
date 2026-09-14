@@ -78,3 +78,6 @@ VR review round: 1; reviewer: reused (`authorization_review`)
 All six acceptance criteria and all plan tasks passed independent review. Existing test and skill evidence remains
 valid: later edits corrected only the affected scenario budget and recorded review/evaluation results. The full
 criterion-level VR result is retained in the completion report. Provider execution remains outside scope.
+
+Correction milestone: `04aabff` — operation-wide scenario budgets, explicit recovery allowance, and completed
+independent evaluation/review evidence. No push or final-delivery GC was performed.

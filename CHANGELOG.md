@@ -2,10 +2,13 @@
 
 ## Unreleased
 
+## 1.2.0 — 2026-09-14
+
 ### Fixed
 
 - Separate distinct-source and evidence-read budgets from a finite update-verification allowance; preserve all
-  returned-content and explicit legacy/total-read caps across rechecks and recovery.
+  returned-content and explicit legacy/total-read caps across rechecks and recovery. Existing aggregate allowances
+  replace unspecified component defaults, and every discovery result page consumes its own request.
 - Resolve specific unambiguous source descriptions and explicitly requested finite batches to exact targets
   without redundant selection; keep ambiguity, completeness, access, and scope checks.
 - Allow one bounded wiki routing follow-up for a concrete evidence gap while preserving compact initial routing,
@@ -19,6 +22,17 @@
   revisions. Preserve requester access checks, including for broader service accounts.
 - Route missing publication capabilities to an authorized transient result without wiki or registry writes;
   distinguish source freshness from destination concurrency protection and preserve disclosure boundaries.
+- Run bounded benchmark commands synchronously and record execution overrides; retain invalid-output evidence
+  and distinguish execution reliability from answer quality in comparison reports.
+
+### Validation and known limitations
+
+- All 42 adapter/contract and benchmark/report unit tests passed; skill, Markdown-link, and whitespace checks passed.
+- All 18 independent retrieval decision scenarios and variants passed, covering budget accounting, legacy limits,
+  source selection, and routing boundaries. See the [verification record](.docs/tests/test-bounded-wiki-retrieval.md).
+- These checks validate the instruction package and its interpretation. Live-provider execution/enforcement and
+  retrieval-quality improvements under the new defaults remain untested. Historical benchmark results and their
+  stricter read/routing limits remain unchanged.
 
 ## 1.1.0 — 2026-09-13
 

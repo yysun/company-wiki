@@ -106,3 +106,6 @@ VR review round: 1; reviewer: reused (`authorization_review`)
 Independent VR marked all six criteria complete. Evidence establishes package validity and instruction
 interpretation; live-provider execution/enforcement and retrieval-quality improvements remain untested.
 The completion report preserves the full final VR result.
+
+Correction milestone: `a0554d9` — preserve explicit aggregate allowances, count discovery pagination,
+and record completed verification. DD is complete; stopped before GC, with no release or push.
