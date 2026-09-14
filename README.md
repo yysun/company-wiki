@@ -131,23 +131,32 @@ test corpus and 8 questions using the example wiki and its separate original sou
 authority, conflicting versions, policy boundaries, multi-document reasoning, missing evidence, and
 English/Chinese queries. Browse the [questions and answer key](tests/rag-quality/questions.md).
 
-The [September 13 comparison](tests/rag-quality/query-comparison-fixed-2026-09-13.md) evaluates the
-strengthened Query guidance in version 1.0.0: searches target missing evidence, reads preserve relevant
-context within the existing bounds, and exact quotations retain source whitespace. Both conditions use
-the same citation guidance and fixed corpus-tool launcher, with `gpt-6-astra` and high reasoning.
+The [September 14 follow-up](tests/rag-quality/query-execution-2026-09-14.md) repeats the retrieval
+comparison with synchronous command execution in both conditions. It reuses the two frozen Query
+references from September 13, the same corpus, budgets, citation guidance, and corpus-tool launcher,
+with `gpt-6-astra` and high reasoning. Strengthened retrieval targets missing evidence and preserves
+relevant context within the existing bounds. These snapshots predate the later learning, source-access,
+and capability changes; this comparison does not evaluate those additions.
 
 | Measurement | Original retrieval | Strengthened retrieval |
 |---|---:|---:|
-| Valid executions | 100% (20/20 cases) | 95% (19/20 cases) |
-| Semantic answer passes among valid executions | 100% (20/20) | 100% (19/19) |
-| Exact citation integrity | 100% (69/69 quotes) | 100% (49/49 quotes) |
+| Valid executions | 100% (20/20 cases) | 100% (20/20 cases) |
+| Strict answer passes | 20/20 | 19/20 |
+| Answer rubric items satisfied | 59/59 | 58/59 |
+| Exact citation integrity | 100% (68/68 quotes) | 100% (67/67 quotes) |
 | Chinese question | Pass | Pass |
 
-On the same 19 valid questions, strengthened retrieval used 19.0% fewer source reads and 17.0% fewer
-source characters. Quotation counts differ; citation integrity remained 100%. One updated execution
-recorded an empty `list` response and remains invalid. Separate diagnostic retries do not replace it.
-These are observations from one run per question, with agent grading; they do not establish an accuracy
-gain or production reliability.
+Across all 20 questions, strengthened retrieval used 12.7% fewer source reads (55 to 48) and 11.2%
+fewer source characters. Its EQ05 answer omitted an explicit calendar-month qualifier, although the
+citation included it. Conservative answer-text grading marks that criterion incomplete, so the read
+reduction does not establish unchanged strict answer quality.
+
+The runner now disables `unified_exec` for its bounded corpus commands; all 19 benchmark/report tests
+and six forced-listing diagnostics passed. This mitigates the missing-output concern. The
+[September 13 result](tests/rag-quality/query-comparison-fixed-2026-09-13.md) remains unchanged at
+20/20 versus 19/20 valid executions, including the empty `list` response. Its cause is unconfirmed,
+and no retry replaces a recorded attempt. These small synthetic runs with agent grading do not prove
+a failure-rate reduction, an accuracy gain, or production reliability.
 
 For historical context, the [September 12 pilot](tests/rag-quality/pilot-2026-09-12.md) used a hardcoded
 benchmark prompt that did not load the Query reference:

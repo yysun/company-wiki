@@ -98,11 +98,13 @@ class QueryReferenceRunTest(unittest.TestCase):
             ]}
             bench.save(root / "dataset.json", gold)
             prompts = []
+            commands = []
 
             class Process:
                 returncode = 0
 
                 def __init__(self, command, **kwargs):
+                    commands.append(command)
                     response_path = Path(command[command.index("--output-last-message") + 1])
                     bench.save(response_path, {"answer": "Unknown.", "citations": []})
                     self.workspace = Path(command[command.index("--cd") + 1])
@@ -123,6 +125,9 @@ class QueryReferenceRunTest(unittest.TestCase):
                     patch.object(bench.subprocess, "Popen", Process), contextlib.redirect_stdout(io.StringIO()):
                 self.assertEqual(int(tamper_launcher), bench.run(args))
             self.assertEqual(2, len(prompts))
+            for command in commands:
+                self.assertEqual("unified_exec", command[command.index("--disable") + 1])
+                self.assertEqual("read-only", command[command.index("--sandbox") + 1])
             for prompt in prompts:
                 self.assertIn(original.decode(), prompt)
                 self.assertNotIn("Changed during execution.", prompt)
@@ -130,6 +135,7 @@ class QueryReferenceRunTest(unittest.TestCase):
                 self.assertIn("./corpus-tool search", prompt)
                 self.assertNotIn("benchmark.py tool --corpus", prompt)
             manifest = json.loads((args.output / "manifest.json").read_text())
+            self.assertEqual({"unified_exec": False}, manifest["cli_feature_overrides"])
             self.assertEqual(bench.digest(original), manifest["query_contract_sha256"])
             self.assertEqual(original, (args.output / "query-contract-at-execution.md").read_bytes())
             for snapshot, field in (("dataset-at-execution.json", "dataset_sha256"),
@@ -203,6 +209,15 @@ class LauncherTest(unittest.TestCase):
         self.assertEqual(len(self.docs[0]["text"]), checks["source_characters"])
         altered = [{**self.docs[0], "text": "Changed."}]
         self.assertTrue(self.check(self.event(command, documents=altered))["integrity_failures"])
+
+    def test_missing_listing_output_stays_invalid_after_a_successful_read(self):
+        for output in ("", " ", '{"operation":"list","documents":['):
+            with self.subTest(output=output):
+                event = json.loads(self.event("./corpus-tool list", action="list", documents=[]))
+                event["item"]["aggregated_output"] = output
+                checks = self.check(json.dumps(event) + "\n" + self.event("./corpus-tool read E01"))
+                self.assertEqual(["tool output is not JSON"], checks["integrity_failures"])
+                self.assertEqual(["E01"], checks["source_reads"])
 
     def test_launcher_contract_rejects_other_paths_flags_and_shell_operations(self):
         legacy = shlex.join([sys.executable, str(Path(bench.__file__).resolve()), "tool", "--corpus",

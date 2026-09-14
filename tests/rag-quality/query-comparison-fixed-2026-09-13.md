@@ -117,3 +117,10 @@ tracked summaries preserve the conclusions; raw local artifacts are not part of 
 - [After FQ04 diagnostic](results/2026-09-13-query-comparison-fixed/diagnostic-after/report.md)
 - [Diagnostic design](results/2026-09-13-query-comparison-fixed/diagnostic-design.json)
 - [Empty-output observation](results/2026-09-13-query-comparison-fixed/execution-observations.json)
+
+## Subsequent execution follow-up
+
+The [September 14 synchronous follow-up](query-execution-2026-09-14.md) documents a backend
+mitigation and a new 20/20 versus 20/20 execution result. The historical observations, exclusions,
+and measurements above are unchanged. The original empty-output mechanism remains unconfirmed;
+the new run reports its own answer-quality qualification separately.

@@ -243,6 +243,7 @@ def run(args: argparse.Namespace) -> int:
         "created_at": datetime.now(timezone.utc).isoformat(), "model": args.model,
         "reasoning_effort": args.effort, "mode": "query-contract component pilot",
         "cli_version": subprocess.check_output(["codex", "--version"], text=True).strip(),
+        "cli_feature_overrides": {"unified_exec": False},
         "dataset_sha256": digest((HERE / "dataset.json").read_bytes()),
         "runner_sha256": digest(Path(__file__).read_bytes()),
         "query_contract_sha256": digest(query_contract_bytes),
@@ -306,6 +307,8 @@ Question: {case['question']}
 """
             (destination / "prompt.txt").write_text(prompt)
             command = ["codex", "exec", "--json", "--ephemeral", "--ignore-user-config", "--skip-git-repo-check",
+                       # These bounded commands need a complete output payload, not an interactive session.
+                       "--disable", "unified_exec",
                        "--sandbox", "read-only", "--model", args.model, "-c", f'model_reasoning_effort="{args.effort}"',
                        "--cd", str(workspace), "--output-schema", str(schema),
                        "--output-last-message", str(destination / "response.json"), "-"]

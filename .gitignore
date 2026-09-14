@@ -3,3 +3,4 @@ node_modules/
 *.log
 # Disposable RAG runs and CLI logs. Reviewed evidence belongs in tracked baselines/.
 /tests/rag-quality/results/
+__pycache__/

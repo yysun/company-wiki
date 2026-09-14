@@ -73,6 +73,12 @@ command to the exact corpus; caller arguments cannot override the corpus path. T
 model to reproduce a long temporary path. Launcher and corpus hashes are checked after execution.
 Historical traces use their original long-path contract; new runs accept only the short launcher contract.
 
+The runner disables Codex's `unified_exec` backend for these short, bounded commands and records
+that override in the manifest. Synchronous shell execution is a mitigation for a historical missing
+listing payload; the original failure's mechanism is not established. Empty or truncated JSON still
+invalidates an attempt, even if subsequent reads and the final answer succeed. No payload is reconstructed
+and no retry replaces a recorded first attempt.
+
 ## Run
 
 Requirements: Python 3.10+ and an authenticated Codex CLI supporting `exec --json --ephemeral`,
@@ -183,10 +189,14 @@ The [Chinese-case command fix](command-fix-2026-09-13.md) replaces long temporar
 with a corpus-bound launcher. It records three Chinese and three cancellation-case reruns, plus
 revalidation of all 51 earlier traces without changing their outcomes.
 
-The [comparison after citation and command fixes](query-comparison-fixed-2026-09-13.md) is the latest
+The [comparison after citation and command fixes](query-comparison-fixed-2026-09-13.md) is a historical
 full comparison: both references share the fixes, so only retrieval guidance differs. It preserves
 all 40 first attempts and reports a new empty-output failure separately from two diagnostic retries.
 
 The [Query learning-handoff comparison](query-learning-2026-09-13.md) evaluates approved-pattern routing and optional
 Curate suggestions. Both versions passed all 20 RAG questions; six separate synthetic stage probes check the new
 handoff and its boundaries. The report separates observed effort changes from unmeasured cross-query learning.
+
+The [synchronous execution follow-up](query-execution-2026-09-14.md) records the command-backend
+mitigation, six forced-listing diagnostics, and a new comparison with 20/20 valid executions in both
+conditions. It preserves the historical failure and reports a separate answer-qualification omission.
