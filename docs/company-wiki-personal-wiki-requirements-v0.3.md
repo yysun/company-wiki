@@ -1354,10 +1354,15 @@ Agent navigation SHOULD have configurable limits such as:
 
 - maximum wiki traversal depth;
 - maximum source search rounds;
-- maximum source documents opened;
+- maximum distinct native source documents;
+- maximum evidence reads and a separate finite reservation for update verification;
 - maximum context/token budget.
 
-The agent MAY exceed defaults when required by a complex research question.
+Use the [shared retrieval bounds](../skills/company-wiki/references/retrieval-bounds.md). All returned source
+characters and explicit total-read caps cover evidence and verification; legacy ambiguous caps retain their
+meaning. Ask before exceeding applicable limits, and never reset counters on selection, rerouting, or recovery.
+Original evidence may justify one targeted routing follow-up of up to three pages within the selected profile
+and depth limits; it does not authorize a recurring navigation loop or extra source discovery.
 
 ### 15.4 Caching
 

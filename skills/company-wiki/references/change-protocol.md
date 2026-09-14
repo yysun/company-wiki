@@ -13,6 +13,10 @@ For wiki pages, include the [page timestamp rules](document-format.md#page-times
 fields are preserved, set to the actual creation/edit/check time, or marked unknown/not fully checked. Persist
 them with the authorized, protected page write; timestamps do not authorize additional writes.
 
+Use [Retrieval bounds](retrieval-bounds.md) to reserve the required source verification pass before reconciliation
+consumes its capacity. Verification has a finite separate read allowance, but shares distinct-source, returned
+character, and any explicit total-read limits. It grants no extra discovery, selection, or write authority.
+
 ## User authorization
 
 For an existing selected wiki, an explicit Add Source/Ingest, Curate, or Maintain request authorizes the necessary
@@ -65,8 +69,10 @@ edits; that restriction overrides routine implementation discretion. Publication
 ## Replan after drift
 
 Never apply a stale plan or merely substitute a new version condition. Reread affected evidence and targets,
-preserve concurrent edits, reconcile the required changes, and present a fresh concrete plan. All reads, including
-apply-time rereads and recovery, consume the operation's remaining bounds; replanning does not reset them.
+preserve concurrent edits, reconcile the required changes, and present a fresh concrete plan. New evidence uses
+remaining evidence reads; rechecks of already-used evidence use remaining reserved verification capacity. All
+returned source content and explicit total-read caps cover both. Replanning and recovery never refill either
+allowance or reset the shared counters; follow [Retrieval bounds](retrieval-bounds.md).
 
 For task-authorized updates, routine reconciliation may proceed without another approval only when the same
 principal, requested outcome, selected scope/destination, and authorized source selection still cover the work,

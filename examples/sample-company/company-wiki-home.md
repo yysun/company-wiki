@@ -41,7 +41,9 @@ it does not copy them.
 
 ## Reading rules
 
-Read this summary and guide headings as one routing phase, then retrieve original evidence. Tree placement is
+Read this summary and guide headings as one compact initial routing phase, then retrieve original evidence.
+If originals reveal a concrete authority, alias, or exception gap, one targeted wiki follow-up may resolve it
+within the existing profile, traversal, and retrieval bounds. Tree placement is
 navigation; cross-links are discovery and do not prove a relationship. Treat a proposed relationship as an
 inference until evidence or user confirmation supports it. Surface conflicts instead of hiding them.
 

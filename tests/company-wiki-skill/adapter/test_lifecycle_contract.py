@@ -24,10 +24,9 @@ class LifecycleContractTest(unittest.TestCase):
     def test_retrieval_principles_and_bounds(self) -> None:
         skill = text("skills/company-wiki/SKILL.md")
         query = text("skills/company-wiki/references/query.md")
-        for phrase in ("router, not a gate", "retrieval prior, not a boundary", "one routing phase", "40,000"):
+        for phrase in ("router, not a gate", "retrieval prior, not a boundary", "40,000"):
             self.assertIn(phrase, skill)
         self.assertIn("same operation", query)
-        self.assertIn("return to routing", query)
         self.assertIn("Bypass both wikis", query)
 
     def test_taxonomy_is_backbone_and_source_search_is_evidence_layer(self) -> None:
@@ -85,12 +84,10 @@ class LifecycleContractTest(unittest.TestCase):
             self.assertIn("Bootstrap", document)
             self.assertIn("Add Source", document)
             self.assertNotIn("home/map → guide → focused detail", document)
-        self.assertIn("one routing phase", text("examples/sample-company/company-wiki-home.md"))
 
-    def test_main_contract_links_protocol_and_one_phase_routing(self) -> None:
+    def test_main_contract_links_protocol(self) -> None:
         specification = text("tests/test-company-wiki-skill.md")
         self.assertIn("change-protocol.md", specification)
-        self.assertIn("one routing phase", specification)
         self.assertNotIn("references/ingest.md", specification)
 
     def test_scoped_lifecycle_fixtures_exist(self) -> None:

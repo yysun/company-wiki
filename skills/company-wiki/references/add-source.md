@@ -10,14 +10,16 @@ inside the profile's verified wiki destination.
 
 ## Resolve a bounded source selection
 
-Before reading source bodies for reconciliation, the user must select one source document or a finite batch
-resolved to exact provider-native links, document ids, or repository locators. Default to one source at a time.
-The user may supply those targets directly or select bounded members from discovered candidates.
+Before reading source bodies for reconciliation, resolve the user's source selection to exact provider-native
+links, document ids, or repository locators. Default to one source at a time. The user may give exact targets,
+describe one specific document unambiguously, request an explicit finite batch, or select discovered candidates.
 
 A request with usable search criteria, such as a title, keywords, or a filename pattern, authorizes bounded
 candidate discovery inside the selected profile's registered source locations and scope. For example,
-`加入 EDU-C**测试报告` means find candidate reports by name, then ask which to add; do not require exact links
-before that search or a separate request to Explore. A pattern is a search criterion, not a selected batch.
+`加入 EDU-C**测试报告` without explicit batch intent means find candidate reports by name, then ask which to add;
+do not require exact links before that search or a separate request to Explore. A generic topic or pattern alone
+is a discovery criterion. “Add the 2026 travel standard” can identify one document; “add all four final reports
+in this registered folder” can select a finite snapshot after enumeration confirms its membership.
 
 1. Apply [Publication](publication.md) before discovery, including its pre-read metadata gate. Use native search
    restricted to the registered source scope, or a bounded native metadata listing when search is unavailable.
@@ -27,16 +29,24 @@ before that search or a separate request to Explore. A pattern is a search crite
 2. Keep discovery within the existing list/search allowance (default two rounds). Report a finite candidate list
    with authorized names, exact targets, available distinguishing metadata, and the displayed count. State any
    truncation or incomplete coverage; do not infer hidden matches or claim all matching documents were found.
-3. Ask the user to select candidates before opening their bodies for reconciliation, even for a single hit.
-   “All listed candidates” selects only the exact displayed set. If it exceeds the remaining read allowance,
-   ask for a smaller selection or explicit expansion before reading. A rerun or later match never silently joins
-   the selection, and moving from discovery to reconciliation does not reset the operation's bounds.
+3. Resolve and report the exact selection before body reads. A specific description may select its unique native
+   target when scoped metadata establishes identity, including requested status/date/version qualifiers. A lone
+   result in truncated or inadequate search metadata does not establish uniqueness. An explicit finite batch
+   needs complete enumeration of the stated scope/predicate and any requested count; freeze its exact native
+   targets as the selected snapshot. When identity or membership is ambiguous, incomplete, or inconsistent with
+   the request, ask for selection or refinement before reconciliation; do not silently process a partial batch.
+4. When the resolved selection is unambiguous and within bounds, proceed without another selection turn. Honor
+   an explicit request to choose/review sources first. “All listed candidates” selects only that displayed set.
+   A later match never joins the snapshot automatically. Reserve initial reads and required rechecks under
+   [Retrieval bounds](retrieval-bounds.md); ask for a smaller selection or explicit expansion when they cannot fit.
+   Discovery, selection, and reconciliation share the same operation counters.
 
 If there are no usable search criteria or exact targets, ask for the missing criteria or sources before discovery.
 If no candidates are found, report the searched scope and limit, then ask for refined criteria or exact sources.
 Never enumerate an unrelated location to manufacture a batch. A user-selected folder retains the finite-batch
-path: enumerate it first, report members and its bound, then read only that selection. A topic, pattern, collection,
-repository, or current UI context never authorizes corpus-wide processing. Reject selected sources outside the
+path: enumerate it first, resolve or ask for the finite selection, report its exact members, then read only that
+snapshot. A topic, pattern, collection,
+repository, or current UI context alone never silently authorizes corpus-wide processing. Reject selected sources outside the
 profile's registered original-material locations or scope. Report permission denial without exposing content.
 
 ## Read and reconcile

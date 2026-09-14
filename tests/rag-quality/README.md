@@ -54,6 +54,11 @@ session receives one question at a time. Responses from other questions are not 
 | Example navigation | Home first, no more than three additional wiki reads, and no wiki reads after original-source search/read begins. |
 | Effort | Ordered reads, discovery calls, retrieved source characters, wall time, and CLI token usage. Tokens include host context; wall time includes CLI startup. |
 
+These are explicit benchmark overrides, preserved for comparison with recorded runs. The live skill's later
+defaults separate distinct sources, evidence reads, and update verification, and allow one evidence-triggered
+wiki follow-up. This component benchmark still enforces its five-read cap and initial-routing-only order; it does
+not exercise those relaxed defaults. Historical results and runner snapshots are unchanged.
+
 Exact-quote checks run on the decoded JSON string. A source line break must survive JSON serialization;
 replacing it with a space or a literal backslash sequence fails. The Query reference and benchmark prompt
 make this preservation requirement explicit. The scorer does not normalize whitespace or repair answers.

@@ -13,6 +13,10 @@ audience locator; bounds; and ordinary links. A Personal profile may contain one
 Company Index profile. It may record a source locator only when separately supplied by the user; otherwise say
 broad direct-source search is unavailable. The linked index is an opaque Bootstrap reference, not a boundary grant.
 
+Read existing bounds with their stated units under [Retrieval bounds](retrieval-bounds.md). An ambiguous legacy
+source-read/open cap remains a total-read cap across evidence and verification. New defaults never rewrite a
+profile or weaken its explicit limits; changing registered configuration still follows the registration protocol.
+
 Profiles without scope or a governing-capability route are legacy combined wikis. They support Query and Validate,
 plus same-destination Maintain and Add Source only after provider-verified current-user write access. They cannot
 authorize Bootstrap, shared canonical writes, Curate, promotion, or inferred ownership. Upgrade needs explicit

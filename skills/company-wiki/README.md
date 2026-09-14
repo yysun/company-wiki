@@ -29,7 +29,8 @@ Markdown registry is configuration only. A flat document collection is valid.
 - `references/change-protocol.md` — shared authority, approval, and failure contract for writes.
 - `references/publication.md` — read/draft/publish capability levels, provider-managed access, safe generation, and legacy cleanup.
 - `references/registry.md` — select and safely persist user-level wiki configuration.
-- `references/query.md` — route once, refine searches, read bounded evidence, and verify exact quotations.
+- `references/query.md` — compact initial routing, one targeted evidence-gap follow-up, and verified source answers.
+- `references/retrieval-bounds.md` — distinct sources, evidence reads, reserved verification, and explicit-limit compatibility.
 - `references/maintain.md` — propose and apply corrections, repairs, and restructuring.
 - `references/validate.md` — inspect graph health, source drift, gaps, and contradictions without writing.
 - `references/document-format.md` — node, edge, disclosure, question-guide, and validation guidance.
@@ -64,7 +65,9 @@ any durable write.
 
 Add Source is the explicit bridge between discovery and durable knowledge. The user selects one new source by
 default, or supplies a finite batch. A title, keywords, or filename pattern can first produce a bounded candidate
-list inside the registered source scope; the user selects exact members before their bodies are read. The agent
+list inside the registered source scope. A specific unambiguous description or explicit finite batch resolves to
+exact targets from adequate metadata or complete enumeration; report/freeze that selection and proceed. Ask when
+identity or batch membership is ambiguous or incomplete, or the user requested selection first. The agent
 reads the selection, compares it with relevant wiki nodes and evidence,
 and presents the exact planned edits. An explicit Add Source request authorizes the necessary bounded update;
 later candidate selection retains that intent. Source selection alone authorizes reading only. After revalidation,
@@ -122,17 +125,24 @@ registry and must report that limitation.
    ask only for the unknown original-material location and writable destination. A subject never authorizes
    a whole-drive search: source discovery stays inside locations the user explicitly specifies.
 3. Add new or changed sources by exact native targets or search criteria such as `加入 EDU-C**测试报告`.
-   For search criteria, select from the returned candidates first. The agent then plans, revalidates, and applies
+   Generic search criteria require candidate selection. A specific unambiguous document or explicit finite batch
+   can resolve directly to exact targets without another selection turn. The agent then plans, revalidates, and applies
    the bounded update while preserving authority, conflicts, and evidence links. Add “show me the changes first”
    to review and approve the exact proposal before it writes.
 4. Ask company questions normally. The taxonomy resolves canonical terms and aliases, while the few relevant typed
-   links guide discovery; neither limits source search. The agent makes one routing decision, searches registered
+   links guide discovery; neither limits source search. The agent makes a compact initial routing decision and
+   may use one targeted wiki follow-up for an authority, alias, or exception gap revealed by original evidence. It searches registered
    source locations, verifies the requesting user's current access, compares available source versions with loaded
    wiki provenance, and reads original evidence in the same query even when versions match. Missing version metadata
    alone does not block an authorized read. It cites the originals and reports material wiki drift without editing pages.
 5. Ask it to Curate or Maintain structure, or Validate links and coverage. Explicit update requests authorize
    the necessary bounded edits; a factual correction or suggestion alone does not. Every write has a concrete
    plan and passes publication checks. Review-first requests wait for approval. Validation is always read-only.
+
+Default retrieval limits are 5 distinct sources, 10 evidence reads, 2 source discovery rounds, 40,000 returned
+source characters, and wiki depth 3. Updates reserve necessary rechecks within 10 additional verification reads;
+the character cap and explicit total-read limits cover both. Multiple sections share one document slot. Read
+[retrieval-bounds.md](references/retrieval-bounds.md) for counting, legacy cap compatibility, and recovery limits.
 
 For cloud-drive work, the skill reuses only cloud-drive/document skills, MCP tools, or agent plugins the host
 app already provides. For non-drive sources it uses only the host's corresponding exposed repository, CLI,

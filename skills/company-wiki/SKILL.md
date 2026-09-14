@@ -28,7 +28,8 @@ Team is a representable scope, not a separate V1 workflow.
 
 The wiki is a router, not a gate. Its taxonomy is the governed backbone; a small set of reviewable typed links
 forms the useful discovery graph on top; and native source search retrieves original evidence. A Personal Wiki is
-a retrieval prior, not a boundary, and each Query or Explore operation has one routing phase.
+a retrieval prior, not a boundary. Query and Explore use compact initial routing with at most one targeted
+follow-up when original evidence reveals a concrete routing gap.
 
 ## Operating boundaries
 
@@ -58,8 +59,11 @@ Gate unsafe legacy wiki bytes before they enter the model; recheck source access
 V1 cannot synchronize ACLs or retract previously disclosed copies. Report unresolved exposure through Validate;
 repair only through an approved Maintain plan. Prompts and local tests do not establish provider enforcement.
 
-Default bounds: wiki traversal depth 3; source list/search rounds 2; source documents opened 5; and retrieved
-original-source content 40,000 Unicode characters. Stop at an exhausted bound and ask before expanding it.
+Load [Retrieval bounds](references/retrieval-bounds.md) before discovery or evidence reads. Defaults: 5 distinct
+sources, 10 evidence reads, 2 source list/search rounds, 40,000 returned source characters, and wiki traversal
+depth 3. Updates reserve required rechecks within a separate cap of 10 verification reads; all source content
+shares the character cap. Preserve explicit total-read and legacy limits; selection, replanning, and recovery
+never reset counters. Ask before exceeding an applicable limit.
 
 ## Lifecycle and loading
 
@@ -82,8 +86,10 @@ original-source content 40,000 Unicode characters. Stop at an exhausted bound an
 For Query and Explore, read the compact routing context together: the selected Personal home and, through its named
 edge, the visible Company Index taxonomy home, plus at most three declared routing pages per scope. In one decision
 choose canonical concepts and aliases, the few relevant typed links, source routes, and direct searches. Then
-retrieve evidence in bounded rounds; do not return to wiki routing or run a second route-selection phase. A
-direct-source bypass may read no wiki page.
+retrieve evidence in bounded rounds. If originals reveal a concrete missing authority, alias, or exception,
+[one targeted follow-up](references/query.md#targeted-routing-follow-up) may consult up to three wiki pages
+within existing profile edges and traversal limits. Do not restart full routing or loop through follow-ups.
+A direct-source bypass may read no wiki page.
 
 For each source used, verify the requesting user's current access and compare available native versions with loaded
 wiki provenance. Read relevant original evidence in the same operation even when versions match; missing version

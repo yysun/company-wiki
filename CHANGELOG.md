@@ -4,6 +4,12 @@
 
 ### Fixed
 
+- Separate distinct-source and evidence-read budgets from a finite update-verification allowance; preserve all
+  returned-content and explicit legacy/total-read caps across rechecks and recovery.
+- Resolve specific unambiguous source descriptions and explicitly requested finite batches to exact targets
+  without redundant selection; keep ambiguity, completeness, access, and scope checks.
+- Allow one bounded wiki routing follow-up for a concrete evidence gap while preserving compact initial routing,
+  traversal/source limits, and read-only Query/Explore behavior.
 - Let explicit Add Source/Ingest, Curate, and Maintain requests authorize bounded updates to an existing wiki,
   including after candidate selection. Preserve review-first approval, publication checks, protected writes,
   and setup/registration approval; replan within task scope without redundant confirmation.

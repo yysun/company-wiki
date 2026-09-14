@@ -23,8 +23,12 @@ These boundaries apply to `Init → Bootstrap → Explore ↔ Query → Curate �
   supplied by the user is allowed only where the skill's missing-registry contract explicitly permits it.
 - Source discovery and reads stay inside the profile's registered original-material locations and scopes.
   Add Source (with Ingest as a compatibility alias) may use user-supplied search criteria to discover candidates
-  within those bounds. Before reading source bodies for reconciliation, it requires exact user-selected documents
-  or an explicitly bounded batch; a topic, pattern, folder, or collection never silently expands into an all-source operation.
+  within those bounds. Before reconciliation reads, resolve the user's selection to exact native targets. A
+  specific unambiguous description or explicitly requested finite batch can authorize that resolution without
+  another selection turn; establish adequate identity and complete batch membership from authorized metadata,
+  report and freeze the selected snapshot, and ask when ambiguous or incomplete. A topic, pattern, folder, or
+  collection alone never silently expands into an all-source operation. Preserve explicit hard limits; distinct
+  sources, evidence reads, verification, and returned content follow the skill's shared operation-wide bounds.
 - Wiki writes stay inside the profile's verified destination and require a concrete authorized plan, apply-time
   rereads, and conditional/exclusive write protection. An explicit Add Source, Curate, or Maintain request for an
   existing selected wiki authorizes necessary bounded edits, including after subsequent exact source selection;

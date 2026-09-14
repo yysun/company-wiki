@@ -311,8 +311,11 @@ Explore ↔ Query → Curate → Maintain → Validate
 - **Validate** detects broken/inaccessible links, drift, missing provenance, duplicates, contradictions,
   supersession, permission leakage, gaps, and orphans without rewriting the corpus.
 
-**Add Source** is an optional bounded path into Explore and Curate for explicitly selected documents or one finite
-folder/batch. A folder is enumerated and its visible member bound is confirmed before content reads. It replaces
+**Add Source** is an optional bounded path into Explore and Curate for selected documents or one explicit finite
+batch. A specific unambiguous description may resolve to an exact native target without another selection turn;
+an explicitly requested finite batch may resolve to a complete enumerated snapshot. Report exact targets before
+body reads and freeze membership. Ambiguous descriptions, incomplete/truncated enumeration, and generic patterns
+without batch intent require selection or refinement. Registered scope and read limits still apply. It replaces
 mandatory top-level Ingest. Existing `Ingest` language may survive only as a compatibility alias for this
 reconciliation behavior; documents do not need to be copied, chunked, embedded, or indexed before Query.
 
@@ -1055,10 +1058,17 @@ All derived artifacts should be rebuildable from the original sources.
 Optional caches must preserve the current principal's permission boundary and carry enough freshness information
 to avoid serving stale or newly inaccessible material.
 
-Navigation should be explicitly bounded. A practical default is a maximum wiki traversal depth of 3, two source
-search/list rounds, and five opened source documents per operation. A deployment or request may use lower finite
-limits. When a limit is exhausted, the agent should report it and request a new finite bound rather than silently
-expanding scope.
+Navigation follows the [shared retrieval bounds](../skills/company-wiki/references/retrieval-bounds.md): defaults
+are depth 3, two source search/list rounds, five distinct native sources, ten evidence document/range reads, and
+40,000 returned source characters. Updates reserve necessary rechecks within ten additional verification reads;
+both allowances share source/content limits and any explicit total-read cap. Failed/repeated reads consume the
+applicable counters; selection, replanning, and recovery never reset them. Legacy ambiguous read/open limits
+retain total-read semantics. Ask before exceeding applicable limits.
+
+Query/Explore start with compact initial routing. Original evidence revealing a missing authority, alias, or
+exception may trigger one targeted follow-up through up to three known visible wiki pages, within the selected
+profile/index edge and traversal budget. It cannot restart full routing, scan the wiki, grant more source/search
+budget, or trigger a second follow-up. Explicit stricter routing instructions remain binding.
 
 ---
 

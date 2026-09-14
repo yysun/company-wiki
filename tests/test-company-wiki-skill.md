@@ -21,7 +21,7 @@ not exposed as a navigation contract. The wiki itself is a flat set of Markdown 
 adapter; this stands in for cloud-drive documents with readable content and native links.
 
 This is not the PRD MVP evaluation. It does not measure answer-quality lift against raw search. It checks the
-`Init → Bootstrap → Explore ↔ Query → Curate → Add Source → Maintain → Validate` lifecycle, one-phase routing, source
+`Init → Bootstrap → Explore ↔ Query → Curate → Add Source → Maintain → Validate` lifecycle, bounded routing, source
 integrity, change approval, validation, and permission safety.
 
 | Scenarios | What they cover |
@@ -228,7 +228,8 @@ and `2026-08-20` for later scenarios.
 - **C5 — Routing:** besides `SKILL.md`, only the reference files permitted by the workflow are read:
 
   Every workflow reads `references/publication.md` after registry/profile selection and before provider discovery
-  or wiki content. It is a common prerequisite in addition to each row below.
+  or wiki content. It also reads `references/retrieval-bounds.md` before discovery/evidence work. These are
+  common prerequisites in addition to each row below.
 
   | Workflow | Allowed skill files |
   |---|---|
@@ -337,10 +338,11 @@ under “Fixtures”; expected behavior is summarized here to keep the graph con
 | o | K | What is the current status of the telemetry incident? | Reports the investigation state, date, and unconfirmed cause. |
 | p | L | What risks are exposed by the telemetry gaps? | Separates evidenced operational risk from plausible but unconfirmed risk. |
 
-For rows a and e, evidence must show one routing phase: the first non-skill files are the registry index,
-selected profile, and the compact home/index routing context before any source read. It chooses routes and
-direct searches once, then reads only needed source evidence without returning to wiki routing. Every cited
-source is actually read. Each row writes nothing and passes C1–C7.
+For rows a and e, evidence must show compact initial routing: the first non-skill files are the registry index,
+selected profile, and home/index routing context before source retrieval. At most one later targeted wiki lookup
+may address a concrete authority, alias, or exception gap revealed by an original, subject to L-C8. It cannot
+reset retrieval budgets or replace current original evidence. Every cited source is actually read. Each row
+writes nothing and passes C1–C7.
 
 ### S4 — Maintenance with a user correction (post-init)
 

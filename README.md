@@ -91,7 +91,8 @@ search, links, and permissions differ.
 ### Optional local Markdown demo
 
 Start with [`examples/sample-company/company-wiki-home.md`](examples/sample-company/company-wiki-home.md), then
-make one routing decision from its compact outline before opening source evidence.
+make a compact initial routing decision before opening source evidence. One targeted follow-up can resolve a
+concrete authority, alias, or exception gap revealed by an original, within the same profile and retrieval limits.
 
 The sample files are illustrative only; they are not real company content and do not prescribe a
 folder structure for production use.
@@ -200,7 +201,15 @@ stay in the Git-ignored `tests/rag-quality/results/` directory.
 Here, **Ingest** is the compatibility alias for deliberate **Add Source** reconciliation. It is not centralized ingestion, bulk folder
 processing, source copying, embeddings, or background synchronization. One source at a time is the default.
 Titles, keywords, and filename patterns can start bounded candidate discovery within the registered source scope.
-The user selects exact candidates before reconciliation reads their bodies; matching a search does not select a source.
+A specific unambiguous document description resolves directly to its exact target; an explicitly requested finite
+batch resolves to a complete enumerated snapshot. The agent reports that selection and proceeds without another
+selection turn. Ambiguous requests, incomplete/truncated results, and generic patterns still need selection or refinement.
+
+Default [retrieval bounds](skills/company-wiki/references/retrieval-bounds.md) distinguish 5 native source documents
+from 10 evidence reads, so reading several sections does not consume several document slots. Updates reserve
+necessary rechecks within 10 additional verification reads. All returned source content shares a 40,000-character
+cap; 2 source discovery rounds and traversal depth 3 remain. Explicit total-read and legacy caps still apply,
+and no selection, follow-up, or retry resets counters.
 
 ## How people use it
 
@@ -232,7 +241,7 @@ language. For example:
 
 > Add reports named `EDU-C**测试报告` to this wiki. Search its registered sources and show me the candidates to select.
 
-The assistant resolves the question through the taxonomy, uses only the few relevant typed links, then searches the
+The assistant starts with compact taxonomy routing, uses only the few relevant typed links, then searches the
 registered source locations and reads original evidence. It should say when information is missing, restricted,
 outdated, or uncertain. Explicit update requests authorize bounded edits in the selected existing wiki, including
 after source selection. Reading or selecting a source alone does not. The assistant presents concrete changes,

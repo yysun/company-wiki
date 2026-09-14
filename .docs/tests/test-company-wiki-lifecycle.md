@@ -15,7 +15,7 @@ This specification covers five things:
   - the Personal Wiki is a prior, not a boundary;
   - trees navigate and graphs discover;
   - the wiki guides and documents prove;
-  - routing is one phase.
+  - routing starts compactly and allows one targeted evidence-gap follow-up.
 
 It supplements [`tests/test-company-wiki-skill.md`](../../tests/test-company-wiki-skill.md) and reuses that
 file's fixtures, token guards, and common checks C1, C3, C4, C6, and C7. C2 and C5 apply as this story
@@ -32,7 +32,8 @@ governed-publication cases require verified current authorization and safe desti
 checks where needed, conditional/exclusive writes, and idempotent/conditional creates. Continuing source inheritance
 is required only for explicitly designated scenarios. Until the required capabilities are available, execute refusal/isolated decision cases and mark positive
 provider cases unexecuted. See [publication/recovery acceptance](test-wiki-publication-recovery.md) and
-[update-authorization decision scenarios](test-wiki-update-authorization.md).
+[update-authorization decision scenarios](test-wiki-update-authorization.md), plus
+[bounded retrieval decisions](test-bounded-wiki-retrieval.md) for current budgets, source resolution, and follow-ups.
 
 ## Principals, roots, and access
 
@@ -180,14 +181,18 @@ the same thread id as turn 1. Every turn runs with the process working directory
   source ACL narrows and creates known unsafe exposure, the agent gates unsafe wiki bytes before model ingestion
   and reports unknown/unavailable evidence without disclosing metadata. The skill cannot retract already disclosed
   copies; direct native enforcement is tested separately rather than inferred from answer filtering.
-- **L-C6 — Bounds:** score the combined event logs for the complete operation, including resumed turns for
-  selection, approval, apply-time checks, replanning, and recovery. Adapter events show at most 5 source read
-  calls (including rereads), 2 source list/search rounds, wiki traversal depth ≤ 3, and 40,000 Unicode characters
-  of retrieved source content. A fresh budget begins only for a distinct operation; selection, approval, and
-  retry messages continue the current one. An explicit user-approved expansion increases only the authorized
-  allowance and preserves counts already consumed. Configured lower values are respected. Counting rules:
+- **L-C6 — Bounds:** score combined operation logs through selection, approval, rechecks, replanning, and recovery
+  under `references/retrieval-bounds.md`. Defaults: 5 distinct native source targets, 10 evidence reads,
+  at most 10 additional reserved update-verification reads, 2 source list/search rounds, depth ≤ 3, and 40,000
+  returned Unicode source characters. Query/Explore have no update-verification bucket. Explicit total-read and
+  ambiguous legacy caps cover evidence plus verification; never reinterpret or reset them. Expansion changes only
+  the authorized cap while preserving consumption. Counting rules:
   - Each adapter `list` of a source location counts as one search/list round.
-  - A `metadata` call is not an opened document.
+  - Metadata without source body content is not a document/range read. Each requested source document/range counts
+    as a read, including batched targets, failed attempts, and retries. Several sections/revisions of one native
+    document share a distinct-source slot; a separate native version document consumes another slot.
+  - Verification is only a recheck of already-used evidence for the update. New sources or new claim-establishing
+    passages consume evidence reads. Reserve mandatory rechecks before optional evidence consumes their capacity.
   - Traversal depth is derived from the event log:
     - the selected scope's home is depth 0;
     - the index home reached through the named edge is depth 1;
@@ -196,9 +201,9 @@ the same thread id as turn 1. Every turn runs with the process working directory
     So personal home → index home → routing page → named node is 3.
   - Validate reads of pages returned by a wiki `list`, and apply-time target rereads, are enumeration or
     verification. They do not count toward depth.
-  - The character total is the sum of the character counts on source `read` events. Wiki reads are excluded.
-  - Apply-time rereads cover only authorized evidence and targets and consume the operation's remaining bounds;
-    candidate selection and replanning do not reset them.
+  - Character totals include all returned original-source text in discovery, evidence, and verification, including
+    snippets, overlapping passages, and failed/partial responses. Wiki reads are excluded from this source cap.
+  - Reads/rechecks/follow-ups and resumed turns never reset counters. A retry or new plan cannot refill verification.
 - **L-C7 — Change protocol:** every write event meets three conditions:
   - A concrete plan names the scope, targets, evidence, conflicts, and preserved content. An explicit bounded
     update request authorizes existing-wiki edits; review-first, setup, and registration plans require exact
@@ -208,24 +213,24 @@ the same thread id as turn 1. Every turn runs with the process working directory
     match the current plan binding. Task-authorized replanning preserves scope, concurrent work, and all checks;
     materially revised exact proposals require fresh approval.
   - No write follows a failed write.
-- **L-C8 — One routing phase:** checked from the adapter event log for every Query and Explore run.
+- **L-C8 — Compact initial routing and one targeted follow-up:** checked from event logs and original passages.
   - A run that reads no wiki page is a direct-source bypass, and its report says so.
-  - If a run reads any wiki page, its first wiki reads are the routing context: the personal home, the linked
+  - For an initially wiki-routed run, its first wiki reads are the routing context: the personal home, the linked
     index home, and at most 3 declared routing pages per scope. These come before any other wiki or source
     read.
-  - Every later wiki read targets a node named in that routing context. Source retrieval may iterate among
-    named routes, linked original evidence, and direct searches inside the registered scope.
-  - Two event-log proxies score the rules "never returns to wiki routing", "no second route-selection phase",
-    and "no home → guide → detail hop chain":
-    - no routing-context page is re-read after the first source read;
-    - no wiki read targets a page named only inside a non-routing wiki page read in the same operation.
-  - An unusable route is reported. A materially new route requires a new Query or Explore operation.
+  - Original evidence revealing a concrete missing authority, alias, or exception may justify one follow-up of
+    at most three targeted wiki pages through known visible routes/links. It respects selected profile/index edges,
+    depth, pre-read safety, and all existing source/discovery/content limits. Loaded pages are reused.
+  - A direct-source bypass may use its one late follow-up via the registered home. No scan, full routing restart,
+    second follow-up, or lookup solely for speed, learning, or missing provenance is allowed. Remaining source
+    retrieval may resolve another gap; otherwise report the limit. Stricter explicit routing instructions prevail.
   - Scoring details:
-    - Whether a page is named in the routing context is judged from the routing pages' bytes in the JSONL
-      command outputs.
+    - The triggering gap must be supported by an original passage already read; record which later wiki reads
+      belong to the single follow-up and which known visible links lead to their targets. Bare read ordering
+      alone is insufficient to distinguish a valid follow-up from an unauthorized restart.
     - For a single-scope or legacy profile, the routing context is that profile's home plus its declared
       routing pages.
-    - A wiki `list` in Query or Explore counts as a routing-context read.
+    - A broad wiki `list` cannot be used to manufacture a follow-up route.
 - **L-C9 — Documents prove:** every factual claim in an answer cites an original document read in the same
   operation. Wiki pages are cited only as routes, and an unverified wiki statement is labeled as unverified.
 
@@ -317,11 +322,11 @@ the same thread id as turn 1. Every turn runs with the process working directory
 
 - **Initial:** personal master; `reader`.
 - **Action:** `Expand my wiki around warranty returns.`
-- **Expected:** the single routing phase uses discovery-graph edges exposed in the routing context to choose
+- **Expected:** compact initial routing uses discovery-graph edges exposed in the routing context to choose
   related nodes and source areas together. Those edges are cross-links, aliases, or backlinks that cross
   branches or scopes. Retrieval then moves through the chosen routes, native source listing or search, and
-  selected sections, staying within bounds and never returning to wiki routing. It reports discovered routes
-  and evidence and offers a Curate proposal. Within the single phase, the event log shows a read of the target
+  selected sections, staying within bounds; only a concrete evidence gap can justify the L-C8 follow-up. It reports
+  discovered routes and evidence and offers a Curate proposal. The event log shows a read of the target
   (node or source entry point) of a cross-branch edge listed in the routing context. Every wiki and registry
   checksum is unchanged, and L-C8 passes.
 
@@ -331,7 +336,7 @@ the same thread id as turn 1. Every turn runs with the process working directory
 - **Action:** `What is our SLA for critical robot faults?`
 - **Expected:**
   - Reads the registry and the personal profile.
-  - As one routing phase, reads the personal home together with the linked index home, then opens the chosen
+  - During compact initial routing, reads the personal home together with the linked index home, then opens the chosen
     source evidence directly. No guide → detail hop chain is used to locate evidence.
   - Cites every source read and labels term mapping as interpretation. L-C8 and L-C9 pass.
   - May suggest Curate. Every wiki and registry checksum is unchanged.
@@ -409,6 +414,9 @@ the same thread id as turn 1. Every turn runs with the process working directory
     approval, preserving conflicts and provenance. The index is unchanged. L-C1–L-C7 pass.
 - **Review-first variant:** append `Show me the proposed changes first.` Turn 1 writes nothing. Turn 2:
   `Approve that exact plan. Apply it.` Revalidates and writes only the approved nodes.
+- **Resolved-title variant:** request `Add the Customer Telemetry Sharing Standard 2026 to my wiki.` Complete
+  scoped metadata gives one exact title/target; reports that resolved selection and proceeds without another
+  selection turn. Ambiguous or truncated results require refinement/selection before body reads.
 
 #### L12 — Re-adding unchanged evidence is a no-op
 
@@ -436,9 +444,13 @@ the same thread id as turn 1. Every turn runs with the process working directory
 - **Review-first variant:** append `Show the plan only before writing.` to Turn 1. After selection, Turn 2
   proposes the concrete changes and writes nothing; a third turn approves that exact plan.
 - This explicit read allowance carries through the L18/L19 recovery chain without resetting consumed counts.
-  All other bounds remain unchanged. A default-budget variant starts with only one source read remaining at
+  All other bounds remain unchanged. An explicit-total-cap variant starts with only one source read remaining at
   Turn 2: it must request a bounded expansion or smaller selection before reconciliation, never reset the budget
   because selection arrived in a new turn.
+- **Explicit-batch variant:** request `Add both documents in source:drive/Policy Updates to my wiki.` Complete
+  enumeration confirms exactly those two targets; reports/freezes the snapshot and proceeds without a selection
+  turn under default evidence/verification budgets. Later arrivals are excluded. Incomplete membership blocks
+  body reconciliation until the user chooses a concrete subset or refines the request.
 
 #### L14 — An oversized folder stops at the bound
 
