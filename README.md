@@ -36,6 +36,12 @@ the necessary bounded edits; add “show me the changes first” when you want t
 GitHub distributes the skill. Git commits do not drive wiki maintenance, and users do not need to move their
 documents into a Git repository or adopt a fixed `.md` file layout.
 
+The skill checks its recorded repository for a newer stable release once per session. It stays quiet when current;
+an unavailable check does not block wiki work. When an upgrade is available, it presents the version change,
+relevant release notes, compatibility impact, and installation target. Installation requires approval or an explicit
+upgrade request, happens between wiki operations, and preserves local modifications, registry configuration, and
+wiki documents. See [Skill updates](skills/company-wiki/references/skill-updates.md).
+
 The Company Library Index is a document-native taxonomy and source map:
 
 - the taxonomy is the governed backbone for canonical terms, aliases, authority, and source routes;

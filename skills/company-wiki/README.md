@@ -29,6 +29,7 @@ Markdown registry is configuration only. A flat document collection is valid.
 - `references/change-protocol.md` — shared authority, approval, and failure contract for writes.
 - `references/publication.md` — read/draft/publish capability levels, provider-managed access, safe generation, and legacy cleanup.
 - `references/registry.md` — select and safely persist user-level wiki configuration.
+- `references/skill-updates.md` — check stable releases once per session and apply authorized package upgrades.
 - `references/query.md` — compact initial routing, one targeted evidence-gap follow-up, and verified source answers.
 - `references/retrieval-bounds.md` — distinct sources, evidence reads, reserved verification, and explicit-limit compatibility.
 - `references/maintain.md` — propose and apply corrections, repairs, and restructuring.
@@ -82,6 +83,12 @@ embedding pipeline, provider-side index, processing ledger, mandatory log, watch
 Wiki documents are organization data. Keep them in the drive and preserve them when updating or replacing
 this skill. Do not move them into the installed package or treat package updates as a migration of the
 organization's knowledge.
+
+On first use in a session, the skill checks the recorded repository for a newer stable release. It stays quiet
+when current and continues wiki work if the check is unavailable. A newer release produces a concrete upgrade
+offer with version, changes, compatibility impact, and installation target. Installation needs approval or an
+existing explicit upgrade request, runs between wiki operations, and preserves local modifications, registry
+configuration, and wiki documents. See [Skill updates](references/skill-updates.md).
 
 Publication uses provider-managed wiki permissions by default and requires current source access, exact-scope
 authority, audience containment, and safe permissions from creation. Personal copies and index links are included.
