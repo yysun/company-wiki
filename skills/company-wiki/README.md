@@ -143,6 +143,7 @@ Default retrieval limits are 5 distinct sources, 10 evidence reads, 2 source dis
 source characters, and wiki depth 3. Updates reserve necessary rechecks within 10 additional verification reads;
 the character cap and explicit total-read limits cover both. Multiple sections share one document slot. Read
 [retrieval-bounds.md](references/retrieval-bounds.md) for counting, legacy cap compatibility, and recovery limits.
+An existing aggregate allowance replaces unspecified component defaults; separately configured limits remain.
 
 For cloud-drive work, the skill reuses only cloud-drive/document skills, MCP tools, or agent plugins the host
 app already provides. For non-drive sources it uses only the host's corresponding exposed repository, CLI,

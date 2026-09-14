@@ -1361,6 +1361,7 @@ Agent navigation SHOULD have configurable limits such as:
 Use the [shared retrieval bounds](../skills/company-wiki/references/retrieval-bounds.md). All returned source
 characters and explicit total-read caps cover evidence and verification; legacy ambiguous caps retain their
 meaning. Ask before exceeding applicable limits, and never reset counters on selection, rerouting, or recovery.
+An explicit aggregate allowance replaces unspecified component defaults; separately explicit caps still apply.
 Original evidence may justify one targeted routing follow-up of up to three pages within the selected profile
 and depth limits; it does not authorize a recurring navigation loop or extra source discovery.
 

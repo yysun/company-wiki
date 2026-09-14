@@ -6,21 +6,21 @@ reading evidence. Remove these three restrictions while keeping bounded, request
 
 ## Acceptance criteria
 
-- [ ] Distinct sources, evidence read calls, retrieved characters, and update verification have explicit finite
+- [x] Distinct sources, evidence read calls, retrieved characters, and update verification have explicit finite
   limits. Three selected short documents can be reconciled and rechecked without expanding default read-call
   limits. Several sections of one source do not count as several distinct sources.
-- [ ] Explicit existing hard limits keep their meaning. Rechecks, overlapping passages, failed/retried reads,
+- [x] Explicit existing hard limits keep their meaning. Rechecks, overlapping passages, failed/retried reads,
   selection, replanning, and recovery cannot reset or bypass the applicable counters; reserve required verification
   before consuming its capacity. Character limits cover all returned source content.
-- [ ] A specific unambiguous source description can resolve to an exact target without a second selection turn.
+- [x] A specific unambiguous source description can resolve to an exact target without a second selection turn.
   An explicit finite batch can select a complete enumerated snapshot. Ambiguity, incomplete membership, truncation,
   out-of-scope matches, or exhausted bounds cannot silently expand selection or start an unauthorized batch.
-- [ ] Query/Explore may perform one targeted wiki follow-up when original evidence reveals a concrete missing
+- [x] Query/Explore may perform one targeted wiki follow-up when original evidence reveals a concrete missing
   authority, alias, or exception. Keep compact initial routing, bounded traversal, the selected profile and named
   index edge, source access checks, and all retrieval limits; no unrestricted rerouting loop is permitted.
-- [ ] Setup/registration approval, review-first behavior, source immutability, publication/governance checks,
+- [x] Setup/registration approval, review-first behavior, source immutability, publication/governance checks,
   protected writes, unknown-outcome stops, and read-only Query/Explore/Validate behavior remain unchanged.
-- [ ] Live skill instructions, guides, current product descriptions, examples, and affected scenarios agree.
+- [x] Live skill instructions, guides, current product descriptions, examples, and affected scenarios agree.
   Package checks and independent synthetic decision evaluation pass. Historical benchmark results and explicit
   benchmark limits remain identifiable and unchanged; no live-provider execution is claimed.
 

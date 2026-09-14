@@ -209,7 +209,8 @@ Default [retrieval bounds](skills/company-wiki/references/retrieval-bounds.md) d
 from 10 evidence reads, so reading several sections does not consume several document slots. Updates reserve
 necessary rechecks within 10 additional verification reads. All returned source content shares a 40,000-character
 cap; 2 source discovery rounds and traversal depth 3 remain. Explicit total-read and legacy caps still apply,
-and no selection, follow-up, or retry resets counters.
+and no selection, follow-up, or retry resets counters. A configured aggregate allowance replaces unspecified
+component defaults, so an existing twenty-read budget is not reduced to five distinct documents or ten evidence reads.
 
 ## How people use it
 

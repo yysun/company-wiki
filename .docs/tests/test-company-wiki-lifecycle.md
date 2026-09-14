@@ -186,8 +186,9 @@ the same thread id as turn 1. Every turn runs with the process working directory
   at most 10 additional reserved update-verification reads, 2 source list/search rounds, depth ≤ 3, and 40,000
   returned Unicode source characters. Query/Explore have no update-verification bucket. Explicit total-read and
   ambiguous legacy caps cover evidence plus verification; never reinterpret or reset them. Expansion changes only
-  the authorized cap while preserving consumption. Counting rules:
-  - Each adapter `list` of a source location counts as one search/list round.
+  the authorized cap while preserving consumption. Explicit aggregate allowances replace unspecified component
+  defaults; separately explicit component caps still apply. Counting rules:
+  - Each native source list/search result-page request counts as one discovery round, including pagination.
   - Metadata without source body content is not a document/range read. Each requested source document/range counts
     as a read, including batched targets, failed attempts, and retries. Several sections/revisions of one native
     document share a distinct-source slot; a separate native version document consumes another slot.

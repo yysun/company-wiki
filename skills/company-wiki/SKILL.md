@@ -61,8 +61,9 @@ repair only through an approved Maintain plan. Prompts and local tests do not es
 
 Load [Retrieval bounds](references/retrieval-bounds.md) before discovery or evidence reads. Defaults: 5 distinct
 sources, 10 evidence reads, 2 source list/search rounds, 40,000 returned source characters, and wiki traversal
-depth 3. Updates reserve required rechecks within a separate cap of 10 verification reads; all source content
-shares the character cap. Preserve explicit total-read and legacy limits; selection, replanning, and recovery
+depth 3. Updates reserve required rechecks within a default cap of 10 verification reads; all source content
+shares the character cap. Explicit aggregate read allowances replace unspecified component defaults while retaining
+their total ceiling and separately configured limits. Preserve legacy units; selection, replanning, and recovery
 never reset counters. Ask before exceeding an applicable limit.
 
 ## Lifecycle and loading

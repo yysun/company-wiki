@@ -1065,6 +1065,10 @@ both allowances share source/content limits and any explicit total-read cap. Fai
 applicable counters; selection, replanning, and recovery never reset them. Legacy ambiguous read/open limits
 retain total-read semantics. Ask before exceeding applicable limits.
 
+An explicitly configured aggregate allowance replaces unspecified distinct/evidence/verification defaults while
+retaining its total ceiling and separately explicit component caps. A higher legacy total is not silently reduced
+by new component defaults. Every native discovery result-page request counts toward the discovery cap.
+
 Query/Explore start with compact initial routing. Original evidence revealing a missing authority, alias, or
 exception may trigger one targeted follow-up through up to three known visible wiki pages, within the selected
 profile/index edge and traversal budget. It cannot restart full routing, scan the wiki, grant more source/search

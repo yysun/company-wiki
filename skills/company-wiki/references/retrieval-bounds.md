@@ -27,6 +27,9 @@ an authorized durable-change workflow; it does not authorize publication or bypa
 - Count all returned original-source characters, including search snippets, repeated/overlapping text, and partial
   or failed responses. Full-document responses count in full even if only one passage is used. Search returning
   full source bodies also consumes distinct-source and evidence-read allowances; it is not free discovery.
+- Each native list/search result-page request consumes one discovery round, including continuation pages of the
+  same query. Pagination cannot provide unlimited enumeration inside one round. If remaining requests cannot
+  establish complete batch membership, refine/select explicitly or request a bounded expansion before continuing.
 - Verification may only recheck evidence already used for the planned update. Newly needed sources or additional
   passages needed to establish a new claim consume evidence reads, even if discovered during verification.
   All sources still count against the distinct-source limit and every returned character against the shared cap.
@@ -44,21 +47,28 @@ capacity for the mandatory rechecks. Do not spend that capacity on optional evid
 time that the planned checks cannot fit. If a required read cannot be bounded to fit, narrow the work or request
 the specific expansion before that read or dependent writes.
 
-The verification cap is fixed for the operation, not a new grant per source, plan, or retry. An initial plan needing
-three rechecks reserves three of its ten verification reads; remaining capacity can cover necessary rechecks on
+The applicable verification cap is fixed for the operation, not a new grant per source, plan, or retry. Under the
+defaults, an initial plan needing three rechecks reserves three of ten verification reads; remaining capacity can cover necessary rechecks on
 the same evidence during drift/recovery. It cannot fund new discovery or refill consumed reads. Stop when any
 applicable cap would be exceeded. Small updates therefore have room for their rechecks without a new approval,
 while large bodies, extra evidence, or repeated failures can still need a bounded expansion.
 
 ## Preserve explicit limits
 
-An explicit total source-read limit applies across evidence and verification together. A source-open/read limit
-whose legacy wording does not distinguish documents from repeated reads retains total-read semantics; do not
-silently reinterpret `source documents opened: 5` as five distinct sources with twenty allowed reads. Limits
-explicitly expressed as distinct documents, calls, characters, or rounds keep those units. A hard tool-call cap
-also applies to actual invocations in addition to document/range accounting. Never rewrite the profile to adopt
-these defaults. User overrides, configured lower caps, and stricter benchmark contracts remain binding unless
-explicitly changed by their governing authority.
+An explicit total source-read allowance T governs evidence and verification together. It replaces unspecified
+default distinct-source, evidence-read, and verification-read ceilings: each is finitely bounded by T, and their
+combined reads must still fit T. Separately explicit component caps also apply. Do not add D5/E10/V10 defaults
+on top of an existing aggregate allowance that never specified those components. Character, discovery, depth,
+and explicit actual tool-call limits keep their independent meanings and are not increased by T.
+
+A source-open/read limit whose legacy wording does not distinguish documents from repeated reads retains these
+aggregate semantics; do not silently reinterpret `source documents opened: 5` as five distinct sources with twenty
+allowed reads. Conversely, `total source opens: 20` with no separate component caps permits six sources plus six
+rechecks, or twelve section reads, within twenty total reads and the unchanged character/search/depth limits.
+An explicitly configured distinct-source cap of five or evidence-read cap of ten would still constrain those tasks.
+Limits expressly stated in actual tool calls count invocations in addition to applicable document/range accounting.
+Never rewrite the profile to adopt defaults. Explicit limits and stricter benchmark contracts remain binding
+unless changed by their governing authority.
 
 Three 1,000-character sources can use three evidence reads and three verification reads: three distinct sources
 and 6,000 returned characters. An explicit five-total-read cap would still require expansion or a smaller task.
