@@ -5,7 +5,7 @@ description: "Build and use a permission-aware Company Library Index and Persona
 
 # company-wiki / 企业文库
 
-**Version:** `1.2.0`
+**Version:** `1.2.1`
 **Repository:** https://github.com/yysun/company-wiki
 
 Use this skill for a Company Library Index, a Personal Wiki, or a bounded exploration, query, curation,

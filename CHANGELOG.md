@@ -2,13 +2,24 @@
 
 ## Unreleased
 
-## 1.2.0 — 2026-09-14
+## 1.2.1 — 2026-09-14
 
 ### Fixed
 
 - Check the recorded skill repository for newer stable releases once per session without blocking wiki work.
   Present a concrete upgrade offer, reuse explicit upgrade authorization, and install between wiki operations
   while preserving local modifications, registry configuration, and wiki documents.
+
+### Validation and known limitations
+
+- All 9 lifecycle contract checks passed; skill validation, local Markdown links, and whitespace checks passed.
+- Automatic release checks and package installation are instruction workflows using the host's existing tools;
+  live upgrade execution has not been tested.
+
+## 1.2.0 — 2026-09-14
+
+### Fixed
+
 - Separate distinct-source and evidence-read budgets from a finite update-verification allowance; preserve all
   returned-content and explicit legacy/total-read caps across rechecks and recovery. Existing aggregate allowances
   replace unspecified component defaults, and every discovery result page consumes its own request.
@@ -36,8 +47,6 @@
 - These checks validate the instruction package and its interpretation. Live-provider execution/enforcement and
   retrieval-quality improvements under the new defaults remain untested. Historical benchmark results and their
   stricter read/routing limits remain unchanged.
-- Automatic release checks and package installation are instruction workflows using the host's existing tools;
-  live upgrade execution has not been tested.
 
 ## 1.1.0 — 2026-09-13
 
