@@ -66,8 +66,10 @@ Add Source is the explicit bridge between discovery and durable knowledge. The u
 default, or supplies a finite batch. A title, keywords, or filename pattern can first produce a bounded candidate
 list inside the registered source scope; the user selects exact members before their bodies are read. The agent
 reads the selection, compares it with relevant wiki nodes and evidence,
-and presents the exact proposed edits. Source selection permits reading but not those edits; the agent writes
-only after approval and revalidation. An unchanged source produces no edit or receipt. Validate is separately
+and presents the exact planned edits. An explicit Add Source request authorizes the necessary bounded update;
+later candidate selection retains that intent. Source selection alone authorizes reading only. After revalidation,
+the agent applies within that task without another confirmation, unless the user requested review first or a
+required decision or authority is missing. An unchanged source produces no edit or receipt. Validate is separately
 read-only, while fixes route to Maintain.
 
 This source-to-wiki reconciliation does not introduce centralized ingestion. `Ingest` remains a compatibility
@@ -120,15 +122,17 @@ registry and must report that limitation.
    ask only for the unknown original-material location and writable destination. A subject never authorizes
    a whole-drive search: source discovery stays inside locations the user explicitly specifies.
 3. Add new or changed sources by exact native targets or search criteria such as `加入 EDU-C**测试报告`.
-   For search criteria, select from the returned candidates first. Review the proposed wiki changes, then approve
-   them if they correctly preserve authority, conflicts, and evidence links.
+   For search criteria, select from the returned candidates first. The agent then plans, revalidates, and applies
+   the bounded update while preserving authority, conflicts, and evidence links. Add “show me the changes first”
+   to review and approve the exact proposal before it writes.
 4. Ask company questions normally. The taxonomy resolves canonical terms and aliases, while the few relevant typed
    links guide discovery; neither limits source search. The agent makes one routing decision, searches registered
    source locations, verifies the requesting user's current access, compares available source versions with loaded
    wiki provenance, and reads original evidence in the same query even when versions match. Missing version metadata
    alone does not block an authorized read. It cites the originals and reports material wiki drift without editing pages.
-5. Ask it to Curate or Maintain structure, or Validate links and coverage. Every durable change has its own
-   concrete proposal and approval; corrections are not approval. Validation is always read-only.
+5. Ask it to Curate or Maintain structure, or Validate links and coverage. Explicit update requests authorize
+   the necessary bounded edits; a factual correction or suggestion alone does not. Every write has a concrete
+   plan and passes publication checks. Review-first requests wait for approval. Validation is always read-only.
 
 For cloud-drive work, the skill reuses only cloud-drive/document skills, MCP tools, or agent plugins the host
 app already provides. For non-drive sources it uses only the host's corresponding exposed repository, CLI,

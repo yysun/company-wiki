@@ -14,7 +14,7 @@ they use the same provider. Do not add a connector, permission service, version 
 |---|---|---|
 | Read and answer | Scoped discovery when needed, current requester-authorized reads, and usable source identifiers or links for citations | Query and Explore; the read-only Validate checks the interface can establish |
 | Draft changes | Authorized reads of the selected evidence and any wiki content needed for concrete edits; a response audience authorized for that evidence | A transient proposal in the current conversation, with publication blockers stated; no wiki or registry writes |
-| Publish changes | Read capabilities plus exact-destination write/govern authority, verified current audience containment, safe permissions from creation, and the protected create/update operations required by the plan | Approved writes through the [change protocol](change-protocol.md), including protected registration when needed |
+| Publish changes | Read capabilities plus exact-destination write/govern authority, verified current audience containment, safe permissions from creation, and the protected create/update operations required by the plan | User-authorized writes through the [change protocol](change-protocol.md), including protected registration when needed |
 
 For ordinary reads, a successful operation authenticated as the requesting user can establish access; separate
 ACL enumeration is unnecessary. A broader bot or service account needs a host/provider-enforced requester check

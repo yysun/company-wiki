@@ -48,6 +48,12 @@ unavailable future-inheritance proof alone does not block ordinary creation or p
 nothing. Unavailable requester access still blocks affected reads and drafts.
 Private local originals/tests retain the narrowly defined local path.
 
+An explicit Add Source/Ingest, Curate, or Maintain request for an existing selected wiki authorizes the necessary
+bounded edits. Carry that intent through later exact source selection. Present concrete changes, revalidate, and
+apply without redundant confirmation under [Change protocol](references/change-protocol.md#user-authorization).
+Source selection alone and read-only requests authorize no writes. Honor review-first requests and ask only for
+missing decisions or additional authority. Setup and registration retain exact-proposal approval.
+
 Gate unsafe legacy wiki bytes before they enter the model; recheck source access before using derived claims.
 V1 cannot synchronize ACLs or retract previously disclosed copies. Report unresolved exposure through Validate;
 repair only through an approved Maintain plan. Prompts and local tests do not establish provider enforcement.

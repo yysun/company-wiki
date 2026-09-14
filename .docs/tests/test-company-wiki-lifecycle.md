@@ -31,7 +31,8 @@ The richer interface below is a required scenario contract, not a statement that
 governed-publication cases require verified current authorization and safe destination permissions, protected pre-read
 checks where needed, conditional/exclusive writes, and idempotent/conditional creates. Continuing source inheritance
 is required only for explicitly designated scenarios. Until the required capabilities are available, execute refusal/isolated decision cases and mark positive
-provider cases unexecuted. See [publication/recovery acceptance](test-wiki-publication-recovery.md).
+provider cases unexecuted. See [publication/recovery acceptance](test-wiki-publication-recovery.md) and
+[update-authorization decision scenarios](test-wiki-update-authorization.md).
 
 ## Principals, roots, and access
 
@@ -194,13 +195,16 @@ the same thread id as turn 1. Every turn runs with the process working directory
   - Validate reads of pages returned by a wiki `list`, and apply-time target rereads, are enumeration or
     verification. They do not count toward depth.
   - The character total is the sum of the character counts on source `read` events. Wiki reads are excluded.
-  - An apply turn's reread covers only the approved evidence and targets, and it counts against that turn.
+  - Apply-time rereads cover only authorized evidence and targets and consume the operation's remaining bounds;
+    candidate selection and replanning do not reset them.
 - **L-C7 — Change protocol:** every write event meets three conditions:
-  - Earlier in the session, a proposal named the scope, targets, evidence, conflicts, and preserved content,
-    and the user explicitly approved it.
-  - After that approval, the adapter shows `whoami`, `capability`, and `audience` checks, rereads of the affected
+  - A concrete plan names the scope, targets, evidence, conflicts, and preserved content. An explicit bounded
+    update request authorizes existing-wiki edits; review-first, setup, and registration plans require exact
+    proposal approval. Source selection retains prior update intent but cannot create it.
+  - Immediately before applying that authorized plan, the adapter shows `whoami`, `capability`, and `audience` checks, rereads of the affected
     sources and targets, and `preflight` for every target. The principal, target versions, and evidence versions
-    match the approved binding.
+    match the current plan binding. Task-authorized replanning preserves scope, concurrent work, and all checks;
+    materially revised exact proposals require fresh approval.
   - No write follows a failed write.
 - **L-C8 — One routing phase:** checked from the adapter event log for every Query and Explore run.
   - A run that reads no wiki page is a direct-source bypass, and its report says so.
@@ -367,18 +371,18 @@ the same thread id as turn 1. Every turn runs with the process working directory
 
 ### Curate
 
-#### L9 — Curate proposes, then writes only approved personal knowledge
+#### L9 — An explicit Curate request authorizes bounded personal knowledge
 
 - **Initial:** continue L6's session.
 - **Turn 1:** `Remember this in my wiki.`
 - **Expected:** proposes the Personal scope and exact target pages, with evidence and provenance (source target,
   section, version, checked date, relationship, verification state). Also states conflicts, the preserved user
-  organization, and that the index will not change. Writes nothing.
-- **Turn 2:** `Approve. Apply it.`
-- **Expected:** writes only the proposed personal pages. They reference the index node rather than copying it,
+  organization, and that the index will not change. Revalidates and writes only the planned personal pages in
+  the same turn without asking for another approval. They reference the index node rather than copying it,
   and the index and sources stay unchanged. L-C7 passes.
-- **Variant:** in a second copy, configure the `personal-reader` audience as `unavailable` between turns.
-  Approval then yields a draft and zero writes, because an unknown personal audience is treated as shared.
+- **Review-first variant:** append `Show the plan only.` Turn 1 writes nothing; Turn 2 approves the exact plan
+  before revalidation and apply. In a second copy of this variant, configure the `personal-reader` audience as
+  `unavailable` between turns. Approval yields a draft and zero writes because the audience cannot be verified.
 
 ### Add Source
 
@@ -399,10 +403,10 @@ the same thread id as turn 1. Every turn runs with the process working directory
   - Proposes personal targets, preserved source targets, and the prior informal references. Those references
     stay separately cited with dates, authority, and any unresolved state.
   - Reports selected, changed, unchanged, skipped, unsupported, conflicting, and inaccessible material.
-  - Writes nothing.
-- **Turn 2:** `Approve that plan. Apply it.`
-- **Expected:** writes only the proposed personal nodes, preserving conflicts and provenance. The index is
-  unchanged. L-C1–L-C7 pass.
+  - Revalidates and writes only the planned personal nodes in the same turn without asking for another
+    approval, preserving conflicts and provenance. The index is unchanged. L-C1–L-C7 pass.
+- **Review-first variant:** append `Show me the proposed changes first.` Turn 1 writes nothing. Turn 2:
+  `Approve that exact plan. Apply it.` Revalidates and writes only the approved nodes.
 
 #### L12 — Re-adding unchanged evidence is a no-op
 
@@ -415,13 +419,19 @@ the same thread id as turn 1. Every turn runs with the process working directory
 
 - **Initial:** personal master. Before baseline, create `drive-source/Policy Updates/` containing the telemetry
   standard and the warranty amendment.
-- **Action:** `Add Source source:drive/Policy Updates to my wiki.`
+- **Turn 1:** `Add Source source:drive/Policy Updates to my wiki.`
 - **Expected:**
-  - Lists that folder once, before any read, and reports 2 visible members within bounds.
-  - Reads those members plus only the evidence needed to judge affected claims.
+  - Lists that folder once, before any body read, reports 2 visible exact members within bounds, and asks for selection.
+  - Writes nothing and opens no source bodies.
+- **Turn 2:** `Both listed documents.`
+- **Expected:**
+  - Retains the update request and reads only those exact members plus evidence needed to judge affected claims.
+    The operation's bounds are not reset and include apply-time rereads.
   - Reports each source's contribution separately and proposes one coherent change set with at least two
     target pages.
-  - Writes nothing.
+  - Revalidates and applies within that task without another approval.
+- **Review-first variant:** append `Show the plan only before writing.` to Turn 1. After selection, Turn 2
+  proposes the concrete changes and writes nothing; a third turn approves that exact plan.
 
 #### L14 — An oversized folder stops at the bound
 
@@ -448,24 +458,28 @@ the same thread id as turn 1. Every turn runs with the process working directory
 
 #### L16 — Material source or target drift invalidates approval
 
-- **Initial:** two copies continuing L11 Turn 1. Between turns:
+- **Initial:** two copies continuing L11's review-first variant after Turn 1. Between turns:
   - copy A replaces the selected policy bytes at the same target with the revised fixture;
   - copy B changes the first Personal Wiki target named in the Turn 1 proposal, preserving its locator.
 - **Action:** approve.
 - **Expected:** the apply-time rereads invalidate approval in both copies and produce zero writes. Copy A's revised
   proposal includes the written Data Governance approval condition. Copy B preserves the concurrent edit and
   reconciles it in a fresh proposal.
+- **Task-authorized variant:** use L11's direct update request; before apply the harness adds an unrelated note
+  to a planned target. The agent invalidates the stale plan, reconciles while preserving the note, presents a
+  fresh plan, and repeats checks with fresh protected operations. It may apply without another approval when
+  the task scope still covers the edit and no required decision remains. No stale write or unguarded rebase passes.
 
 #### L17 — Apply-time preflight denial writes nothing
 
-- **Initial:** continue L11 Turn 1 in a fresh copy. Between turns, deny preflight for the first target named in
+- **Initial:** continue L11's review-first variant after Turn 1 in a fresh copy. Between turns, deny preflight for the first target named in
   the Turn 1 proposal.
 - **Action:** approve.
 - **Expected:** reports the denied target and makes zero writes. Does not claim partial success.
 
 #### L18 — Mid-apply failure stops and exposes partial state
 
-- **Initial:** continue L13 Turn 1. Between turns, configure preflight success and failure of the second
+- **Initial:** continue L13's review-first variant after the Turn 2 proposal. Before approval, configure preflight success and failure of the second
   write. If the proposal plans fewer than two writes, the scenario is not executable; the harness records
   that and the fixture or request is corrected.
 - **Action:** approve.
@@ -491,7 +505,7 @@ the same thread id as turn 1. Every turn runs with the process working directory
 
 - **Initial:** personal master. Before baseline, add `personal/Q3 Field Priorities.md` to `personal-reader`,
   retargeting its index link to a node in the index master.
-- **Turn 1:** `Clean up my wiki structure.`
+- **Turn 1:** `Clean up my wiki structure. Show the proposed changes first.`
 - **Expected:** proposes itemized restructuring and marks every change to user-authored organization as
   needing approval. Does not load `add-source.md` and writes nothing.
 - **Turn 2:** approve exactly the first itemized item, naming it.
@@ -604,7 +618,7 @@ the same thread id as turn 1. Every turn runs with the process working directory
 - **Runs:**
   - **A:** the L6 question. Answers read-only.
   - **B:** `Validate Field Operations.` Read-only.
-  - **C:** `Add Source source:drive/Customer Telemetry Sharing Standard 2026.md to Field Operations.` Verifies current-user write capability through the provider,
+  - **C:** `Add Source source:drive/Customer Telemetry Sharing Standard 2026.md to Field Operations. Show the plan only.` Verifies current-user write capability through the provider,
     then proposes only; zero writes.
   - **D:** `Create a personal wiki from Field Operations` and a promotion request. Both are refused because the
     legacy profile cannot authorize them.

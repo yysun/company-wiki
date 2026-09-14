@@ -25,8 +25,12 @@ These boundaries apply to `Init → Bootstrap → Explore ↔ Query → Curate �
   Add Source (with Ingest as a compatibility alias) may use user-supplied search criteria to discover candidates
   within those bounds. Before reading source bodies for reconciliation, it requires exact user-selected documents
   or an explicitly bounded batch; a topic, pattern, folder, or collection never silently expands into an all-source operation.
-- Wiki writes stay inside the profile's verified destination and require a concrete approved plan, apply-time
-  rereads, and conditional/exclusive write protection. Provider-governed content additionally requires authenticated
+- Wiki writes stay inside the profile's verified destination and require a concrete authorized plan, apply-time
+  rereads, and conditional/exclusive write protection. An explicit Add Source, Curate, or Maintain request for an
+  existing selected wiki authorizes necessary bounded edits, including after subsequent exact source selection;
+  present concrete changes and proceed without redundant confirmation. Source selection alone, read-only requests,
+  and suggestions authorize no edits. Respect review-first requests; ask for a concrete decision or additional
+  authority when needed. Init, Bootstrap, and registration changes retain exact-proposal approval. Provider-governed content additionally requires authenticated
   provider identity, exact-scope capability/governance, and current audience containment. The provider enforces the
   wiki's own permissions by default; continuing source inheritance is required only by an explicit user or governing
   requirement. Unavailable current authorization or explicitly required protection blocks affected publication;

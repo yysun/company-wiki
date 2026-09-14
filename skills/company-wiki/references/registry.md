@@ -36,7 +36,9 @@ Registration approval covers the exact selected entry delta and completed profil
 index. An unrelated-entry-only index change may be merged under that existing approval after rechecking containment,
 identity/capability, and unchanged selected registration/protection. Refresh the index version condition from the
 new reread and preserve every unrelated entry. A changed selected entry, profile, destination, or authority needs
-a revised approved proposal. This narrow merge exception does not permit rebasing source/page edits onto new versions.
+a revised approved proposal. This narrow registration exception does not permit rebasing setup pages or an
+explicitly approved page proposal onto new versions. Task-authorized updates to an existing wiki follow
+[Replan after drift](change-protocol.md#replan-after-drift); they cannot modify the registration under that authority.
 
 Registration is non-atomic across provider pages, profile, and index. An index failure may leave a newly completed
 unlinked profile; report its exact path without scanning for it. Preserve pre-existing registry bytes and successful

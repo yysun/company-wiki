@@ -4,7 +4,9 @@ Curate makes a discovery durable only when it is reused, explicitly requested, p
 useful, or policy-approved. Prefer small navigation knowledge: nodes, links, aliases, typed relationships,
 concise source-grounded summaries, and source mappings. A Personal node should reference shared knowledge rather
 than copy it. Update readable pins, temporary nodes, personal canonical nodes, and do-not-curate controls only
-with the owner's approval.
+with the owner's authorization under [User authorization](change-protocol.md#user-authorization). An explicit
+request to remember or save a selected lesson authorizes its bounded curation in the existing selected wiki;
+the assistant's suggestion alone does not.
 
 For a Query learning candidate, reconcile it with existing destination knowledge before proposing a new node or
 edit; a Query suggestion is not a saved lesson or an approved write. Retain the original references, applicability

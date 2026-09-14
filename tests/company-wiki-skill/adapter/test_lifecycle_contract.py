@@ -87,12 +87,10 @@ class LifecycleContractTest(unittest.TestCase):
             self.assertNotIn("home/map → guide → focused detail", document)
         self.assertIn("one routing phase", text("examples/sample-company/company-wiki-home.md"))
 
-    def test_main_contract_requires_proposal_and_one_phase_routing(self) -> None:
+    def test_main_contract_links_protocol_and_one_phase_routing(self) -> None:
         specification = text("tests/test-company-wiki-skill.md")
-        self.assertIn("approved proposal", specification)
         self.assertIn("change-protocol.md", specification)
         self.assertIn("one routing phase", specification)
-        self.assertIn("correction is not approval", specification)
         self.assertNotIn("references/ingest.md", specification)
 
     def test_scoped_lifecycle_fixtures_exist(self) -> None:

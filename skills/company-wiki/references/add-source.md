@@ -57,10 +57,13 @@ For a batch, report each source's contribution separately before combining the s
 Do not let one selected source silently pull another document into the batch; additional evidence may be read
 only when needed to evaluate an affected claim.
 
-## Propose before writing
+## Plan before writing
 
-Source selection authorizes reading, not wiki edits. Before any write, present one concrete proposal that
-states:
+An explicit request to add or ingest evidence into the selected existing wiki authorizes the necessary bounded
+wiki edits. If discovery was needed, the later exact candidate selection retains that update intent; a new or
+undisplayed match never joins it automatically. Source selection without an update request authorizes reading
+only. Follow [User authorization](change-protocol.md#user-authorization), including review-first instructions.
+Before any write, present one concrete plan that states:
 
 - every wiki document to create or edit and the exact readable change;
 - each selected source and the original evidence target that will be preserved;
@@ -70,20 +73,23 @@ states:
 - the order of planned writes when more than one document is affected.
 
 If the comparison finds no material delta, report that the wiki is already current and make no change. Do not
-create a duplicate page or link, processing receipt, metadata record, or log entry. Otherwise wait for explicit
-approval of the proposal only when the publication capabilities are available. Otherwise return the authorized
-transient draft and its specific blocker under [capability levels](publication.md#capability-levels), with no wiki
-or registry writes. “Ingest this source” is not approval of edits that have not yet been proposed.
+create a duplicate page or link, processing receipt, metadata record, or log entry. When publication capabilities
+are available and the plan is within the authorized task, revalidate and apply in the same turn without a second
+approval. Wait only for an explicitly requested proposal review or a required decision/additional authority.
+If publication capabilities are unavailable, return the authorized transient draft and its specific blocker under
+[capability levels](publication.md#capability-levels), with no wiki or registry writes; approval cannot supply
+missing capabilities.
 
 ## Revalidate and apply
 
-Immediately before applying an approved plan:
+Immediately before applying an authorized plan:
 
 1. Reopen every selected source and planned wiki target. Recheck authenticated identity, governing authority,
    source/destination audience, explicitly required continuous inheritance, material content, status, dates, exact links, permissions, destination
    containment, and write capability.
-2. If a source, target, relationship, permission, or required change materially differs from the approved
-   proposal, invalidate the plan and its approval. Make no write; present a revised plan for fresh approval.
+2. If a source, target, relationship, permission, or required change materially differs from the plan, invalidate
+   it and make no write under that plan. Follow [Replan after drift](change-protocol.md#replan-after-drift):
+   reconcile and revalidate within task authorization, or obtain fresh approval for a changed exact proposal.
 3. If preflight fails for any planned target, make no write and report the exact failure.
 4. Apply planned changes through the [durable change protocol](change-protocol.md): native conditional/idempotent
    operations, dependencies before links, and verified results. Unsupported version protection cannot be replaced
@@ -93,7 +99,7 @@ Provider writes are not assumed atomic. If a write fails or has an unknown outco
 may follow a committed write. Do not continue, blindly retry, delete successful work, or attempt automatic rollback:
 a rollback could overwrite concurrent provider edits. Reconcile exact targets/native operation keys and report
 confirmed successful, confirmed failed, unknown, and unattempted changes, graph inconsistency, and a recovery
-proposal. Preserve concurrent edits; changed evidence, authorization, or targets require a revised approved plan.
+proposal. Preserve concurrent edits; changed evidence, authorization, or targets require a fresh authorized plan.
 Follow the shared protocol for unchanged already-authorized remaining work and unresolved outcomes.
 
 ## Content and reporting contract

@@ -1127,12 +1127,18 @@ establish leakage. Validate is read-only; approved cleanup MUST report unresolve
 
 ### 10.4 Durable changes and recovery
 
-Use the [shared change protocol](../skills/company-wiki/references/change-protocol.md). Bind concrete approval to
-identity, evidence/target versions, audiences/protection, scope, and operation parameters. Use native conditional or
+Use the [shared change protocol](../skills/company-wiki/references/change-protocol.md). Explicit update requests
+authorize necessary bounded changes in an existing selected wiki, including after exact source selection. Source
+selection alone and read-only work authorize no writes. Honor review-first instructions with exact-proposal
+approval; setup and registration retain their existing approval gates. Bind each concrete plan to the user's
+task or exact-proposal authorization, identity, evidence/target versions, audiences/protection, scope, and operation
+parameters. Use native conditional or
 exclusive updates and idempotent/conditional creates; reread-then-write alone does not protect concurrent edits.
 Verify dependencies before exposing links. Failed or unknown outcomes stop later writes; a timeout may follow a
 committed write. Reconcile exact targets/original operation keys before retry, preserve concurrent edits, and propose
-only remaining work. Changed bindings need revised approval; no automatic destructive rollback is allowed.
+only remaining work. Material drift invalidates the plan; routine task-authorized updates may reconcile and
+revalidate within the same scope while preserving concurrent edits. Changed exact proposals need fresh approval;
+missing decisions or authority block the affected action. No automatic destructive rollback is allowed.
 
 Setup preflights registration and creates verified provider pages before the completed profile and index link.
 Atomic, conflict-protected index replacement preserves unrelated entries. Registration remains non-atomic across

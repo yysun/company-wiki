@@ -209,8 +209,10 @@ and `2026-08-20` for later scenarios.
 
 - **C1 — Sources untouched:** all `drive-source/` checksums match baseline; `platform-repo` HEAD,
   status, and working-tree checksums are unchanged. Scenario setup changes are excluded.
-- **C2 — Writes only where allowed:** Init, Bootstrap, Curate, Add Source, and Maintain write only through an
-  approved proposal, apply-time identity/capability/audience/source-target rereads, and per-target preflight.
+- **C2 — Writes only where allowed:** Init, Bootstrap, Curate, Add Source, and Maintain write only through a
+  concrete authorized plan, apply-time identity/capability/audience/source-target rereads, and per-target preflight.
+  An explicit update request covers necessary bounded existing-wiki edits, including after exact source selection;
+  review-first requests require an approved proposal. Setup and registration keep their exact-proposal gates.
   Init and Bootstrap may register completed profiles only after provider pages succeed. Query, Explore, and
   Validate write nothing. No product workflow creates a database,
   provider-search index, cache, embedding, script, JSON/YAML state file, folder-based taxonomy, source copy,
@@ -343,10 +345,13 @@ source is actually read. Each row writes nothing and passes C1–C7.
 ### S4 — Maintenance with a user correction (post-init)
 
 - **Action:** `Field technicians call warranty returns "bouncebacks". Add that term to our company wiki.`
-- **Expected:** a correction is not approval: it proposes the exact personal/company scope, relevant target,
-  preserved organization, and evidence;
-  writes nothing. A second explicit approval turn must recheck authority/audience and targets, preflight, then
-  minimally apply the approved user-confirmed term while leaving sources and unrelated pages byte-identical.
+- **Expected:** the explicit edit request authorizes the bounded alias update in the selected company scope.
+  It presents the relevant target, exact change, preserved organization, and evidence; rechecks authority/audience
+  and targets, preflights, and minimally applies without a second approval, leaving sources and unrelated pages
+  byte-identical. Publication capabilities must be available; otherwise the result is a draft with its blocker.
+- **Read-only variant:** the user only states the correction during Query, without asking to add it. No write.
+- **Review-first variant:** append `Show the proposed change first.` The first turn writes nothing; exact approval
+  in the next turn triggers revalidation and protected apply.
 
 ### S4b — Maintenance proposals without approval (post-init)
 

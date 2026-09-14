@@ -4,6 +4,9 @@
 
 ### Fixed
 
+- Let explicit Add Source/Ingest, Curate, and Maintain requests authorize bounded updates to an existing wiki,
+  including after candidate selection. Preserve review-first approval, publication checks, protected writes,
+  and setup/registration approval; replan within task scope without redundant confirmation.
 - Separate read-and-answer, transient-draft, and publication capabilities for existing plugins, MCP tools,
   CLIs, and APIs. Source connectivity no longer implies support for publishing wiki changes.
 - Keep ordinary authorized answers independent of destination write tools, ACL enumeration, and optional source

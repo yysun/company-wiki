@@ -316,11 +316,19 @@ folder/batch. A folder is enumerated and its visible member bound is confirmed b
 mandatory top-level Ingest. Existing `Ingest` language may survive only as a compatibility alias for this
 reconciliation behavior; documents do not need to be copied, chunked, embedded, or indexed before Query.
 
-Every durable change uses the same change contract: identify ownership scope, exact targets, evidence, conflicts,
-and preserved content; verify the authenticated principal's governing capability; present a concrete proposal;
-bind approval to the principal, scope, targets, evidence/target versions, audience/protection results, operation
-parameters, and proposal; then reread and preflight immediately before ordered writes. Changed bindings invalidate
-approval. A preflight failure before apply writes nothing; drift between writes stops further writes. Each update
+Every durable change uses the [shared change protocol](../skills/company-wiki/references/change-protocol.md).
+For an existing selected wiki, an explicit Add Source/Ingest, Curate, or Maintain request authorizes necessary
+bounded edits and retains that intent through later exact source selection. Source selection alone, factual
+corrections without an edit request, and read-only workflows authorize no writes. Review-first requests require
+approval of the exact proposal; setup and registration retain their concrete-proposal approval gates.
+
+Identify ownership scope, exact targets, evidence, conflicts, and preserved content; verify governing capability;
+present a concrete plan tied to the user's task or exact-proposal authorization, principal, scope, targets,
+evidence/target versions, audience/protection results, and operation parameters; then reread and preflight before
+ordered writes. Material drift invalidates the plan. Routine task-authorized updates may replan and revalidate
+within the same authorized outcome and bounds, preserving concurrent edits. A changed exact proposal requires
+fresh approval. Missing decisions or additional authority stop the affected action. A preflight failure before
+apply writes nothing; drift between writes stops further writes. Each update
 requires a native version condition or verified equivalent exclusive-write mechanism. Reread-then-write alone
 cannot prevent concurrent overwrites, and a content version does not prove unchanged permissions. Creates require
 native idempotency or conditional create-if-absent at an exact, reconcilable target. Unsupported operations yield
@@ -330,8 +338,8 @@ A failed or unknown provider outcome stops later writes and produces confirmed s
 unknown, and unattempted state plus a remaining-work-only recovery proposal. A timeout can follow a successful
 commit: reconcile exact approved targets and original native operation keys before retrying. If identity/outcome
 cannot be established, stop rather than creating a duplicate. Preserve successful work and concurrent edits; never
-perform destructive automatic rollback. Recovery rechecks authorization and current state. Revised work requires
-approval; unchanged concrete remaining actions already authorized in the session need no redundant approval.
+perform destructive automatic rollback. Recovery rechecks authorization and current state, using the same task
+versus exact-proposal replanning rules. Unchanged authorized remaining actions need no redundant approval.
 
 Init and Bootstrap also register their completed provider documents. Provider creation and registry registration
 are non-atomic. Preflight registry feasibility before page creation; then create/verify provider pages, write the
@@ -1008,8 +1016,9 @@ The final response should distinguish:
 Where supported by the host, cite or link original sources.
 
 After answering, identify reusable discoveries. They remain transient unless the user asks to retain them or an
-explicit curation policy applies. Any durable change is a separate Curate operation with its own proposal and
-approval; Query itself is read-only.
+explicit curation policy applies. Any durable change is a separate Curate operation with concrete edits and
+user authorization under the shared protocol; an explicit request to retain the lesson covers bounded curation
+without a second confirmation unless review was requested. Query itself is read-only.
 
 ---
 
