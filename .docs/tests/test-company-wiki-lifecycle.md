@@ -180,10 +180,12 @@ the same thread id as turn 1. Every turn runs with the process working directory
   source ACL narrows and creates known unsafe exposure, the agent gates unsafe wiki bytes before model ingestion
   and reports unknown/unavailable evidence without disclosing metadata. The skill cannot retract already disclosed
   copies; direct native enforcement is tested separately rather than inferred from answer filtering.
-- **L-C6 — Bounds:** within each user turn, scored from that turn's event log, adapter events show at most 5 opened source documents and at most
-  2 source list/search rounds, wiki traversal depth ≤ 3, and at most 40,000 UTF-8 characters of retrieved source
-  content. These limits hold unless the user approved an expansion after a reported exhaustion. Configured lower
-  values are respected. Counting rules:
+- **L-C6 — Bounds:** score the combined event logs for the complete operation, including resumed turns for
+  selection, approval, apply-time checks, replanning, and recovery. Adapter events show at most 5 source read
+  calls (including rereads), 2 source list/search rounds, wiki traversal depth ≤ 3, and 40,000 Unicode characters
+  of retrieved source content. A fresh budget begins only for a distinct operation; selection, approval, and
+  retry messages continue the current one. An explicit user-approved expansion increases only the authorized
+  allowance and preserves counts already consumed. Configured lower values are respected. Counting rules:
   - Each adapter `list` of a source location counts as one search/list round.
   - A `metadata` call is not an opened document.
   - Traversal depth is derived from the event log:
@@ -419,7 +421,8 @@ the same thread id as turn 1. Every turn runs with the process working directory
 
 - **Initial:** personal master. Before baseline, create `drive-source/Policy Updates/` containing the telemetry
   standard and the warranty amendment.
-- **Turn 1:** `Add Source source:drive/Policy Updates to my wiki.`
+- **Turn 1:** `Add Source source:drive/Policy Updates to my wiki. Allow up to 12 source read calls total,
+  including rechecks and recovery, while keeping the source selection limited to the documents I select.`
 - **Expected:**
   - Lists that folder once, before any body read, reports 2 visible exact members within bounds, and asks for selection.
   - Writes nothing and opens no source bodies.
@@ -432,6 +435,10 @@ the same thread id as turn 1. Every turn runs with the process working directory
   - Revalidates and applies within that task without another approval.
 - **Review-first variant:** append `Show the plan only before writing.` to Turn 1. After selection, Turn 2
   proposes the concrete changes and writes nothing; a third turn approves that exact plan.
+- This explicit read allowance carries through the L18/L19 recovery chain without resetting consumed counts.
+  All other bounds remain unchanged. A default-budget variant starts with only one source read remaining at
+  Turn 2: it must request a bounded expansion or smaller selection before reconciliation, never reset the budget
+  because selection arrived in a new turn.
 
 #### L14 — An oversized folder stops at the bound
 

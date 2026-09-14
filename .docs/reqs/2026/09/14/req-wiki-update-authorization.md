@@ -6,19 +6,19 @@ source selection and bounded implementation without weakening publication or con
 
 ## Acceptance criteria
 
-- [ ] An explicit Add Source/Ingest, Curate, or Maintain request authorizes necessary bounded changes in the
+- [x] An explicit Add Source/Ingest, Curate, or Maintain request authorizes necessary bounded changes in the
   selected existing wiki; later selection of exact discovered candidates retains that intent.
-- [ ] Reading, source selection without update intent, factual corrections without an edit request, Query,
+- [x] Reading, source selection without update intent, factual corrections without an edit request, Query,
   Explore, Validate, and suggestions do not authorize writes. Explicit review-first requests wait for approval.
-- [ ] Every write has concrete reviewable targets and changes, verified provider authority and audience,
+- [x] Every write has concrete reviewable targets and changes, verified provider authority and audience,
   apply-time evidence/target rereads, protected operations, and result verification. Missing capabilities
   cannot be supplied by user confirmation. Original sources remain unchanged.
-- [ ] Replanning stays within the authorized task and preserves concurrent work. A materially changed
+- [x] Replanning stays within the authorized task and preserves concurrent work. A materially changed
   explicitly approved proposal needs fresh approval; task-authorized routine reconciliation may continue after
   a fresh plan and checks. Unresolved decisions or additional authority stop the affected action.
-- [ ] No automatic source expansion, scope/destination changes, promotion, or unrelated restructuring is
+- [x] No automatic source expansion, scope/destination changes, promotion, or unrelated restructuring is
   authorized. Init, Bootstrap, registration changes, failure/unknown-outcome stops, and read bounds are preserved.
-- [ ] Live skill instructions, repository boundaries, current guides, and affected scenarios agree. Local
+- [x] Live skill instructions, repository boundaries, current guides, and affected scenarios agree. Local
   package checks and independent decision evaluation pass, with provider execution limits stated accurately.
 
 ## Non-goals

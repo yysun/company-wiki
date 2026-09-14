@@ -51,4 +51,31 @@ authorized evidence context. Read allowances cover initial reads plus apply-time
 
 ## Execution record
 
-Pending independent evaluation and package checks. Positive provider execution is out of scope and unexecuted.
+2026-09-14: independent evaluator `authorization_decisions` read only the raw input section from an isolated
+temporary file and the skill/references. It did not receive expected results, author history, or review conclusions.
+All 12 cases and their variants matched the expected decisions:
+
+| Cases | Observed |
+|---|---|
+| A1, A5, A6 | Direct ingest, explicit alias edit, and selected Personal curation prepare/revalidate/apply without another approval; factual correction alone and automatic Company promotion do not write. |
+| A2 | Waits for exact displayed candidate selection, then retains update intent and excludes the undisplayed result. |
+| A3 | Explanation, source selection alone, and an unanswered Query suggestion remain read-only. |
+| A4 | Review-first waits for exact approval; unchanged approval permits protected apply. |
+| A7 | Missing protected writes or audience evidence blocks publication without an approval bypass. Equal-authority conflict may be saved as unresolved; asks only if a governing decision is required. |
+| A8 | Task authorization permits a fresh reconciled/revalidated plan preserving the concurrent note; exact-proposal drift requires fresh approval. |
+| A9 | Unresolved native outcome stops writes; confirmed prior success permits only the unchanged remaining operation, without duplicates or another approval. |
+| A10, A11 | No-op produces zero writes; optional source/destination/organization expansion stays outside authorization. |
+| A12 | Setup and changed selected registration retain exact-proposal approval and require verified Company governance/registration capabilities. |
+
+The evaluator found no instruction conflict changing these decisions. It correctly kept A7's unresolved-conflict
+representation separate from choosing a governing claim, did not infer a usable replay key in A9, and required
+Company governance and registration verification in A12 rather than inheriting Personal capability.
+
+Local verification: all 23 adapter/contract tests passed; skill-creator quick validation passed; 16 added Markdown
+links resolved and diff whitespace validation passed. These package checks and decision interpretations do not
+prove runtime provider enforcement. Positive provider execution remains out of scope and unexecuted.
+
+Supplemental independent budget evaluation: two selected reports with only one source read remaining must wait
+for enough explicit expansion to cover reconciliation and required rereads. Selection retains update intent but
+cannot expand the budget; even narrowing to one report would still need its reread allowance. The evaluator
+required zero writes and no redundant update approval. This supports L13's default-budget variant.
